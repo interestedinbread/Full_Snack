@@ -8,6 +8,7 @@ import { MealCard } from './components/MealCard'
 function App() {
 
 const [ingredients, setIngredients] = useState([])
+const [suggestions, setSuggestions] = useState([])
 
 function handleAddIngredient(newIngredient) {
   let newIngredients = [...ingredients, newIngredient]
@@ -23,9 +24,19 @@ function handleDeleteIngredient(ingredientIndex) {
     <>
       <Navbar />
       <div className='mt-8'>
-      <Header />
-      <IngredientInput ingredients={ingredients} handleAddIngredient={handleAddIngredient} handleDeleteIngredient={handleDeleteIngredient}/>
-      <MealResults MealCard={MealCard}/>
+        <Header />
+        <IngredientInput 
+          ingredients={ingredients} 
+          setIngredients={setIngredients} 
+          handleAddIngredient={handleAddIngredient} 
+          handleDeleteIngredient={handleDeleteIngredient}
+          suggestions={suggestions}
+          setSuggestions={setSuggestions}
+        />
+        <MealResults 
+          MealCard={MealCard}
+          suggestions={suggestions}
+        />
       </div>
     </>
   )
