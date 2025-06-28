@@ -10,8 +10,10 @@ export function IngredientInput(props) {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        if(suggestions.length > 0){
+        if(suggestions && suggestions.length > 0){
             console.log('Suggestions updated:', suggestions)
+            console.log('Array.isArray(suggestions):', Array.isArray(suggestions));
+            console.log('Type of suggestions:', typeof suggestions);
         }
     }, [suggestions])
 

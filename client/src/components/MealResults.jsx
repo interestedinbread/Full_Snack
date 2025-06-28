@@ -17,7 +17,7 @@ export function MealResults(props) {
                 {suggestions.map(meal => {
                     return(
                         <MealCard key={meal.id} 
-                        {...meal}
+                        meal={meal}
                         openMealId={openMealId}
                         setOpenMealId={setOpenMealId}
                         />
