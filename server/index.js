@@ -51,7 +51,8 @@ app.post('/api/meals', async (req, res) => {
     });
 
     const reply = response.choices[0].message.content;
-    res.json({ suggestions: reply });
+    const parsedReply = JSON.parse(reply)
+    res.json({ suggestions: parsedReply });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to fetch suggestions from OpenAI' });
