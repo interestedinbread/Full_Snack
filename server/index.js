@@ -29,12 +29,12 @@ app.post('/api/meals', async (req, res) => {
           role: "user",
           content: `Give me 3 meal ideas using these ingredients: ${ingredients.join(', ')}. You can give suggestions that include a few other ingredients not included in this request.
           
-          Return the result as a JSON array. Each meal object should have:
+          Return the result as a clean JSON array with no backticks. Each meal object should have:
             - "id"
             - "title"
             - "ingredients" (array of strings)
             - "time_required" (number in minutes)
-            - "instructions" (string of at least 4 steps).
+            - "instructions" (array of at least 4 steps).
 
             Example:
             [
@@ -43,7 +43,7 @@ app.post('/api/meals', async (req, res) => {
                 "title": "Tomato Pasta",
                 "ingredients": ["tomatoes", "pasta", "olive oil", "garlic"],
                 "time_required": 25,
-                "instructions": "1.) Boil pasta. 2.) Sauté garlic in olive oil. 3.) Add tomatoes and simmer. 4.) Combine with pasta and serve."
+                "instructions": ["Boil pasta.", "Sauté garlic in olive oil.", "Add tomatoes and simmer.", "Combine with pasta and serve."]
             }
             ]`,
         },
