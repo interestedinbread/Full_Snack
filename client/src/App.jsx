@@ -3,7 +3,6 @@ import { Header } from './components/Header'
 import { Navbar } from './components/Navbar'
 import { IngredientInput } from './components/IngredientInput'
 import { MealResults } from './components/MealResults'
-import { MealCard } from './components/MealCard'
 
 function App() {
 
@@ -34,7 +33,6 @@ function handleDeleteIngredient(ingredientIndex) {
           setSuggestions={setSuggestions}
         />
         <MealResults 
-          MealCard={MealCard}
           suggestions={suggestions}
         />
       </div>

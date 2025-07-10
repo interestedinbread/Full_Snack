@@ -1,6 +1,6 @@
 export function Navbar() {
 
-    const tabs = ['Home', 'About', 'Generate', 'Shopping List']
+    const tabs = ['Home', 'About', 'Generate', 'Shopping List', 'Meals']
 
     return(
         <nav className="flex justify-end gap-4 p-4">
