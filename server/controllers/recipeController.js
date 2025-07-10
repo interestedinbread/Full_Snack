@@ -49,3 +49,39 @@ exports.generateMeals = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch suggestions from OpenAI' });
   }
 }
+
+exports.saveMeal = async (req, res) => {
+  const { title, time_required, ingredients, instructions } = req.body
+  const userId = req.user.id
+
+  try{
+    const result = await pool.query(
+      `INSERT INTO saved_meals (user_id, title, time_required, ingredients, instructions)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *`,
+      [userId, title, time_required, ingredients, instructions]
+    )
+
+    res.status(201).json({ message: 'Meal saved', meal: result.rows[0] })
+  } catch (err) {
+    console.error('Error saving meal:', err)
+    res.status(500).json({ error: 'Could not save meal' })
+  }
+}
+
+exports.getSavedMeals = async (req, res) => {
+
+  try{
+    const result = await pool.query(
+    `SELECT * FROM saved_meals WHERE user_id = $1 ORDER BY created_at DESC`,
+    [userId]
+    );
+
+    res.status(200).json({ meals: result.rows})
+
+  } catch (err) {
+    console.error('Error fetching meals:', err)
+    res.status(500).json({ error: 'could not fetch saved meals'})
+  }
+  
+}
