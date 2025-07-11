@@ -1,4 +1,3 @@
-import { fakeMeals } from "./data/fakeData"
 import { useState } from "react"
 import { Modal } from "./Modal"
 
@@ -6,7 +5,12 @@ export function MealResults(props) {
 
     const { suggestions } = props
     const [selectedMeal, setSelectedMeal] = useState(null)
+    const [savedMeals, setSavedMeals] = useState([])
 
+    const handleSaveMeal = (title) => {
+        const newSavedMeals = [...savedMeals, title]
+        setSavedMeals(newSavedMeals)
+    }
 
     if(!Array.isArray(suggestions) || suggestions.length === 0){
         return null
@@ -53,6 +57,9 @@ export function MealResults(props) {
                             })}
                         </ol>
                     </div>
+                    <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
+                       handleSaveMeal(selectedMeal.title) 
+                    }}>{savedMeals.includes(selectedMeal.title) ? 'Saved' : 'Save'}</button>
                 </Modal>
             )}
             

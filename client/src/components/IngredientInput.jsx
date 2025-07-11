@@ -1,21 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Ingredientlist } from "./IngredientList";
 import { getMealSuggestions } from "../api/mealAPI";
 
 export function IngredientInput(props) {
 
-    const { ingredients, setIngredients, handleAddIngredient, handleDeleteIngredient, suggestions, setSuggestions } = props
+    const { ingredients, setIngredients, handleAddIngredient, handleDeleteIngredient, setSuggestions } = props
     const [inputValue, setInputValue] = useState('')
     const [isEditing, setIsEditing] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-
-    useEffect(() => {
-        if(suggestions && suggestions.length > 0){
-            console.log('Suggestions updated:', suggestions)
-            console.log('Array.isArray(suggestions):', Array.isArray(suggestions));
-            console.log('Type of suggestions:', typeof suggestions);
-        }
-    }, [suggestions])
 
     const handleGetMeals = async () => {
         if (!ingredients || ingredients.length === 0) return;
@@ -50,6 +42,7 @@ export function IngredientInput(props) {
                     if(!inputValue) { return }
                     handleAddIngredient(inputValue)
                     setInputValue('')
+                    setIsEditing(false)
                 }}
                 >Add</button>
                 <button className="ml-4 bg-white text-black px-2 rounded-lg"
