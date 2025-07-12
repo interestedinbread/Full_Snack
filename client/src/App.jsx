@@ -28,7 +28,7 @@ function handleDeleteIngredient(ingredientIndex) {
       <Navbar />
       <div className='mt-2 ml-4'>
         
-          <Header />
+          {!authenticated && <Header />}
           <IngredientInput 
             ingredients={ingredients} 
             setIngredients={setIngredients} 
