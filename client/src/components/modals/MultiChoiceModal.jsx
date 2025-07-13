@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import ReactDom from "react-dom"
+import { getMultiChoiceMealSuggestions } from "../../api/multiChoiceMealAPI"
 
 export function MultiChoiceModal(props) {
 
@@ -57,6 +58,12 @@ export function MultiChoiceModal(props) {
     const currentGroup = questionGroups[step]
     const isMulti = currentGroup.multiselect
 
+    const handleGetMultiChoiceMeals = async () => {
+        try{
+            const result = await fetch()
+        }
+    }
+
     function handleUpdateClickedButtons(option) {
         clickedButtons.includes(option) ?
         setClickedButtons(prev => prev.filter(o => o !== option)) :
@@ -68,12 +75,21 @@ export function MultiChoiceModal(props) {
             setTempSelection(prev => prev.includes(option) ? prev.filter(o => o !== option) : [...prev, option])
             handleUpdateClickedButtons(option)
         } else {
-            setAnswers(prev => ({
-                ...prev,
-                [currentGroup.id]: option
-            }))
-            setStep(prev => prev + 1)
+            const updatedAnswers = {
+                ...answers,
+                [currentGroup.id]: option,
+            }
+
+            setAnswers(updatedAnswers)
+
+            const isLastStep = step === questionGroups.length - 1
+            if(isLastStep){
+
+            } else {
+                // FINISH THIS PART AFTER SETTING UP FUNCTION ABOVE
+            }
         }
+        
     }
 
     useEffect(() => {
