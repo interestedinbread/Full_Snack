@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { NavModal } from "./NavModal"
+import { NavModal } from "./modals/NavModal"
 
 export function Navbar() {
 

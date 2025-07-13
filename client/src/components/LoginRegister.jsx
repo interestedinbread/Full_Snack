@@ -1,4 +1,4 @@
-import { LoginRegisterModal } from "./LoginRegisterModal"
+import { LoginRegisterModal } from "./modals/LoginRegisterModal"
 import { useState } from "react"
 
 export function LoginRegister(props) {

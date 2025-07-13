@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Modal } from "./Modal"
+import { Modal } from "./modals/MealModal"
 
 export function MealResults(props) {
 
@@ -34,7 +34,7 @@ export function MealResults(props) {
             }}
             >Start Over</button>
             {selectedMeal && (
-                <Modal setSelectedMeal={setSelectedMeal} >
+                <MealModal setSelectedMeal={setSelectedMeal} >
                     <h3 className="text-xl poppins-extrabold bg-[var(--secondary-color)] rounded-lg p-2 text-white">{selectedMeal.title}</h3>
                     <div className="bg-[var(--mealcard-color-1)] my-2 rounded-lg">
                         <h4 className="p-2 text-red-700 text-md poppins-extrabold">Time Required</h4>
@@ -65,7 +65,7 @@ export function MealResults(props) {
                     <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
                        handleSaveMeal(selectedMeal.title) 
                     }}>{savedMeals.includes(selectedMeal.title) ? 'Saved' : 'Save'}</button>
-                </Modal>
+                </MealModal>
             )}
             
         </>

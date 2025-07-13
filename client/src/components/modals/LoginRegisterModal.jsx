@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
 import ReactDom from 'react-dom'
-import { loginUser } from '../api/login'
-import { registerUser } from '../api/register'
-import { AuthContext } from './context/AuthContext'
+import { loginUser } from '../../api/login'
+import { registerUser } from '../../api/register'
+import { AuthContext } from '../context/AuthContext'
 
 export function LoginRegisterModal(props) {
 
