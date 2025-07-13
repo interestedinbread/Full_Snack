@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Modal } from "./modals/MealModal"
+import { MealModal } from "./modals/MealModal"
 
 export function MealResults(props) {
 

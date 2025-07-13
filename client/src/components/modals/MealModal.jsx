@@ -1,6 +1,6 @@
 import ReactDom from 'react-dom'
 
-export function Modal(props) {
+export function MealModal(props) {
     const { children, setSelectedMeal } = props
     return ReactDom.createPortal(
         <div className="fixed inset-0 z-10">
