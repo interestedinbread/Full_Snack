@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import ReactDom from 'react-dom'
 import { loginUser } from '../api/login'
+import { registerUser } from '../api/register'
+import { AuthContext } from './context/AuthContext'
 
 export function LoginRegisterModal(props) {
 
@@ -8,21 +10,27 @@ export function LoginRegisterModal(props) {
     const [usernameValue, setUsernameValue] = useState('')
     const [emailValue, setEmailValue] = useState('')
     const [passwordValue, setPasswordValue] = useState('')
+    const { setAuthenticated, setUsername } = useContext(AuthContext)
 
     const handleLogin = async (credentials) => {
         try{
-            const response = await loginUser(credentials)
-            if(response.ok){
-                const data = await response.json()
-                console.log('Login successful:', data)
-            }
+            const data = await loginUser(credentials)
+            console.log('Login successful', data)
+
+            setAuthenticated(true)
+            setUsername(data.user.username)
         } catch (err) {
-            console.error('Could not log in:', err)
+            console.error('Could not log in:', err.message)
         }
     }
 
     const handleRegister = async (userInfo) => {
-
+        try{
+            const data = await registerUser(userInfo)
+            console.log('User registered:', data)
+        } catch (err) {
+            console.error('Error registering user:', err)
+        }
     }
 
     return ReactDom.createPortal(
@@ -85,6 +93,9 @@ export function LoginRegisterModal(props) {
                             }
                             await handleRegister(userInfo)
                         }  
+                        setUsernameValue('')
+                        setEmailValue('')
+                        setPasswordValue('')
                     }}>Submit</button>
                     <p className='text-white text-base mt-4'>
                         {registering ? "Already have an account?" : "Don't have an account?"}

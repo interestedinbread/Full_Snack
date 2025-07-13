@@ -4,8 +4,7 @@ export function Ingredientlist(props) {
 
     return(
         <>
-        {ingredients.length > 0 && (
-            <ul className="px-4 py-2 bg-[var(--secondary-color)] mt-8 w-4/5 rounded-md">
+            <ul className="px-4 py-2 bg-[var(--secondary-color)] ml-4 w-4/5 rounded-md">
                 {ingredients.map((ingredient, ingredientIndex) => {
                     return (
                         <li key={ingredientIndex} className="text-white">
@@ -20,8 +19,6 @@ export function Ingredientlist(props) {
                     )
                 })}
             </ul>
-        )}
-            
         </>
     )
 }

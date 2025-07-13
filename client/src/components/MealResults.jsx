@@ -3,7 +3,7 @@ import { Modal } from "./Modal"
 
 export function MealResults(props) {
 
-    const { suggestions } = props
+    const { suggestions, setSuggestions } = props
     const [selectedMeal, setSelectedMeal] = useState(null)
     const [savedMeals, setSavedMeals] = useState([])
 
@@ -22,12 +22,17 @@ export function MealResults(props) {
             <div className="flex flex-col">
                 {suggestions.map((meal, index) => {
                     return(
-                        <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" key={index} onClick={() => {
+                        <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white w-max" key={index} onClick={() => {
                             setSelectedMeal(suggestions[index])
                         }}>{meal.title}</button>
                     )
                 })}
             </div>
+            <button className="ml-4 w-max bg-white text-black px-2 mb-2 rounded-lg"
+            onClick={() => {
+                setSuggestions([])
+            }}
+            >Start Over</button>
             {selectedMeal && (
                 <Modal setSelectedMeal={setSelectedMeal} >
                     <h3 className="text-xl poppins-extrabold bg-[var(--secondary-color)] rounded-lg p-2 text-white">{selectedMeal.title}</h3>

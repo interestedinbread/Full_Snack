@@ -4,7 +4,9 @@ import { Navbar } from './components/Navbar'
 import { IngredientInput } from './components/IngredientInput'
 import { MealResults } from './components/MealResults'
 import { LoginRegister } from './components/LoginRegister'
+import { MultiChoiceInput } from './components/MultiChoiceInput'
 import { AuthContext, AuthProvider } from './components/context/AuthContext'
+import { PromptInput } from './components/PromptInput'
 
 function App() {
 
@@ -28,7 +30,7 @@ function handleDeleteIngredient(ingredientIndex) {
       <Navbar />
       <div className='mt-2 ml-4'>
         
-          {!authenticated && <Header />}
+          <Header />
           <IngredientInput 
             ingredients={ingredients} 
             setIngredients={setIngredients} 
@@ -37,10 +39,13 @@ function handleDeleteIngredient(ingredientIndex) {
             suggestions={suggestions}
             setSuggestions={setSuggestions}
             />
+          {authenticated && <MultiChoiceInput suggestions={suggestions}/>}
+          {authenticated && <PromptInput suggestions={suggestions}/>}
           <MealResults 
             suggestions={suggestions}
+            setSuggestions={setSuggestions}
             />
-          <LoginRegister />
+          {!authenticated && <LoginRegister />}
         
       </div>
     </>
