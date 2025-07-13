@@ -5,10 +5,10 @@ import { AuthContext } from "./context/AuthContext";
 
 export function IngredientInput(props) {
 
-    const { ingredients, setIngredients, handleAddIngredient, handleDeleteIngredient, suggestions, setSuggestions } = props
+    const { ingredients, setIngredients, handleAddIngredient, handleDeleteIngredient, suggestions, setSuggestions, isLoading, setIsLoading } = props
     const [inputValue, setInputValue] = useState('')
     const [isEditing, setIsEditing] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+    
     const { authenticated } = useContext(AuthContext)
 
     const handleGetMeals = async () => {
@@ -21,12 +21,12 @@ export function IngredientInput(props) {
         }
     }
 
-    if(suggestions.length > 0) return null
+    if(suggestions.length > 0 || isLoading) return null
 
     return (
         <>
             <h2 className="text-3xl poppins-extrabold my-3 text-white">
-                { authenticated ? "When you're ready" : 'Try our meal generator'}
+                { authenticated ? "When you're ready..." : 'Try our meal generator'}
                 </h2>
             <div className="bg-[var(--secondary-color)] w-9/10 rounded-lg">
                 <h4 className="p-3 text-white">Enter some ingredients you might want to use</h4>

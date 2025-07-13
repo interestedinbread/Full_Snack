@@ -1,9 +1,12 @@
 import { LoginRegisterModal } from "./LoginRegisterModal"
 import { useState } from "react"
 
-export function LoginRegister() {
+export function LoginRegister(props) {
+    const { isLoading } = props
     const [loggingIn, setLoggingIn] = useState(false)
     const [registering, setRegistering] = useState(false)
+
+    if(isLoading) return null
 
     return (
         <>
