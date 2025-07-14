@@ -4,7 +4,7 @@ import { getMultiChoiceMealSuggestions } from "../../api/multiChoiceMealAPI"
 
 export function MultiChoiceModal(props) {
 
-    const { multiChoiceOpen, setMultiChoiceOpen } = props
+    const { multiChoiceOpen, setMultiChoiceOpen, setSuggestions, setIsLoading } = props
 
     const questionGroups = [
         {
@@ -58,9 +58,16 @@ export function MultiChoiceModal(props) {
     const currentGroup = questionGroups[step]
     const isMulti = currentGroup.multiselect
 
-    const handleGetMultiChoiceMeals = async () => {
+    const handleGetMultiChoiceMeals = async (preferences) => {
+        setIsLoading(true)
+        setMultiChoiceOpen(false)
         try{
-            const result = await fetch()
+            const result = await getMultiChoiceMealSuggestions(preferences)
+            setSuggestions(result)
+        } catch (err) {
+            alert('Failed to fetch meal suggestions', err);
+        } finally{
+            setIsLoading(false)
         }
     }
 
@@ -84,9 +91,9 @@ export function MultiChoiceModal(props) {
 
             const isLastStep = step === questionGroups.length - 1
             if(isLastStep){
-
+                handleGetMultiChoiceMeals(answers)
             } else {
-                // FINISH THIS PART AFTER SETTING UP FUNCTION ABOVE
+                setStep(prev => prev + 1)
             }
         }
         
@@ -128,6 +135,7 @@ export function MultiChoiceModal(props) {
                             }))
                             setTempSelection([])
                             setStep(prev => prev + 1)
+                            setClickedButtons([])
                         }}>Next</button>}
                     </div>
                 </div>

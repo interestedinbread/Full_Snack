@@ -8,6 +8,12 @@ export const getMultiChoiceMealSuggestions = async (preferences) => {
             body: JSON.stringify({ preferences }),
         })
 
+        if (!response.ok) {
+            const errorText = await response.text(); 
+            console.error('Backend error response:', errorText);
+            throw new Error('Failed to fetch meal suggestions');
+        }
+
         const data = await response.json();
         return data.suggestions
     } catch (error){

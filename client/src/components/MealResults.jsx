@@ -32,7 +32,7 @@ export function MealResults(props) {
             onClick={() => {
                 setSuggestions([])
             }}
-            >Start Over</button>
+            >Reset</button>
             {selectedMeal && (
                 <MealModal setSelectedMeal={setSelectedMeal} >
                     <h3 className="text-xl poppins-extrabold bg-[var(--secondary-color)] rounded-lg p-2 text-white">{selectedMeal.title}</h3>

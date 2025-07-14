@@ -50,6 +50,129 @@ exports.generateMeals = async (req, res) => {
   }
 }
 
+exports.multiChoiceGenerateMeals = async (req, res) => {
+  const { mealType,
+          flavorType, 
+          dietPreference, 
+          proteinPreference, 
+          cuisineType, 
+          allergiesOrAvoidances,
+          timeAvailable
+          } = req.body;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: "You are a helpful recipe generator.",
+        },
+        {
+          role: "user",
+          content: `Give me 3 creative ${mealType} meal ideas using these preferences:
+
+          - Flavor profile: ${flavorType}
+          - Dietary preferences: ${dietPreference?.join(', ') || 'None'}
+          - Preferred protein(s): ${proteinPreference?.join(', ') || 'Any'}
+          - Cuisine type(s): ${cuisineType?.join(', ') || 'Any'}
+          - Allergies or ingredients to avoid: ${allergiesOrAvoidances?.join(', ') || 'None'}
+          - Time available: ${timeAvailable}
+
+          
+          Return the result as a clean JSON array with no backticks. Each meal object should have:
+            - "id"
+            - "title"
+            - "ingredients" (array of strings)
+            - "time_required" (number in minutes)
+            - "instructions" (array of at least 4 steps).
+
+            Example:
+            [
+            {
+                "id": 1,
+                "title": "Tomato Pasta",
+                "ingredients": ["tomatoes", "pasta", "olive oil", "garlic"],
+                "time_required": 25,
+                "instructions": ["Boil pasta.", "Sauté garlic in olive oil.", "Add tomatoes and simmer.", "Combine with pasta and serve."]
+            }
+            ]`,
+        },
+      ],
+    });
+
+    let parsedReply
+    try{
+      parsedReply = JSON.parse(response.choices[0].message.content);
+    } catch (err) {
+      console.error('Failed to parse OpenAI response:', response.choices[0].message.content);
+      return res.status(500).json({ error: 'OpenAI response format error' });
+    }
+
+    return res.status(200).json({ suggestions: parsedReply })
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch suggestions from OpenAI' });
+  }
+}
+
+exports.promptGenerateMeals = async (req, res) => {
+  const prompt = req.body.prompt;
+  
+  if (!prompt || typeof prompt !== 'string' || prompt.trim() === '') {
+  return res.status(400).json({ error: 'Prompt must be a non-empty string.' });
+  }
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: "You are a helpful recipe generator.",
+        },
+        {
+          role: "user",
+          content: `Give me 3 creative meal ideas based on this input: ${prompt.trim()}
+          
+          Return the result as a clean JSON array with no backticks. Each meal object should have:
+            - "id"
+            - "title"
+            - "ingredients" (array of strings)
+            - "time_required" (number in minutes)
+            - "instructions" (array of at least 4 steps).
+
+            Example:
+            [
+            {
+                "id": 1,
+                "title": "Tomato Pasta",
+                "ingredients": ["tomatoes", "pasta", "olive oil", "garlic"],
+                "time_required": 25,
+                "instructions": ["Boil pasta.", "Sauté garlic in olive oil.", "Add tomatoes and simmer.", "Combine with pasta and serve."]
+            }
+            ]`,
+        },
+      ],
+    });
+
+    let parsedReply
+    try{
+      parsedReply = JSON.parse(response.choices[0].message.content);
+    } catch (err) {
+      console.error('Failed to parse OpenAI response:', response.choices[0].message.content);
+      return res.status(500).json({ error: 'OpenAI response format error' });
+    }
+
+    return res.status(200).json({ suggestions: parsedReply })
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch suggestions from OpenAI' });
+  }
+}
+
 exports.saveMeal = async (req, res) => {
   const { title, time_required, ingredients, instructions } = req.body
   const userId = req.user.id
@@ -70,6 +193,7 @@ exports.saveMeal = async (req, res) => {
 }
 
 exports.getSavedMeals = async (req, res) => {
+  // DEFINE USER ID HERE 
 
   try{
     const result = await pool.query(

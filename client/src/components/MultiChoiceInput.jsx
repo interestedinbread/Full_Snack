@@ -2,7 +2,7 @@ import { useState } from "react"
 import { MultiChoiceModal } from "./modals/MultiChoiceModal"
 
 export function MultiChoiceInput(props) {
-    const { suggestions, isLoading } = props
+    const { suggestions, setSuggestions, isLoading, setIsLoading } = props
     const [multiChoiceOpen, setMultiChoiceOpen] = useState(false)
 
     if(suggestions.length > 0 || isLoading) return null
@@ -17,7 +17,11 @@ export function MultiChoiceInput(props) {
                         setMultiChoiceOpen(true)
                     }}>Begin</button>
                 </div>
-                <MultiChoiceModal multiChoiceOpen={multiChoiceOpen} setMultiChoiceOpen={setMultiChoiceOpen}/>
+                <MultiChoiceModal multiChoiceOpen={multiChoiceOpen} 
+                setMultiChoiceOpen={setMultiChoiceOpen}
+                suggestions={suggestions}
+                setSuggestions={setSuggestions}
+                setIsLoading={setIsLoading}/>
             </>
     )
 }

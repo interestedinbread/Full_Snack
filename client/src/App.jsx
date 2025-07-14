@@ -44,10 +44,12 @@ function handleDeleteIngredient(ingredientIndex) {
             />
           {authenticated && <MultiChoiceInput 
             suggestions={suggestions}
+            setSuggestions={setSuggestions}
             isLoading={isLoading}
             setIsLoading={setIsLoading}/>}
           {authenticated && <PromptInput 
             suggestions={suggestions}
+            setSuggestions={setSuggestions}
             isLoading={isLoading}
             setIsLoading={setIsLoading}/>}
           <MealResults 

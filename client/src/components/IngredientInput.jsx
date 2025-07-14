@@ -17,7 +17,7 @@ export function IngredientInput(props) {
             const result = await getMealSuggestions(ingredients)
             setSuggestions(result)
         } catch (err){
-            alert('Failed to fetch meal suggestions');
+            alert('Failed to fetch meal suggestions', err);
         }
     }
 
