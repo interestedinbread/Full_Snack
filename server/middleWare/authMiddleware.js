@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 exports.protect = (req, res, next) => {
-    const authHeader = request.headers.authorization;
+    const authHeader = req.headers.authorization;
 
     if(!authHeader?.startsWith('Bearer ')) {
         return res.status(401).json({ message: 'Unauthorized' });

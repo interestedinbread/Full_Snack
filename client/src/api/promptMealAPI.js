@@ -1,9 +1,17 @@
 export const getPromptGenerateMeals = async (promptString) => {
     try {
+        const user = JSON.parse(localStorage.getItem('user'))
+        const token = user?.token
+
+        if(!token){
+            throw new Error ('User is not authenticated')
+        }
+
         const response = await fetch('http://localhost:3000/api/meals/prompt', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({ prompt: promptString})
             })

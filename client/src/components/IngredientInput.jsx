@@ -29,7 +29,7 @@ export function IngredientInput(props) {
                 { authenticated ? "When you're ready..." : 'Try our meal generator'}
                 </h2>
             <div className="bg-[var(--secondary-color)] w-9/10 rounded-lg">
-                <h4 className="p-3 text-white">Enter some ingredients you might want to use</h4>
+                <h4 className="p-3 text-white">Enter some ingredients you might want to use!</h4>
                 <input className="ml-3 mb-3 pl-2 bg-black border-2 border-slate-400 text-white rounded-lg"
                 placeholder="eggs, cumin, beef..." 
                 value={inputValue}

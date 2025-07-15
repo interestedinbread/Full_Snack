@@ -1,9 +1,13 @@
 export const getMultiChoiceMealSuggestions = async (preferences) => {
     try {
+        const user = JSON.parse(localStorage.getItem('user'))
+        const token = user?.token
+
         const response = await fetch('http://localhost:3000/api/meals/multichoice', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({ preferences }),
         })

@@ -16,9 +16,12 @@ export function LoginRegisterModal(props) {
         try{
             const data = await loginUser(credentials)
             console.log('Login successful', data)
-
+            const { user, token } = data
+            localStorage.setItem('user', JSON.stringify({...user, token}))
+            
             setAuthenticated(true)
-            setUsername(data.user.username)
+            setUsername(user.username)
+            
         } catch (err) {
             console.error('Could not log in:', err.message)
         }
