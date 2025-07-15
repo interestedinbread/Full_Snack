@@ -3,7 +3,13 @@ import { getPromptGenerateMeals } from "../api/promptMealAPI";
 
 export function PromptInput(props) {
 
-    const { suggestions, setSuggestions, isLoading, setIsLoading } = props
+    const { suggestions, 
+        setSuggestions, 
+        isLoading, 
+        setIsLoading,
+        savedMealsOpen,
+        shoppingListOpen } = props
+
     const [prompt, setPrompt] = useState('')
 
     const handleGetPromptMeals = async () => {
@@ -20,7 +26,11 @@ export function PromptInput(props) {
         }
     }
 
-    if(suggestions.length > 0 || isLoading) return null
+    if(suggestions.length > 0 || 
+        isLoading ||
+        shoppingListOpen ||
+        savedMealsOpen
+    ) return null
 
     return (
         <>

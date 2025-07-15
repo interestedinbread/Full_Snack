@@ -1,5 +1,6 @@
 const { OpenAI } = require('openai')
 require('dotenv').config()
+const pool = require('../config/db')
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -42,7 +43,8 @@ exports.generateMeals = async (req, res) => {
     });
 
     const reply = response.choices[0].message.content;
-    const parsedReply = JSON.parse(reply)
+    let cleaned = reply.replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
+    const parsedReply = JSON.parse(cleaned)
     res.json({ suggestions: parsedReply });
   } catch (err) {
     console.error(err);
@@ -103,7 +105,7 @@ exports.multiChoiceGenerateMeals = async (req, res) => {
 
     let parsedReply
     try{
-      parsedReply = JSON.parse(response.choices[0].message.content);
+      parsedReply = JSON.parse(response.choices[0].message.content.replace(/,\s*}/g, '}').replace(/,\s*]/g, ']'));
     } catch (err) {
       console.error('Failed to parse OpenAI response:', response.choices[0].message.content);
       return res.status(500).json({ error: 'OpenAI response format error' });
@@ -159,7 +161,7 @@ exports.promptGenerateMeals = async (req, res) => {
 
     let parsedReply
     try{
-      parsedReply = JSON.parse(response.choices[0].message.content);
+      parsedReply = JSON.parse(response.choices[0].message.content.replace(/,\s*}/g, '}').replace(/,\s*]/g, ']'));
     } catch (err) {
       console.error('Failed to parse OpenAI response:', response.choices[0].message.content);
       return res.status(500).json({ error: 'OpenAI response format error' });
@@ -175,8 +177,9 @@ exports.promptGenerateMeals = async (req, res) => {
 
 exports.saveMeal = async (req, res) => {
   const { title, time_required, ingredients, instructions } = req.body
-  const userId = req.user.id
+  const userId = parseInt(req.user.id)
 
+  console.log('User ID:', userId, 'Type:', typeof userId);
   try{
     const result = await pool.query(
       `INSERT INTO saved_meals (user_id, title, time_required, ingredients, instructions)
@@ -193,7 +196,8 @@ exports.saveMeal = async (req, res) => {
 }
 
 exports.getSavedMeals = async (req, res) => {
-  // DEFINE USER ID HERE 
+   
+  const userId = req.user.id
 
   try{
     const result = await pool.query(

@@ -1,13 +1,28 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { MealModal } from "./modals/MealModal"
+import { AuthContext } from "./context/AuthContext"
+import { saveMeal } from "../api/saveMeal"
 
 export function MealResults(props) {
 
     const { suggestions, setSuggestions } = props
     const [selectedMeal, setSelectedMeal] = useState(null)
     const [savedMeals, setSavedMeals] = useState([])
+    const { authenticated } = useContext(AuthContext)
 
-    const handleSaveMeal = (title) => {
+    const handleSaveMeal = async (meal) => {
+        console.log('Saving meal...')
+        try{
+            const result = await saveMeal(meal)
+            console.log('SaveMeal response:', result);
+        } catch (err) {
+            console.error('Could not save meal', err)
+        } finally {
+            handleUpdateSavedMeals(meal.title)
+        }
+    }
+
+    const handleUpdateSavedMeals = (title) => {
         const newSavedMeals = [...savedMeals, title]
         setSavedMeals(newSavedMeals)
     }
@@ -62,9 +77,12 @@ export function MealResults(props) {
                             })}
                         </ol>
                     </div>
-                    <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
-                       handleSaveMeal(selectedMeal.title) 
-                    }}>{savedMeals.includes(selectedMeal.title) ? 'Saved' : 'Save'}</button>
+                    {authenticated && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
+                        if(savedMeals.includes(selectedMeal.title)){
+                            return
+                        }
+                        handleSaveMeal(selectedMeal) 
+                    }}>{savedMeals.includes(selectedMeal.title) ? 'Saved' : 'Save'}</button>}
                 </MealModal>
             )}
             

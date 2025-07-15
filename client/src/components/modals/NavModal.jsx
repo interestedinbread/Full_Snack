@@ -12,8 +12,8 @@ export function NavModal(props) {
             <div className="fixed inset-0 w-4/5 mx-auto mt-24 z-50 max-h-[60vh] flex flex-col gap-4">
                 {tabs.map((tab, index) => {
                     return(
-                        <button key={index}>
-                            <h2 className="text-white poppins-regular text-2xl">{tab}</h2>
+                        <button key={index} onClick={tab.onclick}>
+                            <h2 className="text-white poppins-regular text-2xl">{tab.name}</h2>
                         </button>
                     )
                 })}

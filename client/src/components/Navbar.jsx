@@ -1,10 +1,39 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { NavModal } from "./modals/NavModal"
+import { AuthContext } from "./context/AuthContext"
+import { getSavedMeals } from "../api/getSavedMeals"
 
-export function Navbar() {
-
-    const tabs = ['Home', 'About', 'Generate', 'Shopping List', 'Meals']
+export function Navbar(props) {
+    const { setSuggestions } = props
     const [navModalOpen, setNavModalOpen] = useState(false)
+    const { setAuthenticated } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        localStorage.removeItem('user')
+        setAuthenticated(false)
+        setNavModalOpen(false)
+    }
+
+    const handleGenerate = () => {
+        setSuggestions([])
+        setNavModalOpen(false)
+    }
+
+    const handleGetMeals = async () => {
+        setNavModalOpen(false)
+        try{
+            const result = await getSavedMeals()
+            console.log('SaveMeal response:', result);
+        } catch (err) {
+            console.error('Error getting meals', err)
+        }
+    }
+
+    const tabs = [
+        {name: 'Generate', onclick: handleGenerate},
+        {name: 'Saved Meals', onclick: handleGetMeals},
+        {name: 'Logout', onclick: handleLogout}
+    ]
 
     return(
         <>
@@ -12,8 +41,8 @@ export function Navbar() {
                 <div className="flex justify-end gap-4 p-4 hidden">
                     {tabs.map((tab, tabIndex) => {
                         return(
-                            <button key={tabIndex} className="">
-                                <h4 className="text-white poppins-regular text-sm">{tab}</h4>
+                            <button key={tabIndex} onClick={tab.onclick}>
+                                <h4 className="text-white poppins-regular text-sm">{tab.name}</h4>
                             </button>
                         )
                     })}

@@ -1,10 +1,13 @@
 export const saveMeal = async (meal) => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    const token = user?.token
 
     try{
         const res = await fetch('http://localhost:3000/api/meals/save', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify( meal ),
     })

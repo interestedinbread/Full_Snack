@@ -2,10 +2,18 @@ import { useState } from "react"
 import { MultiChoiceModal } from "./modals/MultiChoiceModal"
 
 export function MultiChoiceInput(props) {
-    const { suggestions, setSuggestions, isLoading, setIsLoading } = props
+    const { suggestions, 
+        setSuggestions, 
+        isLoading, 
+        setIsLoading,
+        shoppingListOpen,
+        savedMealsOpen } = props
     const [multiChoiceOpen, setMultiChoiceOpen] = useState(false)
 
-    if(suggestions.length > 0 || isLoading) return null
+    if(suggestions.length > 0 ||
+        isLoading ||
+        shoppingListOpen ||
+        savedMealsOpen) return null
     
     return (
             <>

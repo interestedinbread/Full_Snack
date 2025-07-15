@@ -5,7 +5,16 @@ import { AuthContext } from "./context/AuthContext";
 
 export function IngredientInput(props) {
 
-    const { ingredients, setIngredients, handleAddIngredient, handleDeleteIngredient, suggestions, setSuggestions, isLoading, setIsLoading } = props
+    const { ingredients, 
+        setIngredients, 
+        handleAddIngredient, 
+        handleDeleteIngredient, 
+        suggestions, 
+        setSuggestions, 
+        isLoading, 
+        setIsLoading,
+        shoppingListOpen,
+        savedMealsOpen } = props
     const [inputValue, setInputValue] = useState('')
     const [isEditing, setIsEditing] = useState(false)
     
@@ -21,7 +30,11 @@ export function IngredientInput(props) {
         }
     }
 
-    if(suggestions.length > 0 || isLoading) return null
+    if(suggestions.length > 0 || 
+        isLoading ||
+        shoppingListOpen ||
+        savedMealsOpen
+    ) return null
 
     return (
         <>

@@ -5,6 +5,8 @@ import { IngredientInput } from './components/IngredientInput'
 import { MealResults } from './components/MealResults'
 import { LoginRegister } from './components/LoginRegister'
 import { MultiChoiceInput } from './components/MultiChoiceInput'
+import { SavedMeals } from './components/SavedMeals'
+import { ShoppingList } from './components/ShoppingList'
 import { AuthContext, AuthProvider } from './components/context/AuthContext'
 import { PromptInput } from './components/PromptInput'
 import { Loading } from './components/Loading'
@@ -14,6 +16,8 @@ function App() {
 const [ingredients, setIngredients] = useState([])
 const [suggestions, setSuggestions] = useState([])
 const [isLoading, setIsLoading] = useState(false)
+const [savedMealsOpen, setSavedMealsOpen] = useState(false)
+const [shoppingListOpen, setShoppingListOpen] = useState(false)
 
 const { authenticated } = useContext(AuthContext)
 
@@ -29,7 +33,7 @@ function handleDeleteIngredient(ingredientIndex) {
 
   return (
     <>
-      <Navbar />
+      <Navbar setSuggestions={setSuggestions}/>
       <div className='mt-2 ml-4'>
           <Header />
           <IngredientInput 
@@ -41,17 +45,23 @@ function handleDeleteIngredient(ingredientIndex) {
             setSuggestions={setSuggestions}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            savedMealsOpen={savedMealsOpen}
+            shoppingListOpen={shoppingListOpen}
             />
           {authenticated && <MultiChoiceInput 
             suggestions={suggestions}
             setSuggestions={setSuggestions}
             isLoading={isLoading}
-            setIsLoading={setIsLoading}/>}
+            setIsLoading={setIsLoading}
+            savedMealsOpen={savedMealsOpen}
+            shoppingListOpen={shoppingListOpen}/>}
           {authenticated && <PromptInput 
             suggestions={suggestions}
             setSuggestions={setSuggestions}
             isLoading={isLoading}
-            setIsLoading={setIsLoading}/>}
+            setIsLoading={setIsLoading}
+            savedMealsOpen={savedMealsOpen}
+            shoppingListOpen={shoppingListOpen}/>}
           <MealResults 
             suggestions={suggestions}
             setSuggestions={setSuggestions}
@@ -63,6 +73,8 @@ function handleDeleteIngredient(ingredientIndex) {
             setIsLoading={setIsLoading}
             />}
           {isLoading && <Loading />}
+          {savedMealsOpen && <SavedMeals />}
+          {shoppingListOpen && <ShoppingList />}
       </div>
     </>
   )
