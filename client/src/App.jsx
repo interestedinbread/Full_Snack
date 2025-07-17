@@ -32,6 +32,14 @@ function handleDeleteIngredient(ingredientIndex) {
   setIngredients(newIngredients)
 }
 
+async function handleAddToList() {
+
+}
+
+async function handleGetShoppingList() {
+  
+}
+
   return (
     <>
       <Navbar setSuggestions={setSuggestions} 
