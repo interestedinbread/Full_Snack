@@ -17,7 +17,6 @@ const [ingredients, setIngredients] = useState([])
 const [suggestions, setSuggestions] = useState([])
 const [isLoading, setIsLoading] = useState(false)
 const [savedMealsOpen, setSavedMealsOpen] = useState(false)
-const [savedMeals, setSavedMeals] = useState([])
 const [selectedMeal, setSelectedMeal] = useState(null)
 const [shoppingListOpen, setShoppingListOpen] = useState(false)
 
@@ -37,7 +36,7 @@ function handleDeleteIngredient(ingredientIndex) {
     <>
       <Navbar setSuggestions={setSuggestions} 
       setSavedMealsOpen={setSavedMealsOpen}
-      setSavedMeals={setSavedMeals}/>
+      />
       <div className='mt-2 ml-4'>
           <Header />
           <IngredientInput 
@@ -74,13 +73,14 @@ function handleDeleteIngredient(ingredientIndex) {
             MealModal={MealModal}
             selectedMeal={selectedMeal}
             setSelectedMeal={setSelectedMeal}
+            savedMealsOpen={savedMealsOpen}
+            setSavedMealsOpen={setSavedMealsOpen}
             />
           {!authenticated && <LoginRegister 
             isLoading={isLoading}
             setIsLoading={setIsLoading}
             />}
           {isLoading && <Loading />}
-          {savedMealsOpen && <SavedMeals savedMeals={savedMeals} />}
           {shoppingListOpen && <ShoppingList />}
       </div>
     </>

@@ -3,7 +3,7 @@ import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
 
 export function MealModal(props) {
-    const { selectedMeal, setSelectedMeal, savedMeals, handleSaveMeal } = props
+    const { selectedMeal, setSelectedMeal, savedMeals, handleSaveMeal, savedMealsOpen } = props
     const { authenticated } = useContext(AuthContext)
     return ReactDom.createPortal(
         <div className="fixed inset-0 z-10">
@@ -38,7 +38,7 @@ export function MealModal(props) {
                             })}
                         </ol>
                     </div>
-                    {authenticated && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
+                    {(authenticated && !savedMealsOpen) && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
                         if(savedMeals.includes(selectedMeal.title)){
                             return
                         }

@@ -28,6 +28,7 @@ export function Navbar(props) {
             const result = await getSavedMeals()
             console.log('SaveMeal response:', result);
             setSuggestions(result.meals)
+            setSavedMealsOpen(true)
         } catch (err) {
             console.error('Error getting meals', err)
         } 
