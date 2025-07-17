@@ -10,27 +10,37 @@ export function MealModal(props) {
             <button className="fixed inset-0 z-20 bg-black bg-opacity-50" onClick={() => {
                 setSelectedMeal(null)
             }}/>
-            <div className="fixed inset-0 w-4/5 mx-auto mt-24 z-50 max-h-[60vh]">
+            <div className="fixed inset-0 w-4/5 mx-auto mt-24 z-50 h-max">
                  <h3 className="text-xl poppins-extrabold bg-[var(--secondary-color)] rounded-lg p-2 text-white">{selectedMeal.title}</h3>
-                    <div className="bg-[var(--mealcard-color-1)] my-2 rounded-lg">
-                        <h4 className="p-2 text-red-700 text-md poppins-extrabold">Time Required</h4>
-                        <p className="p-2 text-sm text-red-700 poppins-medium">{selectedMeal.time_required} minutes</p>
+                    <div className="bg-[var(--mealcard-color-1)] my-2 rounded-lg relative">
+                        <h4 className="p-2 pl-4 text-red-700 text-lg poppins-extrabold">Time Required</h4>
+                        <p className="p-2 pl-4 text-sm text-red-700 poppins-medium">{selectedMeal.time_required} minutes</p>
+                        <img src="/img/noun-clock-7574786-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
                     </div>
             
-                    <div className="bg-[var(--mealcard-color-2)] my-2 rounded-lg">
-                        <h4 className="p-2 text-md text-red-700 poppins-extrabold">Ingredients</h4>
+                    <div className="bg-[var(--mealcard-color-2)] my-2 rounded-lg relative">
+                        <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Ingredients</h4>
+                        <img src="/img/noun-275627-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
                         <ul className="px-2 pb-4">
                             {selectedMeal.ingredients.map((ingredient, index) => {
                                 return(
-                                    <li key={index} className="text-sm text-red-700 poppins-medium">{ingredient}</li>
+                                    <div key={index} className='flex items-center gap-2'>
+                                        <li  className="text-sm text-red-700 poppins-medium">{ingredient}</li>
+                                        <i className="fa-solid fa-square-check text-base text-green-600"></i>
+                                    </div>
                                 )
                             })}
                         </ul>
+                        <p className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'>Checked items are in your shopping list</p>
                     </div>
 
-                    <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg">
-                        <h4 className="p-2 text-md text-red-700 poppins-extrabold">Directions</h4>
-                        <ol className="list-decimal list-outside px-6">
+                    <p className='text-white italic text-sm'>Tap ingredients or bag icon to manage shopping list. 
+                        View full shopping list in the menu above.</p>
+
+                    <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg relative">
+                        <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Directions</h4>
+                        <img src="/img/noun-checklist-445258-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
+                        <ol className="list-decimal list-outside px-6 mt-2">
                             {selectedMeal.instructions.map((step, index) => {
                                 return(
                                     <li key={index} className="text-sm text-red-700 poppins-medium pl-2 py-2">{step}</li>

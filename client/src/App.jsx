@@ -36,6 +36,7 @@ function handleDeleteIngredient(ingredientIndex) {
     <>
       <Navbar setSuggestions={setSuggestions} 
       setSavedMealsOpen={setSavedMealsOpen}
+      setSelectedMeal={setSelectedMeal}
       />
       <div className='mt-2 ml-4'>
           <Header />
