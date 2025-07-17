@@ -10,6 +10,7 @@ import { ShoppingList } from './components/ShoppingList'
 import { AuthContext, AuthProvider } from './components/context/AuthContext'
 import { PromptInput } from './components/PromptInput'
 import { Loading } from './components/Loading'
+import { MealModal } from './components/modals/MealModal'
 
 function App() {
 
@@ -18,6 +19,7 @@ const [suggestions, setSuggestions] = useState([])
 const [isLoading, setIsLoading] = useState(false)
 const [savedMealsOpen, setSavedMealsOpen] = useState(false)
 const [savedMeals, setSavedMeals] = useState([])
+const [selectedMeal, setSelectedMeal] = useState(null)
 const [shoppingListOpen, setShoppingListOpen] = useState(false)
 
 const { authenticated } = useContext(AuthContext)
@@ -70,13 +72,16 @@ function handleDeleteIngredient(ingredientIndex) {
             setSuggestions={setSuggestions}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            MealModal={MealModal}
+            selectedMeal={selectedMeal}
+            setSelectedMeal={setSelectedMeal}
             />
           {!authenticated && <LoginRegister 
             isLoading={isLoading}
             setIsLoading={setIsLoading}
             />}
           {isLoading && <Loading />}
-          {savedMealsOpen && <SavedMeals savedMeals={savedMeals}/>}
+          {savedMealsOpen && <SavedMeals savedMeals={savedMeals} />}
           {shoppingListOpen && <ShoppingList />}
       </div>
     </>

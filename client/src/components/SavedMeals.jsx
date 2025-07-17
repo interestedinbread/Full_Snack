@@ -12,6 +12,7 @@ export function SavedMeals(props) {
                     )
                 })}
             </div>
+            <SavedMealModal savedMeals={savedMeals}/>
         
         
         </>
