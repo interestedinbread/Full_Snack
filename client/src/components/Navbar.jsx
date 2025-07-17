@@ -4,7 +4,7 @@ import { AuthContext } from "./context/AuthContext"
 import { getSavedMeals } from "../api/getSavedMeals"
 
 export function Navbar(props) {
-    const { setSuggestions, setSavedMealsOpen, setSavedMeals } = props
+    const { setSuggestions, setSavedMealsOpen } = props
     const [navModalOpen, setNavModalOpen] = useState(false)
     const { setAuthenticated } = useContext(AuthContext)
     
@@ -27,12 +27,10 @@ export function Navbar(props) {
         try{
             const result = await getSavedMeals()
             console.log('SaveMeal response:', result);
-            setSavedMeals(result)
+            setSuggestions(result.meals)
         } catch (err) {
             console.error('Error getting meals', err)
-        } finally {
-            setSavedMealsOpen(true)
-        }
+        } 
     }
 
     const tabs = [

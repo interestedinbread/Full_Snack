@@ -24,7 +24,7 @@ export function MealResults(props) {
         setSavedMeals(newSavedMeals)
     }
 
-    if(!Array.isArray(suggestions) || suggestions.length === 0){
+    if(!suggestions || suggestions.length === 0){
         return null
     }
 
