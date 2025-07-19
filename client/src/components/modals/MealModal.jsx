@@ -3,6 +3,7 @@ import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
 import { useEffect } from 'react'
 import { getShoppingList } from '../../api/getShoppingList'
+import { useState } from 'react'
 
 export function MealModal(props) {
     
@@ -15,15 +16,26 @@ export function MealModal(props) {
         suggestions } = props
 
     const { authenticated } = useContext(AuthContext)
+    const [ shoppingList, setShoppingList ] = useState([])
+    const [refetchTrigger, setRefetchTrigger] = useState(0)
 
     useEffect(() => {
-        if(!suggestions || suggestions.length === 0){
-        return 
-        }
+        console.log('Checking shopping list')
         const loadShoppingList = async () => {
             try {
                 const result = await getShoppingList()
                 console.log('Shopping list contents', result)
+                const handleSetShoppingList = () => {
+                    const list = []
+                    result.items.forEach(item => {
+                        list.push({
+                            ingredient_id: item.id,
+                            ingredient: item.item_name
+                        })
+                    })
+                    setShoppingList(list)
+                }
+                handleSetShoppingList(result)
             } catch (err) {
                 console.error('Error checking shopping list:', err)
             }
@@ -31,7 +43,7 @@ export function MealModal(props) {
         
         loadShoppingList()
 
-    }, [suggestions])
+    }, [refetchTrigger])
 
     return ReactDom.createPortal(
         <div className="fixed inset-0 z-10">
@@ -51,14 +63,22 @@ export function MealModal(props) {
                         <img src="/img/noun-275627-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
                         <ul className="px-2 pb-4">
                             {selectedMeal.ingredients.map((ingredient, index) => {
+                                const matchedItem = shoppingList.some(item => item.ingredient === ingredient)
+                                const isOnList = Boolean(matchedItem)
                                 return(
                                     <div key={index} className='flex items-center gap-2'>
                                         <li  className="text-sm text-red-700 poppins-medium">
                                             <button onClick={() => {
-                                                handleAddToList(ingredient)
+                                                if(isOnList){
+                                                    // set up delete functionality then do this part
+                                                } else {
+                                                    handleAddToList(ingredient)
+                                                }
+                                                
+                                                setRefetchTrigger(prev => prev + 1)
                                             }}>{ingredient}</button>
                                             </li>
-                                        <i className="fa-solid fa-square-check text-base text-green-600"></i>
+                                        {isOnList && <i className="fa-solid fa-square-check text-base text-green-600"></i>}
                                     </div>
                                 )
                             })}
