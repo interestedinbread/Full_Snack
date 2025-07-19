@@ -1,10 +1,38 @@
 import ReactDom from 'react-dom'
 import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
+import { useEffect } from 'react'
+import { getShoppingList } from '../../api/getShoppingList'
 
 export function MealModal(props) {
-    const { selectedMeal, setSelectedMeal, savedMeals, handleSaveMeal, savedMealsOpen } = props
+    
+    const { selectedMeal, 
+        setSelectedMeal, 
+        savedMeals, 
+        handleSaveMeal, 
+        savedMealsOpen, 
+        handleAddToList,
+        suggestions } = props
+
     const { authenticated } = useContext(AuthContext)
+
+    useEffect(() => {
+        if(!suggestions || suggestions.length === 0){
+        return 
+        }
+        const loadShoppingList = async () => {
+            try {
+                const result = await getShoppingList()
+                console.log('Shopping list contents', result)
+            } catch (err) {
+                console.error('Error checking shopping list:', err)
+            }
+        }
+        
+        loadShoppingList()
+
+    }, [suggestions])
+
     return ReactDom.createPortal(
         <div className="fixed inset-0 z-10">
             <button className="fixed inset-0 z-20 bg-black bg-opacity-50" onClick={() => {
@@ -25,7 +53,11 @@ export function MealModal(props) {
                             {selectedMeal.ingredients.map((ingredient, index) => {
                                 return(
                                     <div key={index} className='flex items-center gap-2'>
-                                        <li  className="text-sm text-red-700 poppins-medium">{ingredient}</li>
+                                        <li  className="text-sm text-red-700 poppins-medium">
+                                            <button onClick={() => {
+                                                handleAddToList(ingredient)
+                                            }}>{ingredient}</button>
+                                            </li>
                                         <i className="fa-solid fa-square-check text-base text-green-600"></i>
                                     </div>
                                 )

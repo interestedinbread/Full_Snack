@@ -3,7 +3,14 @@ import { saveMeal } from "../api/saveMeal"
 
 export function MealResults(props) {
 
-    const { suggestions, setSuggestions, MealModal, selectedMeal, setSelectedMeal, savedMealsOpen, setSavedMealsOpen } = props
+    const { suggestions, 
+        setSuggestions, 
+        MealModal, 
+        selectedMeal, 
+        setSelectedMeal, 
+        savedMealsOpen, 
+        setSavedMealsOpen, 
+        handleAddToList } = props
     
     const [savedMeals, setSavedMeals] = useState([])
 
@@ -51,7 +58,9 @@ export function MealResults(props) {
                 setSelectedMeal={setSelectedMeal}
                 savedMeals={savedMeals}
                 handleSaveMeal={handleSaveMeal}
-                savedMealsOpen={savedMealsOpen} />
+                savedMealsOpen={savedMealsOpen}
+                handleAddToList={handleAddToList}
+                suggestions={suggestions} />
             )}
             
         </>

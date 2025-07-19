@@ -10,6 +10,8 @@ import { AuthContext, AuthProvider } from './components/context/AuthContext'
 import { PromptInput } from './components/PromptInput'
 import { Loading } from './components/Loading'
 import { MealModal } from './components/modals/MealModal'
+import { addToShoppingList } from './api/addToShoppingList'
+import { getShoppingList } from './api/getShoppingList'
 
 function App() {
 
@@ -32,12 +34,22 @@ function handleDeleteIngredient(ingredientIndex) {
   setIngredients(newIngredients)
 }
 
-async function handleAddToList() {
-
+async function handleAddToList(itemData) {
+  try{
+    const result = await addToShoppingList(itemData)
+    console.log(result)
+  } catch (err) {
+    console.error('Error saving item:', err)
+  }
 }
 
-async function handleGetShoppingList() {
-  
+async function handleGetShoppingList(userId) {
+  try{
+    const result = await getShoppingList(userId)
+    console.log(result)
+  } catch (err) {
+    console.error('Error getting shopping list:', err)
+  }
 }
 
   return (
@@ -84,6 +96,7 @@ async function handleGetShoppingList() {
             setSelectedMeal={setSelectedMeal}
             savedMealsOpen={savedMealsOpen}
             setSavedMealsOpen={setSavedMealsOpen}
+            handleAddToList={handleAddToList}
             />
           {!authenticated && <LoginRegister 
             isLoading={isLoading}
