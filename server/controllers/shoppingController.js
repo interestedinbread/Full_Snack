@@ -93,6 +93,35 @@ exports.deleteFromShoppingList = async (req, res) => {
     }
 }
 
+exports.multiDeleteFromShoppingList = async (req, res) => {
+    const { ids } = req.body;
+
+    if(!Array.isArray(ids) || ids.length === 0){
+        return res.status(400).json({ message: "No item ids provided"})
+    }
+
+    try{
+        const result = await pool.query(
+            'DELETE FROM shopping_list WHERE id = ANY($1::int[]) RETURNING *',
+        [ids]
+    )
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'No items found to delete' });
+    }
+
+    res.status(200).json({
+      message: 'Items deleted',
+      deletedCount: result.rowCount,
+      deletedItems: result.rows
+    })
+
+    } catch (err) {
+        console.error('Error deleting items:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
 exports.getShoppingList = async (req, res) => {
     const userId = parseInt(req.user.id)
     try{
