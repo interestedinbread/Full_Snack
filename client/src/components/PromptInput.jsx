@@ -37,7 +37,7 @@ export function PromptInput(props) {
             <h3 className="text-3xl poppins-extrabold mt-3 text-white">or...</h3>
             <div className="bg-[var(--secondary-color)] w-9/10 rounded-lg mt-2 flex flex-col">
                 <h4 className="p-3 text-white">Tell us about a meal idea you have. It could be as vague or specific as you like!</h4>
-                <textarea placeholder="I'm thinking baout something spicy and..."
+                <textarea placeholder="I'm thinking about something spicy and..."
                 className="mx-auto mb-3 p-2 bg-black border-2 border-slate-400 text-white text-sm rounded-lg w-9/10 resize-none overflow-hidden"
                 rows={3}
                 onInput={(e) => {

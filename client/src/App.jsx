@@ -13,6 +13,8 @@ import { MealModal } from './components/modals/MealModal'
 import { addToShoppingList } from './api/addToShoppingList'
 import { getShoppingList } from './api/getShoppingList'
 import { deleteFromShoppingList } from './api/deleteFromShoppingList'
+import { multiAddToShoppingList } from './api/multiAddToShoppingList'
+import { multiDeleteFromShoppingList } from './api/multiDeleteFromShoppingList'
 
 function App() {
 
@@ -50,6 +52,24 @@ async function handleDeleteFromList(itemId) {
     console.log(result)
   } catch (err) {
     console.error('Error deleting item:', err)
+  }
+}
+
+async function handleMultiAddToList(items) {
+  try{
+    const result = await multiAddToShoppingList(items)
+    console.log(result)
+  } catch (err) {
+    console.erroe('Error saving multiple items', err)
+  }
+}
+
+async function handleMultiDeleteFromList(ids) {
+  try{
+    const result = await multiDeleteFromShoppingList(ids)
+    console.log(result)
+  } catch (err){
+    console.error('Error deleting multiple items', err)
   }
 }
 
@@ -108,6 +128,8 @@ async function handleGetShoppingList(userId) {
             setSavedMealsOpen={setSavedMealsOpen}
             handleAddToList={handleAddToList}
             handleDeleteFromList={handleDeleteFromList}
+            handleMultiAddToList={handleMultiAddToList}
+            handleMultiDeleteFromList={handleMultiDeleteFromList}
             />
           {!authenticated && <LoginRegister 
             isLoading={isLoading}

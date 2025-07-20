@@ -14,6 +14,8 @@ export function MealModal(props) {
         savedMealsOpen, 
         handleAddToList,
         handleDeleteFromList,
+        handleMultiAddToList,
+        handleMultiDeleteFromList
          } = props
 
     const { authenticated } = useContext(AuthContext)
@@ -61,10 +63,22 @@ export function MealModal(props) {
             
                     <div className="bg-[var(--mealcard-color-2)] my-2 rounded-lg relative">
                         <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Ingredients</h4>
-                        <button onClick={() => {
-                            
+                        <button onClick={async () => {
+                            const ingredients = selectedMeal.ingredients
+                            const allSaved = ingredients.every(ingredient => 
+                                shoppingList.some(item => item.ingredient === ingredient))
+                            if(allSaved){
+                                const itemIds = shoppingList.filter(item => 
+                                    ingredients.includes(item.ingredient)).map(item =>
+                                    item.ingredient_id
+                                )
+                                await handleMultiDeleteFromList(itemIds)
+                            } else {
+                                await handleMultiAddToList(ingredients)
+                            }
+                            setRefetchTrigger(prev => prev + 1)
                         }}>
-                            <img src="/img/noun-275627-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
+                            <img alt="grocery-bag-image" src="/img/noun-275627-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
                         </button>
                         <ul className="px-2 pb-4">
                             {selectedMeal.ingredients.map((ingredient, index) => {
@@ -79,7 +93,6 @@ export function MealModal(props) {
                                                 } else {
                                                     await handleAddToList(ingredient)
                                                 }
-                                                
                                                 setRefetchTrigger(prev => prev + 1)
                                             }}>{ingredient}</button>
                                             </li>

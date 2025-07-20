@@ -11,7 +11,9 @@ export function MealResults(props) {
         savedMealsOpen, 
         setSavedMealsOpen, 
         handleAddToList,
-        handleDeleteFromList } = props
+        handleDeleteFromList,
+        handleMultiDeleteFromList,
+        handleMultiAddToList } = props
     
     const [savedMeals, setSavedMeals] = useState([])
 
@@ -62,6 +64,8 @@ export function MealResults(props) {
                 savedMealsOpen={savedMealsOpen}
                 handleAddToList={handleAddToList}
                 handleDeleteFromList={handleDeleteFromList}
+                handleMultiAddToList={handleMultiAddToList}
+                handleMultiDeleteFromList={handleMultiDeleteFromList}
                  />
             )}
             
