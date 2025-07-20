@@ -13,7 +13,8 @@ export function MealModal(props) {
         handleSaveMeal, 
         savedMealsOpen, 
         handleAddToList,
-        suggestions } = props
+        handleDeleteFromList,
+         } = props
 
     const { authenticated } = useContext(AuthContext)
     const [ shoppingList, setShoppingList ] = useState([])
@@ -63,16 +64,16 @@ export function MealModal(props) {
                         <img src="/img/noun-275627-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
                         <ul className="px-2 pb-4">
                             {selectedMeal.ingredients.map((ingredient, index) => {
-                                const matchedItem = shoppingList.some(item => item.ingredient === ingredient)
+                                const matchedItem = shoppingList.find(item => item.ingredient === ingredient)
                                 const isOnList = Boolean(matchedItem)
                                 return(
                                     <div key={index} className='flex items-center gap-2'>
                                         <li  className="text-sm text-red-700 poppins-medium">
-                                            <button onClick={() => {
+                                            <button onClick={async() => {
                                                 if(isOnList){
-                                                    // set up delete functionality then do this part
+                                                    await handleDeleteFromList(matchedItem.ingredient_id)
                                                 } else {
-                                                    handleAddToList(ingredient)
+                                                    await handleAddToList(ingredient)
                                                 }
                                                 
                                                 setRefetchTrigger(prev => prev + 1)

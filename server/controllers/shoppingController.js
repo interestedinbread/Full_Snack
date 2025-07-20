@@ -6,6 +6,15 @@ exports.addToShoppingList = async (req, res) => {
     const is_checked = false
 
     try {
+
+        const existing = await pool.query('SELECT * FROM shopping_list WHERE user_id = $1 and item_name = $2',
+            [userId, item_name]
+        )
+
+        if(existing && existing.rows.length > 0){
+            return res.status(200).json({ message: 'Item already exists', item: existing.rows[0]})
+        }
+
         const result = await pool.query(`INSERT INTO shopping_list (user_id, item_name, is_checked) 
             VALUES ($1, $2, $3)
             RETURNING *`,
@@ -19,11 +28,11 @@ exports.addToShoppingList = async (req, res) => {
 }
 
 exports.deleteFromShoppingList = async (req, res) => {
-    const { itemId } = req.body
+    const { id } = req.params
 
     try{
-        result = await pool.query('DELETE * FROM shopping_list WHERE id = $1',
-            [itemId]
+        const result = await pool.query('DELETE FROM shopping_list WHERE id = $1 RETURNING *',
+            [id]
         )
 
         if(result.rowCount === 0){

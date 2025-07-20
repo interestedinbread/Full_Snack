@@ -12,6 +12,7 @@ import { Loading } from './components/Loading'
 import { MealModal } from './components/modals/MealModal'
 import { addToShoppingList } from './api/addToShoppingList'
 import { getShoppingList } from './api/getShoppingList'
+import { deleteFromShoppingList } from './api/deleteFromShoppingList'
 
 function App() {
 
@@ -40,6 +41,15 @@ async function handleAddToList(itemData) {
     console.log(result)
   } catch (err) {
     console.error('Error saving item:', err)
+  }
+}
+
+async function handleDeleteFromList(itemId) {
+  try{
+    const result = await deleteFromShoppingList(itemId)
+    console.log(result)
+  } catch (err) {
+    console.error('Error deleting item:', err)
   }
 }
 
@@ -97,6 +107,7 @@ async function handleGetShoppingList(userId) {
             savedMealsOpen={savedMealsOpen}
             setSavedMealsOpen={setSavedMealsOpen}
             handleAddToList={handleAddToList}
+            handleDeleteFromList={handleDeleteFromList}
             />
           {!authenticated && <LoginRegister 
             isLoading={isLoading}

@@ -13,6 +13,7 @@ export function Navbar(props) {
         localStorage.removeItem('user')
         setAuthenticated(false)
         setNavModalOpen(false)
+        setSuggestions([])
     }
 
     const handleGenerate = () => {

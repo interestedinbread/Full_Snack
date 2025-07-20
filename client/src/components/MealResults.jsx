@@ -10,7 +10,8 @@ export function MealResults(props) {
         setSelectedMeal, 
         savedMealsOpen, 
         setSavedMealsOpen, 
-        handleAddToList } = props
+        handleAddToList,
+        handleDeleteFromList } = props
     
     const [savedMeals, setSavedMeals] = useState([])
 
@@ -60,7 +61,8 @@ export function MealResults(props) {
                 handleSaveMeal={handleSaveMeal}
                 savedMealsOpen={savedMealsOpen}
                 handleAddToList={handleAddToList}
-                suggestions={suggestions} />
+                handleDeleteFromList={handleDeleteFromList}
+                 />
             )}
             
         </>
