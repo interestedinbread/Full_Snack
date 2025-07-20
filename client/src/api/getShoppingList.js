@@ -2,6 +2,10 @@ export const getShoppingList = async () => {
     const user = JSON.parse(localStorage.getItem('user'))
     const token = user?.token
 
+    if (!token) {
+    throw new Error('User not authenticated');
+    }
+
     try{
         const response = await fetch('http://localhost:3000/api/list/get',{
             method: 'GET',

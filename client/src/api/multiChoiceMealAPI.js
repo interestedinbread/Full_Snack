@@ -1,7 +1,13 @@
 export const getMultiChoiceMealSuggestions = async (preferences) => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    const token = user?.token
+    
+    if (!token) {
+    throw new Error('User not authenticated');
+    }
+    
     try {
-        const user = JSON.parse(localStorage.getItem('user'))
-        const token = user?.token
+        
 
         const response = await fetch('http://localhost:3000/api/meals/multichoice', {
             method: 'POST',

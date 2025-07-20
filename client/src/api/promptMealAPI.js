@@ -1,8 +1,11 @@
 export const getPromptGenerateMeals = async (promptString) => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    const token = user?.token
+    
+    if (!token) {
+    throw new Error('User not authenticated');
+    }
     try {
-        const user = JSON.parse(localStorage.getItem('user'))
-        const token = user?.token
-
         if(!token){
             throw new Error ('User is not authenticated')
         }
