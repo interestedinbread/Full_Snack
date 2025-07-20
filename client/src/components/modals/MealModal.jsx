@@ -61,7 +61,11 @@ export function MealModal(props) {
             
                     <div className="bg-[var(--mealcard-color-2)] my-2 rounded-lg relative">
                         <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Ingredients</h4>
-                        <img src="/img/noun-275627-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
+                        <button onClick={() => {
+                            
+                        }}>
+                            <img src="/img/noun-275627-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
+                        </button>
                         <ul className="px-2 pb-4">
                             {selectedMeal.ingredients.map((ingredient, index) => {
                                 const matchedItem = shoppingList.find(item => item.ingredient === ingredient)
@@ -84,10 +88,11 @@ export function MealModal(props) {
                                 )
                             })}
                         </ul>
-                        <p className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'>Checked items are in your shopping list</p>
+                        {(selectedMeal.ingredients.some(ingredient => 
+                            shoppingList.some(item => item.ingredient === ingredient))) && <p className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'>Checked items are in your shopping list</p>}
                     </div>
 
-                    <p className='text-white italic text-sm'>Tap ingredients or bag icon to manage shopping list. 
+                    <p className='text-white italic text-sm'>Tap ingredient or bag icon to manage shopping list. 
                         View full shopping list in the menu above.</p>
 
                     <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg relative">

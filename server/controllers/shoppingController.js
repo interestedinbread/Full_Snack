@@ -1,5 +1,52 @@
 const pool = require('../config/db')
 
+exports.multiAddToShoppingList = async (req, res) => {
+    const { items } = req.body
+    const userId = parseInt(req.user.id)
+    const is_checked = false
+
+    if (!Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({ message: 'No items provided' });
+    }
+
+    try {
+        const existingQuery = `
+        SELECT item_name FROM shopping_list
+        WHERE user_id = $1 AND item_name = ANY($2::text[])
+        `;
+
+        const existingResult = await pool.query(existingQuery, [userId, items]);
+
+        const existingItemNames = existingResult.rows.map(row => row.item_name);
+
+        const newItems = items.filter(item => !existingItemNames.includes(item))
+
+        let insertedItems = []
+        if (newItems.length > 0){
+            const insertValues = newItems.map((_, i) => `($1, $${i + 2}, $${newItems.length + 2})`).join(', ');
+            const insertQuery = `
+            INSERT INTO shopping_list (user_id, item_name, is_checked)
+            VALUES ${insertValues}
+            RETURNING *
+            `;
+
+            const insertParams = [userId, ...newItems, is_checked];
+
+            const insertResult = await pool.query(insertQuery, insertParams);
+            insertedItems = insertResult.rows;
+        }
+
+        res.status(200).json({
+            message: "Bulk add complete",
+            added: insertedItems,
+            skipped: existingItemNames,
+        })
+    } catch (err) {
+        console.error('Bulk insert failed', err)
+        res.status(500).json({ message: 'Failed to add items to shopping list' });
+    }
+}
+
 exports.addToShoppingList = async (req, res) => {
     const { item_name } = req.body
     const userId = parseInt(req.user.id)
