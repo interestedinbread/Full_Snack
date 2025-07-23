@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Header } from './components/Header'
 import { Navbar } from './components/Navbar'
 import { IngredientInput } from './components/IngredientInput'
@@ -27,6 +27,7 @@ const [loggingIn, setLoggingIn] = useState(false)
 const [shoppingListOpen, setShoppingListOpen] = useState(false)
 const [shoppingListItems, setShoppingListItems] = useState([])
 const [navModalOpen, setNavModalOpen] = useState(false)
+const [refetchTrigger, setRefetchTrigger] = useState(0)
 
 const { authenticated } = useContext(AuthContext)
 
@@ -63,7 +64,7 @@ async function handleMultiAddToList(items) {
     const result = await multiAddToShoppingList(items)
     console.log(result)
   } catch (err) {
-    console.erroe('Error saving multiple items', err)
+    console.error('Error saving multiple items', err)
   }
 }
 
@@ -88,6 +89,10 @@ async function handleGetShoppingList() {
     console.error('Error getting shopping list:', err)
   }
 }
+
+useEffect(() => {
+  handleGetShoppingList()
+}, [refetchTrigger])
 
   return (
     <>
@@ -152,7 +157,11 @@ async function handleGetShoppingList() {
             setLoggingIn={setLoggingIn}
             />}
           {isLoading && <Loading />}
-          {shoppingListOpen && <ShoppingList shoppingListItems={shoppingListItems}/>}
+          {shoppingListOpen && <ShoppingList shoppingListItems={shoppingListItems}
+          handleMultiDeleteFromList={handleMultiDeleteFromList}
+          handleMultiAddToList={handleMultiAddToList}
+          refetchTrigger={refetchTrigger}
+          setRefetchTrigger={setRefetchTrigger}/>}
       </div>
     </>
   )
