@@ -4,9 +4,16 @@ import { AuthContext } from "./context/AuthContext"
 import { getSavedMeals } from "../api/getSavedMeals"
 
 export function Navbar(props) {
-    const { setSuggestions, setSavedMealsOpen, setSelectedMeal } = props
-    const [navModalOpen, setNavModalOpen] = useState(false)
-    const { setAuthenticated } = useContext(AuthContext)
+    const { setSuggestions, 
+        setSavedMealsOpen, 
+        setSelectedMeal, 
+        setLoggingIn, 
+        handleGetShoppingList,
+        navModalOpen,
+        setNavModalOpen,
+        setShoppingListOpen } = props
+    
+    const { authenticated, setAuthenticated } = useContext(AuthContext)
     
 
     const handleLogout = () => {
@@ -14,17 +21,25 @@ export function Navbar(props) {
         setAuthenticated(false)
         setNavModalOpen(false)
         setSuggestions([])
+        setShoppingListOpen(false)
+    }
+
+    const handleLogin = () => {
+        setLoggingIn(true)
+        setNavModalOpen(false)
+        setShoppingListOpen(false)
     }
 
     const handleGenerate = () => {
         setSuggestions([])
         setNavModalOpen(false)
         setSavedMealsOpen(false)
+        setShoppingListOpen(false)
     }
 
     const handleGetMeals = async () => {
-        setNavModalOpen(false)
         setSuggestions([])
+        setShoppingListOpen(false)
         setSelectedMeal(null)
         try{
             const result = await getSavedMeals()
@@ -34,12 +49,15 @@ export function Navbar(props) {
         } catch (err) {
             console.error('Error getting meals', err)
         } 
+        setNavModalOpen(false)
     }
+
 
     const tabs = [
         {name: 'Generate', onclick: handleGenerate},
         {name: 'Saved Meals', onclick: handleGetMeals},
-        {name: 'Logout', onclick: handleLogout}
+        {name: 'Shopping List', onclick: handleGetShoppingList},
+        {name: authenticated ? 'Logout' : 'Login', onclick: authenticated ? handleLogout : handleLogin}
     ]
 
     return(

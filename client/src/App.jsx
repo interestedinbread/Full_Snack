@@ -23,7 +23,10 @@ const [suggestions, setSuggestions] = useState([])
 const [isLoading, setIsLoading] = useState(false)
 const [savedMealsOpen, setSavedMealsOpen] = useState(false)
 const [selectedMeal, setSelectedMeal] = useState(null)
+const [loggingIn, setLoggingIn] = useState(false)
 const [shoppingListOpen, setShoppingListOpen] = useState(false)
+const [shoppingListItems, setShoppingListItems] = useState([])
+const [navModalOpen, setNavModalOpen] = useState(false)
 
 const { authenticated } = useContext(AuthContext)
 
@@ -73,10 +76,14 @@ async function handleMultiDeleteFromList(ids) {
   }
 }
 
-async function handleGetShoppingList(userId) {
+async function handleGetShoppingList() {
+  setSuggestions([])
   try{
-    const result = await getShoppingList(userId)
+    const result = await getShoppingList()
     console.log(result)
+    setShoppingListItems(result.items)
+    setShoppingListOpen(true)
+    setNavModalOpen(false)
   } catch (err) {
     console.error('Error getting shopping list:', err)
   }
@@ -87,6 +94,12 @@ async function handleGetShoppingList(userId) {
       <Navbar setSuggestions={setSuggestions} 
       setSavedMealsOpen={setSavedMealsOpen}
       setSelectedMeal={setSelectedMeal}
+      loggingIn={loggingIn}
+      setLoggingIn={setLoggingIn}
+      handleGetShoppingList={handleGetShoppingList}
+      navModalOpen={navModalOpen}
+      setNavModalOpen={setNavModalOpen}
+      setShoppingListOpen={setShoppingListOpen}
       />
       <div className='mt-2 ml-4'>
           <Header />
@@ -130,13 +143,16 @@ async function handleGetShoppingList(userId) {
             handleDeleteFromList={handleDeleteFromList}
             handleMultiAddToList={handleMultiAddToList}
             handleMultiDeleteFromList={handleMultiDeleteFromList}
+            shoppingListOpen={shoppingListOpen}
             />
           {!authenticated && <LoginRegister 
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            loggingIn={loggingIn}
+            setLoggingIn={setLoggingIn}
             />}
           {isLoading && <Loading />}
-          {shoppingListOpen && <ShoppingList />}
+          {shoppingListOpen && <ShoppingList shoppingListItems={shoppingListItems}/>}
       </div>
     </>
   )

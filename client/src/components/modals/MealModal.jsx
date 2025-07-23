@@ -105,8 +105,8 @@ export function MealModal(props) {
                             shoppingList.some(item => item.ingredient === ingredient))) && <p className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'>Checked items are in your shopping list</p>}
                     </div>
 
-                    <p className='text-white italic text-sm'>Tap ingredient or bag icon to manage shopping list. 
-                        View full shopping list in the menu above.</p>
+                    {authenticated && <p className='text-white italic text-sm'>Tap ingredient or bag icon to manage shopping list. 
+                        View full shopping list in the menu above.</p>}
 
                     <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg relative">
                         <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Directions</h4>
