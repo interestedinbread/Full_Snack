@@ -79,12 +79,12 @@ async function handleMultiDeleteFromList(ids) {
 
 async function handleGetShoppingList() {
   setSuggestions([])
+  setNavModalOpen(false)
   try{
     const result = await getShoppingList()
     console.log(result)
     setShoppingListItems(result.items)
     setShoppingListOpen(true)
-    setNavModalOpen(false)
   } catch (err) {
     console.error('Error getting shopping list:', err)
   }
@@ -158,6 +158,7 @@ useEffect(() => {
             />}
           {isLoading && <Loading />}
           {shoppingListOpen && <ShoppingList shoppingListItems={shoppingListItems}
+          handleAddToList={handleAddToList}
           handleMultiDeleteFromList={handleMultiDeleteFromList}
           handleMultiAddToList={handleMultiAddToList}
           refetchTrigger={refetchTrigger}
