@@ -125,7 +125,19 @@ useEffect(() => {
       setNavModalOpen={setNavModalOpen}
       setShoppingListOpen={setShoppingListOpen}
       />
-      <div className='mt-2 ml-4'>
+      {selectedMeal && (
+                <MealModal selectedMeal={selectedMeal} 
+                setSelectedMeal={setSelectedMeal}
+                savedMeals={savedMeals}
+                handleSaveMeal={handleSaveMeal}
+                savedMealsOpen={savedMealsOpen}
+                handleAddToList={handleAddToList}
+                handleDeleteFromList={handleDeleteFromList}
+                handleMultiAddToList={handleMultiAddToList}
+                handleMultiDeleteFromList={handleMultiDeleteFromList}
+                /> 
+            )}
+      <div className='ml-4'>
           <Header selectedMeal={selectedMeal}/>
           <IngredientInput 
             ingredients={ingredients} 
@@ -164,18 +176,6 @@ useEffect(() => {
             setSavedMealsOpen={setSavedMealsOpen}
             shoppingListOpen={shoppingListOpen}
             />
-            {selectedMeal && (
-                <MealModal selectedMeal={selectedMeal} 
-                setSelectedMeal={setSelectedMeal}
-                savedMeals={savedMeals}
-                handleSaveMeal={handleSaveMeal}
-                savedMealsOpen={savedMealsOpen}
-                handleAddToList={handleAddToList}
-                handleDeleteFromList={handleDeleteFromList}
-                handleMultiAddToList={handleMultiAddToList}
-                handleMultiDeleteFromList={handleMultiDeleteFromList}
-                /> 
-            )}
           {!authenticated && <LoginRegister 
             isLoading={isLoading}
             setIsLoading={setIsLoading}
