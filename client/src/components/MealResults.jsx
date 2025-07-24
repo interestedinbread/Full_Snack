@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { saveMeal } from "../api/saveMeal"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function MealResults(props) {
 
@@ -56,18 +57,29 @@ export function MealResults(props) {
                 setSavedMealsOpen(false)
             }}
             >{savedMealsOpen? "return" : "reset"}</button>
+            <AnimatePresence>
+
             {selectedMeal && (
-                <MealModal selectedMeal={selectedMeal} 
-                setSelectedMeal={setSelectedMeal}
-                savedMeals={savedMeals}
-                handleSaveMeal={handleSaveMeal}
-                savedMealsOpen={savedMealsOpen}
-                handleAddToList={handleAddToList}
-                handleDeleteFromList={handleDeleteFromList}
-                handleMultiAddToList={handleMultiAddToList}
-                handleMultiDeleteFromList={handleMultiDeleteFromList}
-                 />
+                <motion.div
+                key="meal-modal"
+                initial={{ x: '-100%', opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: '-100%', opacity: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                >
+                    <MealModal selectedMeal={selectedMeal} 
+                    setSelectedMeal={setSelectedMeal}
+                    savedMeals={savedMeals}
+                    handleSaveMeal={handleSaveMeal}
+                    savedMealsOpen={savedMealsOpen}
+                    handleAddToList={handleAddToList}
+                    handleDeleteFromList={handleDeleteFromList}
+                    handleMultiAddToList={handleMultiAddToList}
+                    handleMultiDeleteFromList={handleMultiDeleteFromList}
+                    />
+                </motion.div>
             )}
+            </AnimatePresence>
             
         </>
     )

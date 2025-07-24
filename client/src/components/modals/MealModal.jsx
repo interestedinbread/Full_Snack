@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { useEffect } from 'react'
 import { getShoppingList } from '../../api/getShoppingList'
 import { useState } from 'react'
+import { motion, AnimatePresence, useAnimation } from "framer-motion"
 
 export function MealModal(props) {
     
@@ -48,6 +49,8 @@ export function MealModal(props) {
 
     }, [refetchTrigger])
 
+    const controls = useAnimation()
+
     return ReactDom.createPortal(
         <div className="fixed inset-0 z-10">
             <button className="fixed inset-0 z-20 bg-black bg-opacity-50" onClick={() => {
@@ -62,24 +65,34 @@ export function MealModal(props) {
                     </div>
             
                     <div className="bg-[var(--mealcard-color-2)] my-2 rounded-lg relative">
-                        <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Ingredients</h4>
-                        <button onClick={async () => {
-                            const ingredients = selectedMeal.ingredients
-                            const allSaved = ingredients.every(ingredient => 
-                                shoppingList.some(item => item.ingredient === ingredient))
-                            if(allSaved){
-                                const itemIds = shoppingList.filter(item => 
-                                    ingredients.includes(item.ingredient)).map(item =>
-                                    item.ingredient_id
-                                )
-                                await handleMultiDeleteFromList(itemIds)
-                            } else {
-                                await handleMultiAddToList(ingredients)
-                            }
-                            setRefetchTrigger(prev => prev + 1)
-                        }}>
-                            <img alt="grocery-bag-image" src="/img/noun-275627-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
-                        </button>
+                        <div className='flex justify-between'>
+                            <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Ingredients</h4>
+                            <motion.button 
+                            onClick={async () => {
+                                controls.start({ scale: [1, 0.9, 1], transition: { duration: 0.3, ease: 'easeOut' } })
+
+                                const ingredients = selectedMeal.ingredients
+                                const allSaved = ingredients.every(ingredient => 
+                                    shoppingList.some(item => item.ingredient === ingredient))
+                                    if(allSaved){
+                                        const itemIds = shoppingList.filter(item => 
+                                            ingredients.includes(item.ingredient)).map(item =>
+                                                item.ingredient_id
+                                            )
+                                            await handleMultiDeleteFromList(itemIds)
+                                        } else {
+                                            await handleMultiAddToList(ingredients)
+                                        }
+                                        setRefetchTrigger(prev => prev + 1)
+                                    }}
+                                    animate={controls}>
+                            <img 
+                                alt="grocery-bag-image" 
+                                src="/img/noun-275627-E63946.png" 
+                                className='h-[50px] w-[50px] mt-2 mr-4'
+                                />
+                            </motion.button>
+                        </div>
                         <ul className="px-2 pb-4">
                             {selectedMeal.ingredients.map((ingredient, index) => {
                                 const matchedItem = shoppingList.find(item => item.ingredient === ingredient)
@@ -96,13 +109,30 @@ export function MealModal(props) {
                                                 setRefetchTrigger(prev => prev + 1)
                                             }}>{ingredient}</button>
                                             </li>
-                                        {isOnList && <i className="fa-solid fa-square-check text-base text-green-600"></i>}
+                                        {isOnList && <motion.i 
+                                        className="fa-solid fa-square-check text-base text-green-600"
+                                        initial = {{ scale: 0.5, opacity: 0 }}
+                                        animate = {{ scale: 1, opacity: 1 }}
+                                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                        />}
                                     </div>
                                 )
                             })}
                         </ul>
-                        {(selectedMeal.ingredients.some(ingredient => 
-                            shoppingList.some(item => item.ingredient === ingredient))) && <p className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'>Checked items are in your shopping list</p>}
+                        <AnimatePresence>
+                            {(selectedMeal.ingredients.some(ingredient => 
+                                shoppingList.some(item => item.ingredient === ingredient))) && 
+                                <motion.p 
+                                className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'
+                                initial={{ x: 50, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: 50, opacity: 0 }}
+                                transition={{ type: "tween", duration: 0.2 }}
+                                >
+                                Checked items are in your shopping list
+                                </motion.p>
+                                }
+                        </AnimatePresence>
                     </div>
 
                     {authenticated && <p className='text-white italic text-sm'>Tap ingredient or bag icon to manage shopping list. 
