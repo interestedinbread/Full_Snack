@@ -187,12 +187,14 @@ useEffect(() => {
             setLoggingIn={setLoggingIn}
             />}
           {isLoading && <Loading />}
+          <AnimatePresence>
           {shoppingListOpen && <ShoppingList shoppingListItems={shoppingListItems}
           handleAddToList={handleAddToList}
           handleMultiDeleteFromList={handleMultiDeleteFromList}
           handleMultiAddToList={handleMultiAddToList}
           refetchTrigger={refetchTrigger}
           setRefetchTrigger={setRefetchTrigger}/>}
+          </AnimatePresence>
       </div>
     </>
   )

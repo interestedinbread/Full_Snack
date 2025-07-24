@@ -106,7 +106,7 @@ export function MealModal(props) {
                                 const isOnList = Boolean(matchedItem)
                                 return(
                                     <div key={index} className='flex items-center gap-2'>
-                                        <li  className="text-sm text-red-700 poppins-medium">
+                                        <li  className="text-sm text-red-700 poppins-medium max-w-[120px]">
                                             <button onClick={async() => {
                                                 if(isOnList){
                                                     await handleDeleteFromList(matchedItem.ingredient_id)
@@ -114,7 +114,8 @@ export function MealModal(props) {
                                                     await handleAddToList(ingredient)
                                                 }
                                                 setRefetchTrigger(prev => prev + 1)
-                                            }}>{ingredient}</button>
+                                            }}
+                                            className='text-left'>{ingredient}</button>
                                             </li>
                                         {isOnList && <motion.i 
                                         className="fa-solid fa-square-check text-base text-green-600"
