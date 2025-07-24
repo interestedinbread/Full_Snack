@@ -167,17 +167,19 @@ useEffect(() => {
             setIsLoading={setIsLoading}
             savedMealsOpen={savedMealsOpen}
             shoppingListOpen={shoppingListOpen}/>}
-          <MealResults 
-            suggestions={suggestions}
-            setSuggestions={setSuggestions}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            selectedMeal={selectedMeal}
-            setSelectedMeal={setSelectedMeal}
-            savedMealsOpen={savedMealsOpen}
-            setSavedMealsOpen={setSavedMealsOpen}
-            shoppingListOpen={shoppingListOpen}
-            />
+          <AnimatePresence>
+            <MealResults 
+              suggestions={suggestions}
+              setSuggestions={setSuggestions}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              selectedMeal={selectedMeal}
+              setSelectedMeal={setSelectedMeal}
+              savedMealsOpen={savedMealsOpen}
+              setSavedMealsOpen={setSavedMealsOpen}
+              shoppingListOpen={shoppingListOpen}
+              />
+            </AnimatePresence>
           {!authenticated && <LoginRegister 
             isLoading={isLoading}
             setIsLoading={setIsLoading}

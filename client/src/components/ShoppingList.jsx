@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { motion } from 'framer-motion'
 
 
 export function ShoppingList(props) {
@@ -31,7 +32,12 @@ export function ShoppingList(props) {
                                     handleAddToSelectedItems(item)
                                 }}>
                                     {item.item_name}
-                                    {selectedItems.includes(item) && <i className="fa-solid fa-square-check text-base text-green-600 ml-2"></i>}
+                                    {selectedItems.includes(item) && <motion.i 
+                                        className="fa-solid fa-square-check text-base text-green-600 ml-2"
+                                        initial = {{ scale: 0.5, opacity: 0 }}
+                                        animate = {{ scale: 1, opacity: 1 }}
+                                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                        />}
                                 </button >
                             </li>
                         )
