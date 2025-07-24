@@ -4,11 +4,12 @@ export function MealResults(props) {
         setSuggestions,  
         setSelectedMeal, 
         savedMealsOpen, 
-        setSavedMealsOpen, 
-         } = props
+        setSavedMealsOpen,
+        selectedMeal 
+        } = props
     
 
-    if(!suggestions || suggestions.length === 0){
+    if(!suggestions || suggestions.length === 0 || selectedMeal){
         return null
     }
 

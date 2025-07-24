@@ -126,7 +126,7 @@ useEffect(() => {
       setShoppingListOpen={setShoppingListOpen}
       />
       <div className='mt-2 ml-4'>
-          <Header />
+          <Header selectedMeal={selectedMeal}/>
           <IngredientInput 
             ingredients={ingredients} 
             setIngredients={setIngredients} 
@@ -164,15 +164,7 @@ useEffect(() => {
             setSavedMealsOpen={setSavedMealsOpen}
             shoppingListOpen={shoppingListOpen}
             />
-          <AnimatePresence>
             {selectedMeal && (
-              <motion.div
-              key="meal-modal"
-              initial={{ x: '-100%', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '-100%', opacity: 0 }}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              >
                 <MealModal selectedMeal={selectedMeal} 
                 setSelectedMeal={setSelectedMeal}
                 savedMeals={savedMeals}
@@ -183,9 +175,7 @@ useEffect(() => {
                 handleMultiAddToList={handleMultiAddToList}
                 handleMultiDeleteFromList={handleMultiDeleteFromList}
                 /> 
-              </motion.div>
             )}
-          </AnimatePresence>
           {!authenticated && <LoginRegister 
             isLoading={isLoading}
             setIsLoading={setIsLoading}

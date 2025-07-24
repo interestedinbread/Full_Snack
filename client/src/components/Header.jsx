@@ -1,9 +1,13 @@
 import { useContext } from "react"
 import { AuthContext } from "./context/AuthContext"
 
-export function Header() {
-
+export function Header(props) {
+    const { selectedMeal } = props
     const { authenticated, username } = useContext(AuthContext)
+
+    if(selectedMeal) {
+        return null
+    }
 
     return(
         <>
