@@ -125,18 +125,20 @@ useEffect(() => {
       setNavModalOpen={setNavModalOpen}
       setShoppingListOpen={setShoppingListOpen}
       />
-      {selectedMeal && (
-                <MealModal selectedMeal={selectedMeal} 
-                setSelectedMeal={setSelectedMeal}
-                savedMeals={savedMeals}
-                handleSaveMeal={handleSaveMeal}
-                savedMealsOpen={savedMealsOpen}
-                handleAddToList={handleAddToList}
-                handleDeleteFromList={handleDeleteFromList}
-                handleMultiAddToList={handleMultiAddToList}
-                handleMultiDeleteFromList={handleMultiDeleteFromList}
-                /> 
-            )}
+      <AnimatePresence>
+        {selectedMeal && (
+          <MealModal selectedMeal={selectedMeal} 
+          setSelectedMeal={setSelectedMeal}
+          savedMeals={savedMeals}
+          handleSaveMeal={handleSaveMeal}
+          savedMealsOpen={savedMealsOpen}
+          handleAddToList={handleAddToList}
+          handleDeleteFromList={handleDeleteFromList}
+          handleMultiAddToList={handleMultiAddToList}
+          handleMultiDeleteFromList={handleMultiDeleteFromList}
+          /> 
+        )}
+      </AnimatePresence>
       <div className='ml-4'>
           <Header selectedMeal={selectedMeal}/>
           <IngredientInput 
