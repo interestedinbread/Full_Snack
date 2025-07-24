@@ -1,39 +1,12 @@
-import { useState } from "react"
-import { saveMeal } from "../api/saveMeal"
-import { motion, AnimatePresence } from "framer-motion"
-
 export function MealResults(props) {
 
     const { suggestions, 
-        setSuggestions, 
-        MealModal, 
-        selectedMeal, 
+        setSuggestions,  
         setSelectedMeal, 
         savedMealsOpen, 
         setSavedMealsOpen, 
-        handleAddToList,
-        handleDeleteFromList,
-        handleMultiDeleteFromList,
-        handleMultiAddToList } = props
+         } = props
     
-    const [savedMeals, setSavedMeals] = useState([])
-
-    const handleSaveMeal = async (meal) => {
-        console.log('Saving meal...')
-        try{
-            const result = await saveMeal(meal)
-            console.log('SaveMeal response:', result);
-        } catch (err) {
-            console.error('Could not save meal', err)
-        } finally {
-            handleUpdateSavedMeals(meal.title)
-        }
-    }
-
-    const handleUpdateSavedMeals = (title) => {
-        const newSavedMeals = [...savedMeals, title]
-        setSavedMeals(newSavedMeals)
-    }
 
     if(!suggestions || suggestions.length === 0){
         return null
@@ -57,30 +30,6 @@ export function MealResults(props) {
                 setSavedMealsOpen(false)
             }}
             >{savedMealsOpen? "return" : "reset"}</button>
-            <AnimatePresence>
-
-            {selectedMeal && (
-                <motion.div
-                key="meal-modal"
-                initial={{ x: '-100%', opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: '-100%', opacity: 0 }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                >
-                    <MealModal selectedMeal={selectedMeal} 
-                    setSelectedMeal={setSelectedMeal}
-                    savedMeals={savedMeals}
-                    handleSaveMeal={handleSaveMeal}
-                    savedMealsOpen={savedMealsOpen}
-                    handleAddToList={handleAddToList}
-                    handleDeleteFromList={handleDeleteFromList}
-                    handleMultiAddToList={handleMultiAddToList}
-                    handleMultiDeleteFromList={handleMultiDeleteFromList}
-                    />
-                </motion.div>
-            )}
-            </AnimatePresence>
-            
         </>
     )
 }

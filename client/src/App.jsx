@@ -15,12 +15,14 @@ import { getShoppingList } from './api/getShoppingList'
 import { deleteFromShoppingList } from './api/deleteFromShoppingList'
 import { multiAddToShoppingList } from './api/multiAddToShoppingList'
 import { multiDeleteFromShoppingList } from './api/multiDeleteFromShoppingList'
+import { motion, AnimatePresence } from 'framer-motion'
 
 function App() {
 
 const [ingredients, setIngredients] = useState([])
 const [suggestions, setSuggestions] = useState([])
 const [isLoading, setIsLoading] = useState(false)
+const [savedMeals, setSavedMeals] = useState([])
 const [savedMealsOpen, setSavedMealsOpen] = useState(false)
 const [selectedMeal, setSelectedMeal] = useState(null)
 const [loggingIn, setLoggingIn] = useState(false)
@@ -40,6 +42,11 @@ function handleDeleteIngredient(ingredientIndex) {
   let newIngredients = ingredients.filter((item, index) => index !== ingredientIndex)
   setIngredients(newIngredients)
 }
+
+function handleUpdateSavedMeals(title) {
+        const newSavedMeals = [...savedMeals, title]
+        setSavedMeals(newSavedMeals)
+    }
 
 async function handleAddToList(itemData) {
   try{
@@ -76,6 +83,18 @@ async function handleMultiDeleteFromList(ids) {
     console.error('Error deleting multiple items', err)
   }
 }
+
+async function handleSaveMeal(meal) {
+        console.log('Saving meal...')
+        try{
+            const result = await saveMeal(meal)
+            console.log('SaveMeal response:', result);
+        } catch (err) {
+            console.error('Could not save meal', err)
+        } finally {
+            handleUpdateSavedMeals(meal.title)
+        }
+    }
 
 async function handleGetShoppingList() {
   setSuggestions([])
@@ -139,17 +158,34 @@ useEffect(() => {
             setSuggestions={setSuggestions}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
-            MealModal={MealModal}
             selectedMeal={selectedMeal}
             setSelectedMeal={setSelectedMeal}
             savedMealsOpen={savedMealsOpen}
             setSavedMealsOpen={setSavedMealsOpen}
-            handleAddToList={handleAddToList}
-            handleDeleteFromList={handleDeleteFromList}
-            handleMultiAddToList={handleMultiAddToList}
-            handleMultiDeleteFromList={handleMultiDeleteFromList}
             shoppingListOpen={shoppingListOpen}
             />
+          <AnimatePresence>
+            {selectedMeal && (
+              <motion.div
+              key="meal-modal"
+              initial={{ x: '-100%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '-100%', opacity: 0 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              >
+                <MealModal selectedMeal={selectedMeal} 
+                setSelectedMeal={setSelectedMeal}
+                savedMeals={savedMeals}
+                handleSaveMeal={handleSaveMeal}
+                savedMealsOpen={savedMealsOpen}
+                handleAddToList={handleAddToList}
+                handleDeleteFromList={handleDeleteFromList}
+                handleMultiAddToList={handleMultiAddToList}
+                handleMultiDeleteFromList={handleMultiDeleteFromList}
+                /> 
+              </motion.div>
+            )}
+          </AnimatePresence>
           {!authenticated && <LoginRegister 
             isLoading={isLoading}
             setIsLoading={setIsLoading}
