@@ -12,7 +12,10 @@ export function Header(props) {
     return(
         <>
         <header className="w-9/10">
-            <h1 className="text-5xl poppins-extrabold text-white">Full Snack</h1>
+            <div className="flex">
+                <h1 className="text-5xl poppins-extrabold text-white">Full Snack</h1>
+                <img src="/img/Carrot_icon.png" className="ml-2 -mt-2 h-[60px] w-[60px]"/>
+            </div>
             {!authenticated && (
                 <>
                     <h3 className="my-3 text-lg text-white">Never run out of meal ideas!</h3>

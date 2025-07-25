@@ -74,6 +74,7 @@ export function Navbar(props) {
                 </div>
                 <button className="mt-4 mr-4 relative z-50" onClick={() => {
                     setNavModalOpen(prev => !prev)
+                    setSelectedMeal(false)
                 }}>
                     <i className={`fa-solid fa-bars text-white text-3xl transition-transform duration-200 ${navModalOpen? 'rotate-180' : 'rotate-0'}`}></i>
                 </button>
