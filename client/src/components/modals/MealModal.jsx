@@ -121,7 +121,7 @@ export function MealModal(props) {
                                         className="fa-solid fa-square-check text-base text-green-600"
                                         initial = {{ scale: 0.5, opacity: 0 }}
                                         animate = {{ scale: 1, opacity: 1 }}
-                                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
                                         />}
                                     </div>
                                 )
