@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config";
+
 export const getPromptGenerateMeals = async (promptString) => {
     const user = JSON.parse(localStorage.getItem('user'))
     const token = user?.token
@@ -10,7 +12,7 @@ export const getPromptGenerateMeals = async (promptString) => {
             throw new Error ('User is not authenticated')
         }
 
-        const response = await fetch('http://localhost:3000/api/meals/prompt', {
+        const response = await fetch(`${API_BASE_URL}/api/meals/prompt`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

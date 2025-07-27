@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config";
+
 export const saveMeal = async (meal) => {
     const user = JSON.parse(localStorage.getItem('user'))
     const token = user?.token
@@ -7,7 +9,7 @@ export const saveMeal = async (meal) => {
     }
 
     try{
-        const res = await fetch('http://localhost:3000/api/meals/save', {
+        const res = await fetch(`${API_BASE_URL}/api/meals/save`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

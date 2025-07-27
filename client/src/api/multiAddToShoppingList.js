@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config";
+
 export const multiAddToShoppingList = async (items) => {
     const user = JSON.parse(localStorage.getItem('user'))
     const token = user?.token
@@ -7,7 +9,7 @@ export const multiAddToShoppingList = async (items) => {
     }
 
     try {
-        const result = await fetch('http://localhost:3000/api/list/add-multiple', {
+        const result = await fetch(`${API_BASE_URL}/api/list/add-multiple`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

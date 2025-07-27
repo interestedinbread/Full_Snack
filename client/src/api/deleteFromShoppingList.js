@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config";
+
 export const deleteFromShoppingList = async (itemId) => {
     const user = JSON.parse(localStorage.getItem('user'))
     const token = user?.token
@@ -6,7 +8,7 @@ export const deleteFromShoppingList = async (itemId) => {
     throw new Error('User not authenticated');
     }
     try {
-        const response = await fetch(`http://localhost:3000/api/list/${itemId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/list/${itemId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

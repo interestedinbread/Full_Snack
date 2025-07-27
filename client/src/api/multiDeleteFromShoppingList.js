@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config";
+
 export const multiDeleteFromShoppingList = async (ids) => {
     const user = JSON.parse(localStorage.getItem('user'))
     const token = user?.token
@@ -7,7 +9,7 @@ export const multiDeleteFromShoppingList = async (ids) => {
     }
 
     try {
-        const result = await fetch('http://localhost:3000/api/list/delete-multiple', {
+        const result = await fetch(`${API_BASE_URL}/api/list/delete-multiple`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
