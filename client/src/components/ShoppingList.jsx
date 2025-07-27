@@ -1,11 +1,16 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from 'framer-motion'
 
 
 export function ShoppingList(props) {
-    const { shoppingListItems, handleMultiDeleteFromList, handleMultiAddToList, setRefetchTrigger, handleAddToList } = props
+    const { shoppingListItems, 
+        handleMultiDeleteFromList, 
+        handleMultiAddToList, 
+        handleAddToList,
+        handleGetShoppingList } = props
     const [selectedItems, setSelectedItems] = useState([])
     const [backedUpItems, setBackedUpItems] = useState([])
+    const [refetchTrigger, setRefetchTrigger] = useState(0)
     const [inputValue, setInputValue] = useState('')
 
     const handleAddToSelectedItems = (item) => {
@@ -17,6 +22,10 @@ export function ShoppingList(props) {
         const newItems = selectedItems.filter(i => i !== item)
         setSelectedItems(newItems)
     }
+
+    useEffect(() => {
+    handleGetShoppingList()
+    }, [refetchTrigger])
 
     return (
         <div>

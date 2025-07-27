@@ -29,7 +29,7 @@ const [loggingIn, setLoggingIn] = useState(false)
 const [shoppingListOpen, setShoppingListOpen] = useState(false)
 const [shoppingListItems, setShoppingListItems] = useState([])
 const [navModalOpen, setNavModalOpen] = useState(false)
-const [refetchTrigger, setRefetchTrigger] = useState(0)
+
 
 const { authenticated } = useContext(AuthContext)
 
@@ -109,10 +109,6 @@ async function handleGetShoppingList() {
   }
 }
 
-useEffect(() => {
-  handleGetShoppingList()
-}, [refetchTrigger])
-
   return (
     <>
       <Navbar setSuggestions={setSuggestions} 
@@ -189,11 +185,11 @@ useEffect(() => {
           {isLoading && <Loading />}
           <AnimatePresence>
           {shoppingListOpen && <ShoppingList shoppingListItems={shoppingListItems}
+          handleGetShoppingList={handleGetShoppingList}
           handleAddToList={handleAddToList}
           handleMultiDeleteFromList={handleMultiDeleteFromList}
           handleMultiAddToList={handleMultiAddToList}
-          refetchTrigger={refetchTrigger}
-          setRefetchTrigger={setRefetchTrigger}/>}
+          />}
           </AnimatePresence>
       </div>
     </>
