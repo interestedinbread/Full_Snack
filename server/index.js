@@ -5,20 +5,20 @@ require('dotenv').config()
 
 const allowedOrigins = [process.env.FRONTEND_URL]
 
-// Optional: allow multiple origins if needed (e.g., dev + prod)
+// New CORS code block
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
     }
   },
-  credentials: true, // if you're using cookies or auth headers
+  credentials: true, 
 }
+// new CORS block ends
 
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.json())
 
 const authRoutes = require('./routes/authRoutes')
