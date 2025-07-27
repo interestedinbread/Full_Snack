@@ -1,3 +1,5 @@
+import { motion } from "framer-motion"
+
 export function Ingredientlist(props) {
 
     const { ingredients, isEditing, handleDeleteIngredient } = props
@@ -8,13 +10,20 @@ export function Ingredientlist(props) {
                 {ingredients.map((ingredient, ingredientIndex) => {
                     return (
                         <li key={ingredientIndex} className="text-white">
-                            <button 
+                            <motion.button
+                            initial = {{ scale: 0.5, opacity: 0 }}
+                            animate = {{ scale: 1, opacity: 1 }}
+                            transition={{ type: "spring", stiffness: 200, damping: 15 }} 
                             onClick={() => {
                                 if(!isEditing) { return }
                                 handleDeleteIngredient(ingredientIndex)
                             }}>
-                                {ingredient} {isEditing && (<span className="text-red-600 poppins-extrabold">X</span>)}
-                            </button>
+                                {ingredient} {isEditing && (<motion.span 
+                                initial = {{ scale: 0.5, opacity: 0 }}
+                                animate = {{ scale: 1, opacity: 1 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                className="text-red-600 poppins-extrabold">X</motion.span>)}
+                            </motion.button>
                         </li>
                     )
                 })}

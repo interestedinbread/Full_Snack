@@ -3,7 +3,10 @@ const cors = require('cors')
 const app = express()
 require('dotenv').config()
 
-const allowedOrigins = [process.env.FRONTEND_URL]
+const allowedOrigins = [
+    'http://127.0.0.1:5173', 
+    process.env.FRONTEND_URL
+]
 
 // New CORS code block
 const corsOptions = {
