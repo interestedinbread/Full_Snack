@@ -102,7 +102,7 @@ export function MealModal(props) {
                                 const isOnList = localShoppingList.includes(ingredient)
                                 return(
                                     <div key={index} className='flex items-center gap-2'>
-                                        <li  className="text-sm text-red-700 poppins-medium max-w-[120px] leading-relaxed">
+                                        <li  className="text-base text-red-700 poppins-medium max-w-[120px] mb-2">
                                             <button onClick={() => {
                                                 if(isOnList){
                                                     const newLocalShoppingList = localShoppingList.filter(item => item !== ingredient)
@@ -116,7 +116,7 @@ export function MealModal(props) {
                                             className='text-left'>{ingredient}</button>
                                             </li>
                                         {isOnList && <motion.i 
-                                        className="fa-solid fa-square-check text-base text-green-600"
+                                        className="fa-solid fa-square-check text-base text-green-600 mb-2"
                                         initial = {{ scale: 0.5, opacity: 0 }}
                                         animate = {{ scale: 1, opacity: 1 }}
                                         transition={{ type: "spring", stiffness: 100, damping: 15 }}
@@ -129,7 +129,7 @@ export function MealModal(props) {
                             {(selectedMeal.ingredients.some(ingredient => 
                                 localShoppingList.some(item => item === ingredient))) && 
                                 <motion.p 
-                                className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'
+                                className='text-[var(--secondary-color)] text-sm italic absolute bottom-6 right-2 w-[150px]'
                                 initial={{ x: 50, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
                                 exit={{ x: 50, opacity: 0 }}
