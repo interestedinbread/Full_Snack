@@ -222,11 +222,14 @@ useEffect(() => {
             />}
           {isLoading && <Loading />}
           <AnimatePresence>
-          {shoppingListOpen && <ShoppingList shoppingListItems={shoppingListItems}
+          {shoppingListOpen && <ShoppingList 
+          shoppingListItems={shoppingListItems}
           handleGetShoppingList={handleGetShoppingList}
           handleAddToList={handleAddToList}
           handleMultiDeleteFromList={handleMultiDeleteFromList}
           handleMultiAddToList={handleMultiAddToList}
+          localShoppingList={localShoppingList}
+          setLocalShoppingList={setLocalShoppingList}
           />}
           </AnimatePresence>
       </div>

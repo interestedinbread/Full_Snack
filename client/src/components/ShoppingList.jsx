@@ -7,7 +7,8 @@ export function ShoppingList(props) {
         handleMultiDeleteFromList, 
         handleMultiAddToList, 
         handleAddToList,
-        handleGetShoppingList } = props
+        handleGetShoppingList
+         } = props
     const [selectedItems, setSelectedItems] = useState([])
     const [backedUpItems, setBackedUpItems] = useState([])
     const [refetchTrigger, setRefetchTrigger] = useState(0)
@@ -22,10 +23,6 @@ export function ShoppingList(props) {
         const newItems = selectedItems.filter(i => i !== item)
         setSelectedItems(newItems)
     }
-
-    useEffect(() => {
-    handleGetShoppingList()
-    }, [refetchTrigger])
 
     return (
         <div>
