@@ -16,38 +16,37 @@ export function MealModal(props) {
         handleAddToList,
         handleDeleteFromList,
         handleMultiAddToList,
-        handleMultiDeleteFromList
+        handleMultiDeleteFromList,
+        localShoppingList,
+        setLocalShoppingList,
+        shoppingListItems,
+        setShoppingListItems
          } = props
 
     const { authenticated } = useContext(AuthContext)
-    const [ shoppingList, setShoppingList ] = useState([])
-    const [refetchTrigger, setRefetchTrigger] = useState(0)
 
     useEffect(() => {
-        console.log('Checking shopping list')
+        console.log('Loading shopping list for modal')
         const loadShoppingList = async () => {
             try {
                 const result = await getShoppingList()
-                console.log('Shopping list contents', result)
-                const handleSetShoppingList = () => {
-                    const list = []
-                    result.items.forEach(item => {
-                        list.push({
-                            ingredient_id: item.id,
-                            ingredient: item.item_name
-                        })
-                    })
-                    setShoppingList(list)
-                }
-                handleSetShoppingList(result)
+                console.log('Shopping list contents:', result)
+                const itemObjects = result.items.map(item => ({
+                    ingredient: item.item_name,
+                    ingredient_id: item.id
+                }))
+                const itemNames = result.items.map(item => item.item_name)
+                setShoppingListItems(itemObjects)
+                setLocalShoppingList(itemNames)
             } catch (err) {
-                console.error('Error checking shopping list:', err)
+                console.error('Error loading shopping list:', err)
             }
         }
-        
-        loadShoppingList()
 
-    }, [refetchTrigger])
+        loadShoppingList()
+    }, [])
+
+
 
     const controls = useAnimation()
 
@@ -79,18 +78,16 @@ export function MealModal(props) {
                                 controls.start({ scale: [1, 0.9, 1], transition: { duration: 0.3, ease: 'easeOut' } })
                                 
                                 const ingredients = selectedMeal.ingredients
-                                const allSaved = ingredients.every(ingredient => 
-                                    shoppingList.some(item => item.ingredient === ingredient))
-                                    if(allSaved){
-                                        const itemIds = shoppingList.filter(item => 
-                                            ingredients.includes(item.ingredient)).map(item =>
-                                                item.ingredient_id
-                                            )
-                                            await handleMultiDeleteFromList(itemIds)
+                                const allOnList = ingredients.every(ingredient => 
+                                    localShoppingList.some(item => item === ingredient))
+                                    if(allOnList){
+                                        const newLocalShoppingList = localShoppingList.filter(item => !ingredients.includes(item))
+                                        setLocalShoppingList(newLocalShoppingList)
                                         } else {
-                                            await handleMultiAddToList(ingredients)
+                                        const newItems = ingredients.filter(ingredient => !localShoppingList.some(item => item === ingredient))  
+                                        setLocalShoppingList([...localShoppingList, ...newItems])
                                         }
-                                        setRefetchTrigger(prev => prev + 1)
+                                        
                                     }}
                                     animate={controls}>
                             <img 
@@ -102,18 +99,19 @@ export function MealModal(props) {
                         </div>
                         <ul className="px-2 pb-4">
                             {selectedMeal.ingredients.map((ingredient, index) => {
-                                const matchedItem = shoppingList.find(item => item.ingredient === ingredient)
-                                const isOnList = Boolean(matchedItem)
+                                const isOnList = localShoppingList.includes(ingredient)
                                 return(
                                     <div key={index} className='flex items-center gap-2'>
                                         <li  className="text-sm text-red-700 poppins-medium max-w-[120px]">
-                                            <button onClick={async() => {
+                                            <button onClick={() => {
                                                 if(isOnList){
-                                                    await handleDeleteFromList(matchedItem.ingredient_id)
+                                                    const newLocalShoppingList = localShoppingList.filter(item => item !== ingredient)
+                                                    setLocalShoppingList(newLocalShoppingList)
                                                 } else {
-                                                    await handleAddToList(ingredient)
+                                                    const newLocalShoppingList = [...localShoppingList, ingredient]
+                                                    setLocalShoppingList(newLocalShoppingList)
                                                 }
-                                                setRefetchTrigger(prev => prev + 1)
+                                                
                                             }}
                                             className='text-left'>{ingredient}</button>
                                             </li>
@@ -121,7 +119,7 @@ export function MealModal(props) {
                                         className="fa-solid fa-square-check text-base text-green-600"
                                         initial = {{ scale: 0.5, opacity: 0 }}
                                         animate = {{ scale: 1, opacity: 1 }}
-                                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                                        transition={{ type: "spring", stiffness: 100, damping: 15 }}
                                         />}
                                     </div>
                                 )
@@ -129,7 +127,7 @@ export function MealModal(props) {
                         </ul>
                         <AnimatePresence>
                             {(selectedMeal.ingredients.some(ingredient => 
-                                shoppingList.some(item => item.ingredient === ingredient))) && 
+                                shoppingListItems.some(item => item.ingredient === ingredient))) && 
                                 <motion.p 
                                 className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'
                                 initial={{ x: 50, opacity: 0 }}

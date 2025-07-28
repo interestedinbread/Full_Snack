@@ -29,6 +29,7 @@ const [loggingIn, setLoggingIn] = useState(false)
 const [shoppingListOpen, setShoppingListOpen] = useState(false)
 const [shoppingListItems, setShoppingListItems] = useState([])
 const [navModalOpen, setNavModalOpen] = useState(false)
+const [localShoppingList, setLocalShoppingList] = useState([])
 
 
 const { authenticated } = useContext(AuthContext)
@@ -67,6 +68,7 @@ async function handleDeleteFromList(itemId) {
 }
 
 async function handleMultiAddToList(items) {
+  if(items.length === 0){ return }
   try{
     const result = await multiAddToShoppingList(items)
     console.log(result)
@@ -76,6 +78,7 @@ async function handleMultiAddToList(items) {
 }
 
 async function handleMultiDeleteFromList(ids) {
+  if(ids.length === 0){ return }
   try{
     const result = await multiDeleteFromShoppingList(ids)
     console.log(result)
@@ -102,12 +105,43 @@ async function handleGetShoppingList() {
   try{
     const result = await getShoppingList()
     console.log(result)
-    setShoppingListItems(result.items)
+    setShoppingListItems(result.items.map(item => item.item_name))
     setShoppingListOpen(true)
   } catch (err) {
     console.error('Error getting shopping list:', err)
   }
 }
+
+useEffect(() => {
+  async function handleUpdateShoppingList() {
+    if(selectedMeal !== null || localShoppingList.length === 0) return;
+    function listsAreSame(arr1, arr2) {
+      if(arr1.length !== arr2.length){
+        return false
+      }
+      const sorted1 = [...arr1].sort()
+      const sorted2 = [...arr2].sort()
+
+      return sorted1.every((item, index) => item === sorted2[index])
+    }
+    const shoppingListArray = shoppingListItems.map(item => item.item_name)
+    if(listsAreSame(localShoppingList, shoppingListArray)) {
+      return
+    }
+    const itemsToRemove = shoppingListItems.filter(item => !localShoppingList.includes(item.ingredient)).map(item => item.ingredient_id)
+    const itemsToSave = localShoppingList.filter(item => !shoppingListItems.some(obj => obj.ingredient === item))
+
+    try {
+      await handleMultiDeleteFromList(itemsToRemove)
+      await handleMultiAddToList(itemsToSave)
+      setShoppingListItems([])
+      setLocalShoppingList([])
+    } catch (err) {
+      console.error("Failed to update shopping list", err);
+    }
+}
+  handleUpdateShoppingList()
+}, [selectedMeal, localShoppingList, shoppingListItems])
 
   return (
     <>
@@ -132,6 +166,10 @@ async function handleGetShoppingList() {
           handleDeleteFromList={handleDeleteFromList}
           handleMultiAddToList={handleMultiAddToList}
           handleMultiDeleteFromList={handleMultiDeleteFromList}
+          localShoppingList={localShoppingList}
+          setLocalShoppingList={setLocalShoppingList}
+          shoppingListItems={shoppingListItems}
+          setShoppingListItems={setShoppingListItems}
           /> 
         )}
       </AnimatePresence>
