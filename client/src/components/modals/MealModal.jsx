@@ -102,7 +102,7 @@ export function MealModal(props) {
                                 const isOnList = localShoppingList.includes(ingredient)
                                 return(
                                     <div key={index} className='flex items-center gap-2'>
-                                        <li  className="text-sm text-red-700 poppins-medium max-w-[120px]">
+                                        <li  className="text-sm text-red-700 poppins-medium max-w-[120px] leading-relaxed">
                                             <button onClick={() => {
                                                 if(isOnList){
                                                     const newLocalShoppingList = localShoppingList.filter(item => item !== ingredient)
@@ -127,7 +127,7 @@ export function MealModal(props) {
                         </ul>
                         <AnimatePresence>
                             {(selectedMeal.ingredients.some(ingredient => 
-                                localShoppingList.some(item => item.ingredient === ingredient))) && 
+                                localShoppingList.some(item => item === ingredient))) && 
                                 <motion.p 
                                 className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'
                                 initial={{ x: 50, opacity: 0 }}
