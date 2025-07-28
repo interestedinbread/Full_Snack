@@ -127,7 +127,7 @@ export function MealModal(props) {
                         </ul>
                         <AnimatePresence>
                             {(selectedMeal.ingredients.some(ingredient => 
-                                shoppingListItems.some(item => item.ingredient === ingredient))) && 
+                                localShoppingList.some(item => item.ingredient === ingredient))) && 
                                 <motion.p 
                                 className='text-[var(--secondary-color)] text-sm italic absolute bottom-4 right-2 w-[150px]'
                                 initial={{ x: 50, opacity: 0 }}
