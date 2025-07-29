@@ -19,6 +19,7 @@ export function MealModal(props) {
 
     const { authenticated } = useContext(AuthContext)
     const [showIngredients, setShowIngredients] = useState(true)
+    const [showDirections, setShowDirections] = useState(true)
 
     useEffect(() => {
         console.log('Loading shopping list for modal')
@@ -143,15 +144,19 @@ export function MealModal(props) {
                         View full shopping list in the menu above.</p>}
 
                     <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg relative">
-                        <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Directions</h4>
-                        <img src="/img/noun-checklist-445258-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
-                        <ol className="list-decimal list-outside px-6 mt-2">
+                        <button onClick={() => {
+                            setShowDirections(prev => !prev)
+                        }}>
+                            <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Directions</h4>
+                        </button>
+                        {showDirections && <img src="/img/noun-checklist-445258-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>}
+                        {showDirections && <ol className="list-decimal list-outside px-6 mt-2">
                             {selectedMeal.instructions.map((step, index) => {
                                 return(
                                     <li key={index} className="text-sm text-red-700 poppins-medium pl-2 py-2">{step}</li>
                                 )
                             })}
-                        </ol>
+                        </ol>}
                     </div>
                     {(authenticated && !savedMealsOpen) && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
                         if(savedMeals.includes(selectedMeal.title)){
