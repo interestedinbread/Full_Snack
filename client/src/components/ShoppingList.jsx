@@ -76,7 +76,7 @@ export function ShoppingList(props) {
                         setRefetchTrigger(prev => prev + 1)
                     }}>Remove</button>
                 </motion.div>}
-                {backedUpItems.length > 0 && 
+                {(backedUpItems.length > 0 && selectedItems.length === 0) && 
                 <motion.div className="bg-[var(--secondary-color)] w-9/10 rounded-lg mt-4"
                 initial = {{ scale: 0.5, opacity: 0 }}
                 animate = {{ scale: 1, opacity: 1 }}
