@@ -175,7 +175,6 @@ useEffect(() => {
           setLocalShoppingList={setLocalShoppingList}
           shoppingListItems={shoppingListItems}
           setShoppingListItems={setShoppingListItems}
-          setScrolled={setScrolled}
           /> 
         )}
       </AnimatePresence>
