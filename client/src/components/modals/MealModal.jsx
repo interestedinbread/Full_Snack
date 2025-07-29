@@ -45,12 +45,12 @@ export function MealModal(props) {
     const controls = useAnimation()
 
     return ReactDom.createPortal(
-        <div>
-            <button className="fixed inset-0 z-20 bg-black bg-opacity-50" onClick={() => {
+        <div className='fixed inset-0 bg-black bg-opacity-50 z-40 top-10 flex justify-center p-4 h-fit'>
+            <button className="fixed inset-0 z-20" onClick={() => {
                 setSelectedMeal(null)
             }}/>
             <motion.div
-            className='relative mx-auto top-4 w-4/5 z-50 h-max transform max-h-screen overflow-y-auto'
+            className='relative w-7/8 max-w-md max-h-[90vh] overflow-y-auto rounded-lg shadow-xl z-50'
             key="meal-modal"
             initial={{ x: '-100%', y: 0, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
