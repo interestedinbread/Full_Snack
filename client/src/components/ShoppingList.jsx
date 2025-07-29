@@ -46,7 +46,7 @@ export function ShoppingList(props) {
                                         handleRemoveFromSelectedItems(item) :
                                         handleAddToSelectedItems(item)
                                     }}>
-                                        {item}
+                                        {item.item}
                                         {selectedItems.includes(item) && <motion.i 
                                             className="fa-solid fa-square-check text-base text-green-600 ml-2"
                                             initial = {{ scale: 0.5, opacity: 0 }}

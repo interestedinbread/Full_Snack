@@ -115,7 +115,7 @@ export function MealModal(props) {
                                             }}
                                             className='text-left'>{ingredient}</button>
                                             </li>
-                                        {isOnList && <motion.i 
+                                        {(isOnList && authenticated) && <motion.i 
                                         className="fa-solid fa-square-check text-base text-green-600 mb-2"
                                         initial = {{ scale: 0.5, opacity: 0 }}
                                         animate = {{ scale: 1, opacity: 1 }}
@@ -127,7 +127,8 @@ export function MealModal(props) {
                         </ul>
                         <AnimatePresence>
                             {(selectedMeal.ingredients.some(ingredient => 
-                                localShoppingList.some(item => item === ingredient))) && 
+                                localShoppingList.some(item => item === ingredient)) &&
+                                authenticated) && 
                                 <motion.p 
                                 className='text-[var(--secondary-color)] text-sm italic absolute bottom-6 right-2 w-[150px]'
                                 initial={{ x: 50, opacity: 0 }}

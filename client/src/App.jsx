@@ -104,7 +104,10 @@ async function handleGetShoppingList() {
   setNavModalOpen(false)
   try{
     const result = await getShoppingList()
-    const listItems = result.items.map(item => item.item_name)
+    const listItems = result.items.map(item => ({
+      item: item.item_name,
+      id: item.id
+    }))
     setShoppingListItems(listItems)
     setShoppingListOpen(true)
     console.log(listItems)
