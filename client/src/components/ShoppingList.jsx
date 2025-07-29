@@ -7,10 +7,12 @@ export function ShoppingList(props) {
         handleMultiDeleteFromList, 
         handleMultiAddToList, 
         handleAddToList,
+        handleGetShoppingList,
+        refetchTrigger,
+        setRefetchTrigger
          } = props
     const [selectedItems, setSelectedItems] = useState([])
     const [backedUpItems, setBackedUpItems] = useState([])
-    const [refetchTrigger, setRefetchTrigger] = useState(0)
     const [inputValue, setInputValue] = useState('')
 
     const handleAddToSelectedItems = (item) => {
@@ -22,6 +24,17 @@ export function ShoppingList(props) {
         const newItems = selectedItems.filter(i => i !== item)
         setSelectedItems(newItems)
     }
+
+    useEffect(() => {
+        async function refetchShoppingList() {
+            try{
+                await handleGetShoppingList()
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        refetchShoppingList()
+    }, [refetchTrigger])
 
     return (
         <div>
@@ -84,7 +97,7 @@ export function ShoppingList(props) {
                     <p className="p-3 text-white text-base italic">Undo remove items?</p>
                     <button className="ml-4 mb-3 bg-white text-black px-2 rounded-lg"
                     onClick={async () => {
-                        const items = backedUpItems.map(item => item.item_name)
+                        const items = backedUpItems.map(item => item.item)
                         await handleMultiAddToList(items)
                         setBackedUpItems([])
                         setSelectedItems([])
@@ -96,7 +109,8 @@ export function ShoppingList(props) {
                     <input placeholder="green onion" className="ml-3 mb-3 pl-2 bg-black border-2 border-slate-400 text-white rounded-lg"
                     value={inputValue}
                     onChange={(e) => {
-                        setInputValue(e.target.value)
+                        const onlyLetters = e.target.value.replace(/[^a-zA-Z\s]/g, '')
+                        setInputValue(onlyLetters.toLowerCase())
                     }}
                     onKeyDown={async (e) => {
                         if(e.key === "Enter" && inputValue){

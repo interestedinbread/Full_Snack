@@ -30,6 +30,7 @@ const [shoppingListOpen, setShoppingListOpen] = useState(false)
 const [shoppingListItems, setShoppingListItems] = useState([])
 const [navModalOpen, setNavModalOpen] = useState(false)
 const [localShoppingList, setLocalShoppingList] = useState([])
+const [refetchTrigger, setRefetchTrigger] = useState(0)
 
 
 const { authenticated } = useContext(AuthContext)
@@ -235,6 +236,8 @@ useEffect(() => {
           handleMultiAddToList={handleMultiAddToList}
           localShoppingList={localShoppingList}
           setLocalShoppingList={setLocalShoppingList}
+          refetchTrigger={refetchTrigger}
+          setRefetchTrigger={setRefetchTrigger}
           />}
           </AnimatePresence>
       </div>
