@@ -43,7 +43,7 @@ export function MealModal(props) {
     const controls = useAnimation()
 
     return ReactDom.createPortal(
-        <div className='fixed inset-0 overflow-y-auto'>
+        <div>
             <button className="fixed inset-0 z-20 bg-black bg-opacity-50" onClick={() => {
                 setSelectedMeal(null)
             }}/>
