@@ -147,6 +147,7 @@ useEffect(() => {
   handleUpdateShoppingList()
 }, [selectedMeal, localShoppingList, shoppingListItems])
 
+
   return (
     <>
       <Navbar setSuggestions={setSuggestions} 
@@ -174,6 +175,7 @@ useEffect(() => {
           setLocalShoppingList={setLocalShoppingList}
           shoppingListItems={shoppingListItems}
           setShoppingListItems={setShoppingListItems}
+          setScrolled={setScrolled}
           /> 
         )}
       </AnimatePresence>

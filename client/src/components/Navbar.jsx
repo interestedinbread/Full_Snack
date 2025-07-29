@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { NavModal } from "./modals/NavModal"
 import { AuthContext } from "./context/AuthContext"
 import { getSavedMeals } from "../api/getSavedMeals"
@@ -11,7 +11,8 @@ export function Navbar(props) {
         handleGetShoppingList,
         navModalOpen,
         setNavModalOpen,
-        setShoppingListOpen } = props
+        setShoppingListOpen,
+        scrolled } = props
     
     const { authenticated, setAuthenticated } = useContext(AuthContext)
     
@@ -60,9 +61,10 @@ export function Navbar(props) {
         {name: authenticated ? 'Logout' : 'Login', onclick: authenticated ? handleLogout : handleLogin}
     ]
 
+
     return(
         <>
-            <nav className="flex justify-end">
+            <nav className={`flex justify-end ${scrolled ? 'backdrop-blur-md shadow-md' : ''}`}>
                 <div className="flex justify-end gap-4 p-4 hidden">
                     {tabs.map((tab, tabIndex) => {
                         return(

@@ -3,7 +3,6 @@ import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
 import { useEffect } from 'react'
 import { getShoppingList } from '../../api/getShoppingList'
-import { useState } from 'react'
 import { motion, AnimatePresence, useAnimation } from "framer-motion"
 
 export function MealModal(props) {
@@ -13,14 +12,9 @@ export function MealModal(props) {
         savedMeals, 
         handleSaveMeal, 
         savedMealsOpen, 
-        handleAddToList,
-        handleDeleteFromList,
-        handleMultiAddToList,
-        handleMultiDeleteFromList,
         localShoppingList,
         setLocalShoppingList,
-        shoppingListItems,
-        setShoppingListItems
+        setShoppingListItems,
          } = props
 
     const { authenticated } = useContext(AuthContext)
@@ -46,17 +40,15 @@ export function MealModal(props) {
         loadShoppingList()
     }, [])
 
-
-
     const controls = useAnimation()
 
     return ReactDom.createPortal(
-        <div>
+        <div className='fixed inset-0 overflow-y-auto'>
             <button className="fixed inset-0 z-20 bg-black bg-opacity-50" onClick={() => {
                 setSelectedMeal(null)
             }}/>
             <motion.div
-            className='fixed left-1/2 top-24 w-4/5 z-50 h-max transform -translate-x-1/2'
+            className='relative mx-auto top-24 w-4/5 z-50 h-max transform max-h-screen overflow-y-auto'
             key="meal-modal"
             initial={{ x: '-100%', y: 0, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
