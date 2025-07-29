@@ -1,6 +1,6 @@
 import ReactDom from 'react-dom'
 import { AuthContext } from '../context/AuthContext'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useEffect } from 'react'
 import { getShoppingList } from '../../api/getShoppingList'
 import { motion, AnimatePresence, useAnimation } from "framer-motion"
@@ -18,6 +18,7 @@ export function MealModal(props) {
          } = props
 
     const { authenticated } = useContext(AuthContext)
+    const [showIngredients, setShowIngredients] = useState(true)
 
     useEffect(() => {
         console.log('Loading shopping list for modal')
@@ -64,8 +65,12 @@ export function MealModal(props) {
             
                     <div className="bg-[var(--mealcard-color-2)] my-2 rounded-lg relative">
                         <div className='flex justify-between'>
-                            <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Ingredients</h4>
-                            <motion.button 
+                            <button onClick={() => {
+                                setShowIngredients(prev => !prev)
+                            }}>
+                                <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Ingredients</h4>
+                            </button>
+                            {showIngredients && <motion.button 
                             onClick={async () => {
                                 controls.start({ scale: [1, 0.9, 1], transition: { duration: 0.3, ease: 'easeOut' } })
                                 
@@ -87,9 +92,9 @@ export function MealModal(props) {
                                 src="/img/noun-275627-E63946.png" 
                                 className='h-[50px] w-[50px] mt-2 mr-4'
                                 />
-                            </motion.button>
+                            </motion.button>}
                         </div>
-                        <ul className="px-2 pb-4">
+                       {showIngredients && <ul className="px-2 pb-4">
                             {selectedMeal.ingredients.map((ingredient, index) => {
                                 const isOnList = localShoppingList.includes(ingredient)
                                 return(
@@ -116,16 +121,16 @@ export function MealModal(props) {
                                     </div>
                                 )
                             })}
-                        </ul>
+                        </ul>}
                         <AnimatePresence>
                             {(selectedMeal.ingredients.some(ingredient => 
                                 localShoppingList.some(item => item === ingredient)) &&
-                                authenticated) && 
+                                authenticated &&
+                                showIngredients) && 
                                 <motion.p 
                                 className='text-[var(--secondary-color)] text-sm italic absolute bottom-6 right-2 w-[150px]'
                                 initial={{ x: 50, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
-                                exit={{ x: 50, opacity: 0 }}
                                 transition={{ type: "tween", duration: 0.2 }}
                                 >
                                 Checked items are in your shopping list
@@ -134,7 +139,7 @@ export function MealModal(props) {
                         </AnimatePresence>
                     </div>
 
-                    {authenticated && <p className='text-white italic text-sm'>Tap ingredient or bag icon to manage shopping list. 
+                    {(authenticated && showIngredients) && <p className='text-white italic text-sm'>Tap ingredient or bag icon to manage shopping list. 
                         View full shopping list in the menu above.</p>}
 
                     <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg relative">
