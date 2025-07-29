@@ -140,8 +140,7 @@ export function MealModal(props) {
                         </AnimatePresence>
                     </div>
 
-                    {(authenticated && showIngredients) && <p className='text-white italic text-sm'>Tap ingredient or bag icon to manage shopping list. 
-                        View full shopping list in the menu above.</p>}
+                    {(authenticated && showIngredients) && <p className='text-white italic text-sm'>Tap ingredient or bag icon to save items.</p>}
 
                     <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg relative">
                         <button onClick={() => {
