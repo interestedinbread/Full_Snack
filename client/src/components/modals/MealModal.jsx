@@ -48,7 +48,7 @@ export function MealModal(props) {
                 setSelectedMeal(null)
             }}/>
             <motion.div
-            className='relative mx-auto top-24 w-4/5 z-50 h-max transform max-h-screen overflow-y-auto'
+            className='relative mx-auto top-4 w-4/5 z-50 h-max transform max-h-screen overflow-y-auto'
             key="meal-modal"
             initial={{ x: '-100%', y: 0, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
