@@ -59,7 +59,7 @@ export function MealModal(props) {
             >
                 <h3 className="text-xl poppins-extrabold bg-[var(--secondary-color)] rounded-lg p-2 text-white">{selectedMeal.title}</h3>
                     <div className="bg-[var(--mealcard-color-1)] my-2 rounded-lg relative">
-                        <h4 className="p-2 pl-4 text-red-700 text-lg poppins-extrabold">Time Required</h4>
+                        <h4 className="p-2 pl-4 text-red-700 text-xl poppins-extrabold">Time Required</h4>
                         <p className="p-2 pl-4 text-sm text-red-700 poppins-medium">{selectedMeal.time_required} minutes</p>
                         <img src="/img/noun-clock-7574786-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
                     </div>
@@ -69,7 +69,7 @@ export function MealModal(props) {
                             <button onClick={() => {
                                 setShowIngredients(prev => !prev)
                             }}>
-                                <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Ingredients</h4>
+                                <h4 className="p-2 text-xl text-red-700 poppins-extrabold">Ingredients</h4>
                             </button>
                             {showIngredients && <motion.button 
                             onClick={async () => {
@@ -100,7 +100,7 @@ export function MealModal(props) {
                                 const isOnList = localShoppingList.includes(ingredient)
                                 return(
                                     <div key={index} className='flex items-center gap-2'>
-                                        <li  className="text-base text-red-700 poppins-medium max-w-[120px] mb-2">
+                                        <li  className="text-lg text-red-700 poppins-medium max-w-[120px] mb-4">
                                             <button onClick={() => {
                                                 if(isOnList){
                                                     const newLocalShoppingList = localShoppingList.filter(item => item !== ingredient)
@@ -140,19 +140,19 @@ export function MealModal(props) {
                         </AnimatePresence>
                     </div>
 
-                    {(authenticated && showIngredients) && <p className='text-white italic text-sm'>Tap ingredient or bag icon to save items.</p>}
+                    {(authenticated && showIngredients) && <p className='text-white italic text-base'>Tap ingredient or bag icon to save items.</p>}
 
                     <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg relative">
                         <button onClick={() => {
                             setShowDirections(prev => !prev)
                         }}>
-                            <h4 className="p-2 text-lg text-red-700 poppins-extrabold">Directions</h4>
+                            <h4 className="p-2 text-xl text-red-700 poppins-extrabold">Directions</h4>
                         </button>
                         {showDirections && <img src="/img/noun-checklist-445258-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>}
                         {showDirections && <ol className="list-decimal list-outside px-6 mt-2">
                             {selectedMeal.instructions.map((step, index) => {
                                 return(
-                                    <li key={index} className="text-sm text-red-700 poppins-medium pl-2 py-2">{step}</li>
+                                    <li key={index} className="text-base text-red-700 poppins-medium px-2 py-2">{step}</li>
                                 )
                             })}
                         </ol>}
