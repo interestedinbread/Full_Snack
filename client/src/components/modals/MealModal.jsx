@@ -45,7 +45,7 @@ export function MealModal(props) {
     const controls = useAnimation()
 
     return ReactDom.createPortal(
-        <div className='fixed inset-0 bg-black bg-opacity-50 z-40 top-10 flex justify-center p-4 h-fit'>
+        <div className='fixed inset-0 bg-black bg-opacity-50 z-40 top-10 flex justify-center p-4 pb-20 h-fit'>
             <button className="fixed inset-0 z-20" onClick={() => {
                 setSelectedMeal(null)
             }}/>
@@ -157,7 +157,7 @@ export function MealModal(props) {
                             })}
                         </ol>}
                     </div>
-                    {(authenticated && !savedMealsOpen) && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white mb-20" onClick={() => {
+                    {(authenticated && !savedMealsOpen) && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
                         if(savedMeals.includes(selectedMeal.title)){
                             return
                         }
