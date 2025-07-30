@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import ReactDom from "react-dom"
 import { getMultiChoiceMealSuggestions } from "../../api/multiChoiceMealAPI"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function MultiChoiceModal(props) {
 
@@ -34,7 +35,7 @@ export function MultiChoiceModal(props) {
         {
             id: 'cuisineType',
             question: "Which cuisines do you enjoy?",
-            options: ["North American", "Mexican", "Italian", "Mediterranean", "Mexican", "Indian", "Chinese", "Thai", "Japanese", "Korean", "African", "No Preference"],
+            options: ["North American", "Mexican", "Italian", "Mediterranean", "Indian", "Chinese", "Thai", "Japanese", "Korean", "African", "No Preference"],
             multiselect: true
         },
         {
@@ -109,36 +110,50 @@ export function MultiChoiceModal(props) {
             <div className="fixed inset-0 z-10">
                 <button className='fixed inset-0 z-20 bg-black bg-opacity-50' onClick={() => {
                 setMultiChoiceOpen(false)
+                setAnswers({})
+                setClickedButtons([])
+                setTempSelection([])
+                setStep(0)
                 }}/>
-                <div className="bg-[var(--secondary-color)] fixed inset-0 w-9/10 h-max mx-auto mt-24 z-50 rounded-md">
-                    <h3 className="text-xl poppins-extrabold m-4 text-white">{currentGroup.question}</h3>
-                    {isMulti && (<p className="text-base poppins-regular m-4 text-white">You can choose more than one</p>)}
-                    <div className="grid grid-cols-3 mx-4 mb-2">
-                        {currentGroup.options.map((option, index) => {
-                            return(
-                                <button key={index} 
-                                className={`m-2 ${clickedButtons.includes(option)? 'bg-blue-400 text-white' : 'bg-white text-black'} px-2 rounded-lg`}
-                                onClick={() => {
-                                    handleOptionClick(option)
-                                }}>
-                                    {option}
-                                </button>
-                            )
-                        })}
-                    </div>
-                    <div className="w-full flex justify-center">
-                        {isMulti && <button className="bg-white text-black px-2 rounded-lg mb-4 mx-auto"
-                        onClick={() => {
-                            setAnswers(prev => ({
-                                ...prev,
-                                [currentGroup.id]: tempSelection
-                            }))
-                            setTempSelection([])
-                            setStep(prev => prev + 1)
-                            setClickedButtons([])
-                        }}>Next</button>}
-                    </div>
-                </div>
+                <AnimatePresence
+                mode="wait">
+                    <motion.div 
+                    className="bg-[var(--secondary-color)] fixed inset-0 w-9/10 h-max mx-auto mt-24 z-50 rounded-md"
+                    key={step} // This is crucial - it tells Framer Motion when to animate
+                    initial={{ x: '-100%', opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: '-100%', opacity: 0 }}
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                    >
+                        <h3 className="text-xl poppins-extrabold m-4 text-white">{currentGroup.question}</h3>
+                        {isMulti && (<p className="text-base poppins-regular m-4 text-white">You can choose more than one</p>)}
+                        <div className="grid grid-cols-3 mx-4 mb-2">
+                            {currentGroup.options.map((option, index) => {
+                                return(
+                                    <button key={index} 
+                                    className={`m-2 ${clickedButtons.includes(option)? 'bg-blue-400 text-white' : 'bg-white text-black'} px-2 rounded-lg`}
+                                    onClick={() => {
+                                        handleOptionClick(option)
+                                    }}>
+                                        {option}
+                                    </button>
+                                )
+                            })}
+                        </div>
+                        <div className="w-full flex justify-center">
+                            {isMulti && <button className="bg-white text-black px-2 rounded-lg mb-4 mx-auto"
+                            onClick={() => {
+                                setAnswers(prev => ({
+                                    ...prev,
+                                    [currentGroup.id]: tempSelection
+                                }))
+                                setTempSelection([])
+                                setStep(prev => prev + 1)
+                                setClickedButtons([])
+                            }}>Next</button>}
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
             </div>,
             document.getElementById('portal')
     )
