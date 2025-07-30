@@ -114,7 +114,7 @@ export function MealModal(props) {
                                             className='text-left'>{ingredient}</button>
                                             </li>
                                         {(isOnList && authenticated) && <motion.i 
-                                        className="fa-solid fa-square-check text-base text-green-600 mb-2"
+                                        className="fa-solid fa-square-check text-base text-green-600 mb-4"
                                         initial = {{ scale: 0.5, opacity: 0 }}
                                         animate = {{ scale: 1, opacity: 1 }}
                                         transition={{ type: "spring", stiffness: 100, damping: 15 }}
