@@ -56,6 +56,15 @@ export function MealModal(props) {
             animate={{ x: 0, y: 0, opacity: 1 }}
             exit={{ x: '-100%', y: 0, opacity: 0 }}
             transition={{ duration: 0.2, ease: 'easeInOut' }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.1}
+            onDragEnd={(event, info) => {
+                if (info.offset.x < -150) {
+                setSelectedMeal(null)
+            }
+            }}
+            whileDrag={{ scale: 0.98 }}
             >
                 <h3 className="text-xl poppins-extrabold bg-[var(--secondary-color)] rounded-lg p-2 text-white">{selectedMeal.title}</h3>
                     <div className="bg-[var(--mealcard-color-1)] my-2 rounded-lg relative">
