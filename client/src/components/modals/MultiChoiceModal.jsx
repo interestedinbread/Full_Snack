@@ -17,7 +17,7 @@ export function MultiChoiceModal(props) {
         {
             id: "flavorType",
             question: "Which flavor profile do you prefer?",
-            options: ["Sweet", "Savory", "Spicy", "Tangy", "Umami", "Mild/Neutral"],
+            options: ["Sweet", "Savory", "Spicy", "Tangy", "Umami", "Mild"],
             multiselect: false
         },
         {
@@ -29,25 +29,25 @@ export function MultiChoiceModal(props) {
         {
             id: "proteinPreference",
             question: "What type of proteins do you prefer?",
-            options: ["Chicken", "Beef", "Pork", "Fish", "Eggs", "Tofu", "Legumes/Beans", "No Preference"],
+            options: ["Chicken", "Beef", "Pork", "Fish", "Eggs", "Tofu", "Legumes", "Any"],
             multiselect: true
         },
         {
             id: 'cuisineType',
             question: "Which cuisines do you enjoy?",
-            options: ["North American", "Mexican", "Italian", "Mediterranean", "Indian", "Chinese", "Thai", "Japanese", "Korean", "African", "No Preference"],
+            options: ["North American", "Mexican", "Italian", "European", "Indian", "Chinese", "Thai", "Japanese", "Korean", "African", "Any"],
             multiselect: true
         },
         {
             id: "allergiesOrAvoidances",
             question: "Are there any foods you'd like to avoid?",
-            options: ["Nuts", "Dairy", "Gluten", "Shellfish", "Eggs", "Soy", "Redmeat", "None", "Other"],
+            options: ["Nuts", "Dairy", "Gluten", "Shellfish", "Eggs", "Soy", "Redmeat", "None"],
             multiselect: true
         },
         {
             id: "timeAvailable",
             question: "How much time do you have to cook?",
-            options: ["10 minutes or less", "20-30 minutes", "30-45 minutes", "1 hour or more"],
+            options: ["10 mins or less", "20-30 minutes", "30-45 minutes", "1 hour or more"],
             multiselect: false
         }
     ]
