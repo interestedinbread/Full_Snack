@@ -157,7 +157,7 @@ export function MealModal(props) {
                             })}
                         </ol>}
                     </div>
-                    {(authenticated && !savedMealsOpen) && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
+                    {(authenticated && !savedMealsOpen) && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white mb-20" onClick={() => {
                         if(savedMeals.includes(selectedMeal.title)){
                             return
                         }
