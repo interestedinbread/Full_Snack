@@ -54,7 +54,7 @@ export function ShoppingList(props) {
                         {shoppingListItems.map((item, index) => {
                             return(
                                 <li key={index}>
-                                    <button className="text-white poppins-regular mb-2" onClick={() => {
+                                    <button className="text-white text-lg poppins-regular mb-4" onClick={() => {
                                         selectedItems.includes(item) ? 
                                         handleRemoveFromSelectedItems(item) :
                                         handleAddToSelectedItems(item)
