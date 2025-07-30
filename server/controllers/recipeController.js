@@ -145,6 +145,8 @@ exports.promptGenerateMeals = async (req, res) => {
             - "time_required" (number in minutes)
             - "instructions" (array of at least 4 steps).
 
+            Each ingredient should only be 1 to 3 words maximum. No lists within ingredient items.
+
             Example:
             [
             {
