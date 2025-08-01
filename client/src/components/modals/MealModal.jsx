@@ -69,10 +69,13 @@ export function MealModal(props) {
                 <h3 className="text-xl poppins-extrabold bg-[var(--secondary-color)] rounded-lg p-2 text-white">{selectedMeal.title}</h3>
                     <div className="bg-[var(--mealcard-color-1)] my-2 rounded-lg relative">
                         <h4 className="p-2 pl-4 text-red-700 text-xl poppins-extrabold">Time Required</h4>
-                        <p className="p-2 pl-4 text-sm text-red-700 poppins-medium">{selectedMeal.time_required} minutes</p>
+                        <p className="p-2 pl-4 text-lg text-red-700 poppins-medium">{selectedMeal.time_required} minutes</p>
                         <img src="/img/noun-clock-7574786-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>
                     </div>
             
+                    {(authenticated && showIngredients) && <p className='text-white italic text-base'>Tap ingredient or bag icon to save items.</p>}
+
+
                     <div className="bg-[var(--mealcard-color-2)] my-2 rounded-lg relative">
                         <div className='flex justify-between'>
                             <button onClick={() => {
@@ -148,8 +151,6 @@ export function MealModal(props) {
                                 }
                         </AnimatePresence>
                     </div>
-
-                    {(authenticated && showIngredients) && <p className='text-white italic text-base'>Tap ingredient or bag icon to save items.</p>}
 
                     <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg relative">
                         <button onClick={() => {
