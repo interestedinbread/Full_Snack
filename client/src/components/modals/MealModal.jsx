@@ -83,8 +83,11 @@ export function MealModal(props) {
                             }}>
                                 <h4 className="p-2 text-xl text-red-700 poppins-extrabold">Ingredients</h4>
                             </button>
-                            {showIngredients && <motion.button 
+                            <motion.button 
                             onClick={async () => {
+                                if(!showIngredients){
+                                    return
+                                }
                                 controls.start({ scale: [1, 0.9, 1], transition: { duration: 0.3, ease: 'easeOut' } })
                                 
                                 const ingredients = selectedMeal.ingredients
@@ -103,9 +106,9 @@ export function MealModal(props) {
                             <img 
                                 alt="grocery-bag-image" 
                                 src="/img/noun-275627-E63946.png" 
-                                className='h-[50px] w-[50px] mt-2 mr-4'
+                                className='h-[50px] w-[50px] mt-2 mr-4 mb-2'
                                 />
-                            </motion.button>}
+                            </motion.button>
                         </div>
                        {showIngredients && <ul className="px-2 pb-4">
                             {selectedMeal.ingredients.map((ingredient, index) => {
@@ -153,12 +156,14 @@ export function MealModal(props) {
                     </div>
 
                     <div className="bg-[var(--mealcard-color-3)] my-2 rounded-lg relative">
-                        <button onClick={() => {
-                            setShowDirections(prev => !prev)
-                        }}>
-                            <h4 className="p-2 text-xl text-red-700 poppins-extrabold">Directions</h4>
-                        </button>
-                        {showDirections && <img src="/img/noun-checklist-445258-E63946.png" className='absolute top-2 right-4 h-[50px] w-[50px]'></img>}
+                        <div className='flex justify-between'>
+                            <button onClick={() => {
+                                setShowDirections(prev => !prev)
+                            }}>
+                                <h4 className="p-2 text-xl text-red-700 poppins-extrabold">Directions</h4>
+                            </button>
+                            <img src="/img/noun-checklist-445258-E63946.png" className='h-[50px] w-[50px] mt-2 mr-4 mb-2'></img>
+                        </div>
                         {showDirections && <ol className="list-decimal list-outside px-6 mt-2">
                             {selectedMeal.instructions.map((step, index) => {
                                 return(
@@ -173,6 +178,11 @@ export function MealModal(props) {
                         }
                         handleSaveMeal(selectedMeal) 
                     }}>{savedMeals.includes(selectedMeal.title) ? 'Saved' : 'Save'}</button>}
+                    
+                    {(authenticated && savedMealsOpen) && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" 
+                    onClick={() => {
+                        
+                    }}>Delete?</button>}
                    
                 
             </motion.div>
