@@ -197,6 +197,27 @@ exports.saveMeal = async (req, res) => {
   }
 }
 
+exports.deleteSavedMeal = async(req,res) => {
+  const { meal_title } = req.body
+  const userId = req.user.id
+
+  try{
+    const result = await pool.query(
+      `DELETE FROM saved_meals WHERE userId = $1 AND meal = $2 RETURNING *`,
+      [userId, meal_title]
+    )
+
+    if(result.rowCount === 0){
+      return res.status(404).json({ message: 'Item not found' });
+    }
+
+    res.status(200).json({ message: 'Meal deleted', deletedItem: result.rows[0] });
+
+    } catch (err) {
+      console.error('Could not delete saved meal', err)
+      res.status(500).json({ message: 'Internal server error'})
+    }
+}
 
 exports.getSavedMeals = async (req, res) => {
    

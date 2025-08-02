@@ -76,7 +76,7 @@ exports.addToShoppingList = async (req, res) => {
 
 exports.deleteFromShoppingList = async (req, res) => {
     const { id } = req.params
-
+    
     try{
         const result = await pool.query('DELETE FROM shopping_list WHERE id = $1 RETURNING *',
             [id]
