@@ -1,4 +1,6 @@
 
+import { motion } from "framer-motion";
+
 export function LoginRegister(props) {
     const { isLoading, setRegistering, setLoggingIn, setSuggestions } = props
     
@@ -9,15 +11,21 @@ export function LoginRegister(props) {
         <div className="mt-8">
             <h2 className="text-xl poppins-extrabold my-3 text-white">Sign Up or Login to use all features!</h2>
             <div className="bg-[var(--secondary-color)] w-max rounded-lg p-2 flex gap-4">
-                <button className="bg-white text-black px-2 rounded-lg" 
+                <motion.button className="bg-white text-black px-2 rounded-lg" 
+                whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                    setRegistering(true)
-                }}>Sign Up</button>
-                <button className="bg-white text-black px-2 rounded-lg"
+                    setTimeout(() => {
+                        setRegistering(true)
+                    }, 100)
+                }}>Sign Up</motion.button>
+                <motion.button className="bg-white text-black px-2 rounded-lg"
+                whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                    setLoggingIn(true)
-                    setSuggestions([])
-                }}>Login</button>
+                    setTimeout(() => {
+                        setLoggingIn(true)
+                        setSuggestions([])
+                    }, 100)
+                }}>Login</motion.button>
             </div>
         </div>
         

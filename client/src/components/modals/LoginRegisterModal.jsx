@@ -3,6 +3,7 @@ import ReactDom from 'react-dom'
 import { loginUser } from '../../api/login'
 import { registerUser } from '../../api/register'
 import { AuthContext } from '../context/AuthContext'
+import { motion } from 'framer-motion'
 
 export function LoginRegisterModal(props) {
 
@@ -75,41 +76,49 @@ export function LoginRegisterModal(props) {
                     }}></input>
                 </div>)}
                 <div className='ml-4 my-2'>
-                    <button className="bg-white text-black px-2 mr-2 rounded-lg"
+                    <motion.button className="bg-white text-black px-2 mr-2 rounded-lg"
+                    whileTap={{ scale: 0.95 }}
                     onClick={ async () => {
-                        if((registering && usernameValue === '') || 
-                        emailValue === '' || 
-                        passwordValue === ''){
-                            alert('Please fill out all input fields')
-                            return
-                        }
-                        if(loggingIn){
-                            const credentials = {
-                            email: emailValue,
-                            password: passwordValue,
-                        }
-                            await handleLogin(credentials)
-                        }
-                        else if(registering){
-                            const userInfo = {
-                                username: usernameValue,
+                        setTimeout(async () => {
+                            if((registering && usernameValue === '') || 
+                            emailValue === '' || 
+                            passwordValue === ''){
+                                alert('Please fill out all input fields')
+                                return
+                            }
+                            if(loggingIn){
+                                const credentials = {
                                 email: emailValue,
                                 password: passwordValue,
                             }
-                            await handleRegister(userInfo)
-                        }  
-                        setUsernameValue('')
-                        setEmailValue('')
-                        setPasswordValue('')
-                    }}>Submit</button>
+                                await handleLogin(credentials)
+                            }
+                            else if(registering){
+                                const userInfo = {
+                                    username: usernameValue,
+                                    email: emailValue,
+                                    password: passwordValue,
+                                }
+                                await handleRegister(userInfo)
+                            }  
+                            setUsernameValue('')
+                            setEmailValue('')
+                            setPasswordValue('')
+                            setLoggingIn(false)
+                            setRegistering(false)
+                        }, 100)
+                    }}>Submit</motion.button>
                     <p className='text-white text-base mt-4'>
                         {registering ? "Already have an account?" : "Don't have an account?"}
                     </p>
-                    <button className="bg-white text-black px-2 rounded-lg my-2"
+                    <motion.button className="bg-white text-black px-2 rounded-lg my-2"
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => {
-                        setLoggingIn(prev => !prev)
-                        setRegistering(prev => !prev)
-                    }}>{registering ? "login" : "register"}</button>
+                        setTimeout(() => {
+                            setLoggingIn(prev => !prev)
+                            setRegistering(prev => !prev)
+                        }, 100)
+                    }}>{registering ? "login" : "register"}</motion.button>
                 </div>
             </div>
         </div>,

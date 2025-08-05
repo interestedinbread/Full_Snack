@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getPromptGenerateMeals } from "../api/promptMealAPI";
+import { motion } from "framer-motion";
 
 export function PromptInput(props) {
 
@@ -48,8 +49,13 @@ export function PromptInput(props) {
                     setPrompt(e.target.value)
                 }}
                 ></textarea>
-                <button className="ml-4 w-max bg-white text-black px-2 mb-2 rounded-lg"
-                onClick={handleGetPromptMeals}>Submit</button>
+                <motion.button className="ml-4 w-max bg-white text-black px-2 mb-2 rounded-lg border-3 border-green-400"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                    setTimeout(() => {
+                        handleGetPromptMeals()
+                    }, 100)
+                }}>Submit</motion.button>
             </div>
         </>
     )

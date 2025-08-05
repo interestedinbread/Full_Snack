@@ -20,12 +20,15 @@ export function DeniedModal (props) {
                 <p className="text-white poppins-regular text-lg">
                     Please login to use this feature.
                 </p>
-                <button className="ml-4 mt-4 bg-white text-black px-2 rounded-lg"
+                <motion.button className="ml-4 mt-4 bg-white text-black px-2 rounded-lg"
+                whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                    setDenied(false)
+                    setTimeout(() => {
+                        setDenied(false)
+                    }, 100)
                 }}>
                     Okay
-                </button>
+                </motion.button>
             </motion.div>
         </div>,
         document.getElementById('portal')
