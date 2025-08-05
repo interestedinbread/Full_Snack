@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Ingredientlist } from "./IngredientList";
 import { getMealSuggestions } from "../api/mealAPI";
 import { AuthContext } from "./context/AuthContext";
+import { motion } from "framer-motion";
 
 export function IngredientInput(props) {
 
@@ -56,26 +57,31 @@ export function IngredientInput(props) {
                         setIsEditing(false)
                     }
                 }}></input>
-                <button className="ml-4 bg-white text-black px-2 rounded-lg"
+                <motion.button className="ml-4 bg-white text-black px-2 rounded-lg border-3 border-green-500"
+                whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                    if(!inputValue) { return }
-                    handleAddIngredient(inputValue)
-                    setInputValue('')
-                    setIsEditing(false)
+                    
+                        if(!inputValue) { return }
+                        handleAddIngredient(inputValue)
+                        setInputValue('')
+                        setIsEditing(false) 
+                    
                 }}
-                >Add</button>
-                <button className="ml-4 bg-white text-black px-2 rounded-lg"
+                >Add</motion.button>
+                <motion.button className="ml-4 bg-white text-black px-2 rounded-lg"
+                whileTap={{ scale: 0.95 }}
                 onClick={() => {
                     setIsEditing(prev => !prev)
                 }}>
                     {isEditing && ingredients.length > 0 ? "Done" : "Edit"}
-                </button>
+                </motion.button>
                 {ingredients.length > 0 && (
                     <>
                     <div>
                     <Ingredientlist ingredients={ingredients} isEditing={isEditing} handleDeleteIngredient={handleDeleteIngredient}/>
                     </div>
-                    <button className="ml-4 mt-2 mb-2 bg-white text-black px-2 rounded-lg"
+                    <motion.button className="ml-4 mt-2 mb-2 bg-white text-black px-2 rounded-lg"
+                    whileTap={{ scale: 0.95 }}
                     onClick={async () => {
                         if(isLoading) { return }
                         setIsLoading(true)
@@ -86,7 +92,7 @@ export function IngredientInput(props) {
                             setIngredients([])
                         }
                     }}
-                    >Generate</button>
+                    >Generate</motion.button>
                 </>
                 )}
             </div>
