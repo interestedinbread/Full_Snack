@@ -6,7 +6,7 @@ import { AuthContext } from '../context/AuthContext'
 
 export function LoginRegisterModal(props) {
 
-    const { loggingIn, setLoggingIn, registering, setRegistering } = props
+    const { loggingIn, setLoggingIn, registering, setRegistering, setRegisterSuccess } = props
     const [usernameValue, setUsernameValue] = useState('')
     const [emailValue, setEmailValue] = useState('')
     const [passwordValue, setPasswordValue] = useState('')
@@ -31,6 +31,8 @@ export function LoginRegisterModal(props) {
         try{
             const data = await registerUser(userInfo)
             console.log('User registered:', data)
+            setRegistering(false)
+            setRegisterSuccess(true)
         } catch (err) {
             console.error('Error registering user:', err)
         }

@@ -1,4 +1,5 @@
 import ReactDom from "react-dom"
+import { motion } from "framer-motion"
 
 export function RegisterSuccessModal (props) {
 

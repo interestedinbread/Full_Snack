@@ -19,6 +19,7 @@ import { multiDeleteFromShoppingList } from './api/multiDeleteFromShoppingList'
 import { deleteSavedMeal } from './api/deleteSavedMeal'
 import { getSavedMeals } from './api/getSavedMeals'
 import { DeniedModal } from './components/modals/DeniedModal'
+import { LoginRegisterModal } from "./components/modals/LoginRegisterModal"
 import { RegisterSuccessModal } from './components/modals/RegisterSuccessModal'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -38,6 +39,7 @@ const [localShoppingList, setLocalShoppingList] = useState([])
 const [refetchTrigger, setRefetchTrigger] = useState(0)
 const [denied, setDenied] = useState(false)
 const [registerSuccess, setRegisterSuccess] = useState(false)
+const [registering, setRegistering] = useState(false)
 
 
 const { authenticated } = useContext(AuthContext)
@@ -270,6 +272,7 @@ useEffect(() => {
             loggingIn={loggingIn}
             setLoggingIn={setLoggingIn}
             setSuggestions={setSuggestions}
+            setRegistering={setRegistering}
             />}
           {isLoading && <Loading />}
           <AnimatePresence>
@@ -294,6 +297,13 @@ useEffect(() => {
             {registerSuccess && <RegisterSuccessModal
             setRegisterSuccess={setRegisterSuccess}/>}
           </AnimatePresence>
+          {(loggingIn || registering) && (<LoginRegisterModal 
+            loggingIn={loggingIn}
+            setLoggingIn={setLoggingIn}
+            registering={registering}
+            setRegistering={setRegistering}
+            setRegisterSuccess={setRegisterSuccess}
+        />)}
       </div>
     </>
   )
