@@ -2,7 +2,7 @@ import { LoginRegisterModal } from "./modals/LoginRegisterModal"
 import { useState } from "react"
 
 export function LoginRegister(props) {
-    const { isLoading, loggingIn, setLoggingIn } = props
+    const { isLoading, loggingIn, setLoggingIn, setSuggestions } = props
     const [registering, setRegistering] = useState(false)
 
     if(isLoading) return null
@@ -19,6 +19,7 @@ export function LoginRegister(props) {
                 <button className="bg-white text-black px-2 rounded-lg"
                 onClick={() => {
                     setLoggingIn(true)
+                    setSuggestions([])
                 }}>Login</button>
             </div>
         </div>

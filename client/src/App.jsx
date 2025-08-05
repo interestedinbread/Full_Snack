@@ -16,6 +16,7 @@ import { saveMeal } from './api/saveMeal'
 import { deleteFromShoppingList } from './api/deleteFromShoppingList'
 import { multiAddToShoppingList } from './api/multiAddToShoppingList'
 import { multiDeleteFromShoppingList } from './api/multiDeleteFromShoppingList'
+import { deleteSavedMeal } from './api/deleteSavedMeal'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function App() {
@@ -66,6 +67,15 @@ async function handleDeleteFromList(itemId) {
     console.log(result)
   } catch (err) {
     console.error('Error deleting item:', err)
+  }
+}
+
+async function handleDeleteSavedMeal(mealId) {
+  try{
+    const result = await deleteSavedMeal(mealId)
+    console.log(result)
+  } catch (err) {
+    console.error('Error deleting saved meal:', err)
   }
 }
 
@@ -173,6 +183,7 @@ useEffect(() => {
           handleDeleteFromList={handleDeleteFromList}
           handleMultiAddToList={handleMultiAddToList}
           handleMultiDeleteFromList={handleMultiDeleteFromList}
+          handleDeleteSavedMeal={handleDeleteSavedMeal}
           localShoppingList={localShoppingList}
           setLocalShoppingList={setLocalShoppingList}
           shoppingListItems={shoppingListItems}
@@ -226,6 +237,7 @@ useEffect(() => {
             setIsLoading={setIsLoading}
             loggingIn={loggingIn}
             setLoggingIn={setLoggingIn}
+            setSuggestions={setSuggestions}
             />}
           {isLoading && <Loading />}
           <AnimatePresence>

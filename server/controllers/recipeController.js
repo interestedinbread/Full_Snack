@@ -198,13 +198,13 @@ exports.saveMeal = async (req, res) => {
 }
 
 exports.deleteSavedMeal = async(req,res) => {
-  const { meal_title } = req.body
+  const { id } = req.params
   const userId = req.user.id
 
   try{
     const result = await pool.query(
-      `DELETE FROM saved_meals WHERE userId = $1 AND meal = $2 RETURNING *`,
-      [userId, meal_title]
+      `DELETE FROM saved_meals WHERE user_id = $1 AND id = $2 RETURNING *`,
+      [userId, id]
     )
 
     if(result.rowCount === 0){

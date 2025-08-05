@@ -11,6 +11,7 @@ export function MealModal(props) {
         setSelectedMeal, 
         savedMeals, 
         handleSaveMeal, 
+        handleDeleteSavedMeal,
         savedMealsOpen, 
         localShoppingList,
         setLocalShoppingList,
@@ -180,8 +181,9 @@ export function MealModal(props) {
                     }}>{savedMeals.includes(selectedMeal.title) ? 'Saved' : 'Save'}</button>}
                     
                     {(authenticated && savedMealsOpen) && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" 
-                    onClick={() => {
-                        
+                    onClick={async() => {
+                        await handleDeleteSavedMeal(selectedMeal.id)
+                        setSelectedMeal(null)
                     }}>Delete?</button>}
                    
                 
