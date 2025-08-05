@@ -18,6 +18,7 @@ import { multiAddToShoppingList } from './api/multiAddToShoppingList'
 import { multiDeleteFromShoppingList } from './api/multiDeleteFromShoppingList'
 import { deleteSavedMeal } from './api/deleteSavedMeal'
 import { getSavedMeals } from './api/getSavedMeals'
+import { DeniedModal } from './components/modals/DeniedModal'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function App() {
@@ -34,6 +35,7 @@ const [shoppingListItems, setShoppingListItems] = useState([])
 const [navModalOpen, setNavModalOpen] = useState(false)
 const [localShoppingList, setLocalShoppingList] = useState([])
 const [refetchTrigger, setRefetchTrigger] = useState(0)
+const [denied, setDenied] = useState(false)
 
 
 const { authenticated } = useContext(AuthContext)
@@ -113,6 +115,11 @@ async function handleSaveMeal(meal) {
     }
 
 async function handleGetShoppingList() {
+  if(!authenticated){
+    setNavModalOpen(false)
+    setDenied(true)
+    return
+  }
   setSuggestions([])
   setNavModalOpen(false)
   try{
@@ -130,6 +137,11 @@ async function handleGetShoppingList() {
 }
 
 async function handleGetMeals() {
+  if(!authenticated){
+    setNavModalOpen(false)
+    setDenied(true)
+    return
+  }
   setSuggestions([])
   setShoppingListOpen(false)
   setSelectedMeal(null)
@@ -259,17 +271,22 @@ useEffect(() => {
             />}
           {isLoading && <Loading />}
           <AnimatePresence>
-          {shoppingListOpen && <ShoppingList 
-          shoppingListItems={shoppingListItems}
-          handleGetShoppingList={handleGetShoppingList}
-          handleAddToList={handleAddToList}
-          handleMultiDeleteFromList={handleMultiDeleteFromList}
-          handleMultiAddToList={handleMultiAddToList}
-          localShoppingList={localShoppingList}
-          setLocalShoppingList={setLocalShoppingList}
-          refetchTrigger={refetchTrigger}
-          setRefetchTrigger={setRefetchTrigger}
-          />}
+            {shoppingListOpen && <ShoppingList 
+            shoppingListItems={shoppingListItems}
+            handleGetShoppingList={handleGetShoppingList}
+            handleAddToList={handleAddToList}
+            handleMultiDeleteFromList={handleMultiDeleteFromList}
+            handleMultiAddToList={handleMultiAddToList}
+            localShoppingList={localShoppingList}
+            setLocalShoppingList={setLocalShoppingList}
+            refetchTrigger={refetchTrigger}
+            setRefetchTrigger={setRefetchTrigger}
+            />}
+          </AnimatePresence>
+          <AnimatePresence>
+            {denied && <DeniedModal 
+            setDenied={setDenied} 
+            />}
           </AnimatePresence>
       </div>
     </>
