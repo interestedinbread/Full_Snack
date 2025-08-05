@@ -13,6 +13,7 @@ export function MealModal(props) {
         handleSaveMeal, 
         handleDeleteSavedMeal,
         savedMealsOpen, 
+        handleGetMeals,
         localShoppingList,
         setLocalShoppingList,
         setShoppingListItems,
@@ -184,6 +185,7 @@ export function MealModal(props) {
                     onClick={async() => {
                         await handleDeleteSavedMeal(selectedMeal.id)
                         setSelectedMeal(null)
+                        await handleGetMeals()
                     }}>Delete?</button>}
                    
                 

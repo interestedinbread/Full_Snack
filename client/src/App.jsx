@@ -17,6 +17,7 @@ import { deleteFromShoppingList } from './api/deleteFromShoppingList'
 import { multiAddToShoppingList } from './api/multiAddToShoppingList'
 import { multiDeleteFromShoppingList } from './api/multiDeleteFromShoppingList'
 import { deleteSavedMeal } from './api/deleteSavedMeal'
+import { getSavedMeals } from './api/getSavedMeals'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function App() {
@@ -128,6 +129,21 @@ async function handleGetShoppingList() {
   }
 }
 
+async function handleGetMeals() {
+  setSuggestions([])
+  setShoppingListOpen(false)
+  setSelectedMeal(null)
+  try{
+      const result = await getSavedMeals()
+      console.log('SaveMeal response:', result);
+      setSuggestions(result.meals)
+      setSavedMealsOpen(true)
+  } catch (err) {
+      console.error('Error getting meals', err)
+  } 
+  setNavModalOpen(false)
+}
+
 useEffect(() => {
   async function handleUpdateShoppingList() {
     if(selectedMeal !== null || localShoppingList.length === 0) return;
@@ -168,6 +184,7 @@ useEffect(() => {
       loggingIn={loggingIn}
       setLoggingIn={setLoggingIn}
       handleGetShoppingList={handleGetShoppingList}
+      handleGetMeals={handleGetMeals}
       navModalOpen={navModalOpen}
       setNavModalOpen={setNavModalOpen}
       setShoppingListOpen={setShoppingListOpen}
@@ -184,6 +201,7 @@ useEffect(() => {
           handleMultiAddToList={handleMultiAddToList}
           handleMultiDeleteFromList={handleMultiDeleteFromList}
           handleDeleteSavedMeal={handleDeleteSavedMeal}
+          handleGetMeals={handleGetMeals}
           localShoppingList={localShoppingList}
           setLocalShoppingList={setLocalShoppingList}
           shoppingListItems={shoppingListItems}

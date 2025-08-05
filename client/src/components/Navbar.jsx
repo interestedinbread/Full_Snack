@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { NavModal } from "./modals/NavModal"
 import { AuthContext } from "./context/AuthContext"
-import { getSavedMeals } from "../api/getSavedMeals"
 
 export function Navbar(props) {
     const { setSuggestions, 
@@ -12,6 +11,7 @@ export function Navbar(props) {
         navModalOpen,
         setNavModalOpen,
         setShoppingListOpen,
+        handleGetMeals,
         scrolled } = props
     
     const { authenticated, setAuthenticated } = useContext(AuthContext)
@@ -38,20 +38,7 @@ export function Navbar(props) {
         setShoppingListOpen(false)
     }
 
-    const handleGetMeals = async () => {
-        setSuggestions([])
-        setShoppingListOpen(false)
-        setSelectedMeal(null)
-        try{
-            const result = await getSavedMeals()
-            console.log('SaveMeal response:', result);
-            setSuggestions(result.meals)
-            setSavedMealsOpen(true)
-        } catch (err) {
-            console.error('Error getting meals', err)
-        } 
-        setNavModalOpen(false)
-    }
+    
 
 
     const tabs = [
