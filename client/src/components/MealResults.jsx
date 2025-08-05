@@ -33,12 +33,15 @@ export function MealResults(props) {
                             )
                         })}
                     </div>
-                    <button className="ml-4 w-max bg-white text-black px-2 mb-2 rounded-lg"
+                    <motion.button className="ml-4 w-max bg-white text-black px-2 mb-2 rounded-lg border-3 border-green-400"
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => {
-                        setSuggestions([])
-                        setSavedMealsOpen(false)
+                        setTimeout(() => {
+                            setSuggestions([])
+                            setSavedMealsOpen(false)
+                        }, 100)
                     }}
-                    >{savedMealsOpen? "return" : "reset"}</button>
+                    >{savedMealsOpen? "return" : "reset"}</motion.button>
             </motion.div>
             </div>
     )

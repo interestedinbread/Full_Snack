@@ -78,16 +78,19 @@ export function ShoppingList(props) {
                 animate = {{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}>
                     <p className="p-3 text-white text-base italic">Remove checked items from shopping list?</p>
-                    <button className="ml-4 mb-3 bg-white text-black px-2 rounded-lg"
+                    <motion.button className="ml-4 mb-3 bg-white text-black px-2 rounded-lg border-3 border-green-400"
+                    whileTap={{ scale: 0.95 }}
                     onClick={async () => {
-                        const backup = [...selectedItems]
-                        setBackedUpItems(backup)
-                        const ids = backup.map(item => item.id)
-                        await handleMultiDeleteFromList(ids)
-                        setSelectedItems([])
-                        console.log('Backed up Items:', backup)
-                        setRefetchTrigger(prev => prev + 1)
-                    }}>Remove</button>
+                        setTimeout(async () => {
+                            const backup = [...selectedItems]
+                            setBackedUpItems(backup)
+                            const ids = backup.map(item => item.id)
+                            await handleMultiDeleteFromList(ids)
+                            setSelectedItems([])
+                            console.log('Backed up Items:', backup)
+                            setRefetchTrigger(prev => prev + 1)
+                        }, 100)
+                    }}>Remove</motion.button>
                 </motion.div>}
                 {(backedUpItems.length > 0 && selectedItems.length === 0) && 
                 <motion.div className="bg-[var(--secondary-color)] w-9/10 rounded-lg mt-4"
@@ -95,14 +98,17 @@ export function ShoppingList(props) {
                 animate = {{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}>
                     <p className="p-3 text-white text-base italic">Undo remove items?</p>
-                    <button className="ml-4 mb-3 bg-white text-black px-2 rounded-lg"
+                    <motion.button className="ml-4 mb-3 bg-white text-black px-2 rounded-lg border-3 border-green-400"
+                    whileTap={{ scale: 0.95 }}
                     onClick={async () => {
-                        const items = backedUpItems.map(item => item.item)
-                        await handleMultiAddToList(items)
-                        setBackedUpItems([])
-                        setSelectedItems([])
-                        setRefetchTrigger(prev => prev + 1)
-                    }}>Undo</button>
+                        setTimeout(async () => {
+                            const items = backedUpItems.map(item => item.item)
+                            await handleMultiAddToList(items)
+                            setBackedUpItems([])
+                            setSelectedItems([])
+                            setRefetchTrigger(prev => prev + 1)
+                        }, 100)
+                    }}>Undo</motion.button>
                 </motion.div>}
                 <div className="bg-[var(--secondary-color)] w-9/10 rounded-lg mt-4">
                     <p className="p-3 text-white text-base">Enter new ingredients below</p>
@@ -119,12 +125,15 @@ export function ShoppingList(props) {
                             setRefetchTrigger(prev => prev + 1)
                         }
                     }}/>
-                    <button className="ml-4 bg-white text-black px-2 rounded-lg"
+                    <motion.button className="ml-4 bg-white text-black px-2 rounded-lg border-3 border-green-400"
+                    whileTap={{ scale: 0.95 }}
                     onClick={async() => {
-                        await handleAddToList(inputValue)
-                        setInputValue('')
-                        setRefetchTrigger(prev => prev + 1)
-                    }}>Add</button>
+                        setTimeout(async () => {
+                            await handleAddToList(inputValue)
+                            setInputValue('')
+                            setRefetchTrigger(prev => prev + 1)
+                        }, 100)
+                    }}>Add</motion.button>
                 </div>
             </motion.div>
         </div>

@@ -119,7 +119,7 @@ export function MultiChoiceModal(props) {
                 mode="wait">
                     <motion.div 
                     className="bg-[var(--secondary-color)] fixed inset-0 w-9/10 h-max mx-auto mt-24 z-50 rounded-md"
-                    key={step} // This is crucial - it tells Framer Motion when to animate
+                    key={step} 
                     initial={{ x: '-100%', opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: '-100%', opacity: 0 }}
@@ -130,27 +130,33 @@ export function MultiChoiceModal(props) {
                         <div className="grid grid-cols-3 mx-4 mb-2">
                             {currentGroup.options.map((option, index) => {
                                 return(
-                                    <button key={index} 
-                                    className={`m-2 ${clickedButtons.includes(option)? 'bg-blue-400 text-white' : 'bg-white text-black'} px-2 rounded-lg`}
+                                    <motion.button key={index} 
+                                    className={`m-2 ${clickedButtons.includes(option)? 'bg-blue-400 text-white' : 'bg-white text-black'} px-2 rounded-lg border-3 border-green-400`}
+                                    whileTap={{ scale: 0.95 }}
                                     onClick={() => {
-                                        handleOptionClick(option)
+                                        setTimeout(() => {
+                                            handleOptionClick(option)
+                                        }, 100)
                                     }}>
                                         {option}
-                                    </button>
+                                    </motion.button>
                                 )
                             })}
                         </div>
                         <div className="w-full flex justify-center">
-                            {isMulti && <button className="bg-white text-black px-2 rounded-lg mb-4 mx-auto"
+                            {isMulti && <motion.button className="bg-white text-black px-2 rounded-lg mb-4 mx-auto"
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => {
-                                setAnswers(prev => ({
-                                    ...prev,
-                                    [currentGroup.id]: tempSelection
-                                }))
-                                setTempSelection([])
-                                setStep(prev => prev + 1)
-                                setClickedButtons([])
-                            }}>Next</button>}
+                                setTimeout(() => {
+                                    setAnswers(prev => ({
+                                        ...prev,
+                                        [currentGroup.id]: tempSelection
+                                    }))
+                                    setTempSelection([])
+                                    setStep(prev => prev + 1)
+                                    setClickedButtons([])
+                                }, 100)
+                            }}>Next</motion.button>}
                         </div>
                     </motion.div>
                 </AnimatePresence>
