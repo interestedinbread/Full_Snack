@@ -19,6 +19,7 @@ import { multiDeleteFromShoppingList } from './api/multiDeleteFromShoppingList'
 import { deleteSavedMeal } from './api/deleteSavedMeal'
 import { getSavedMeals } from './api/getSavedMeals'
 import { DeniedModal } from './components/modals/DeniedModal'
+import { RegisterSuccessModal } from './components/modals/RegisterSuccessModal'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function App() {
@@ -36,6 +37,7 @@ const [navModalOpen, setNavModalOpen] = useState(false)
 const [localShoppingList, setLocalShoppingList] = useState([])
 const [refetchTrigger, setRefetchTrigger] = useState(0)
 const [denied, setDenied] = useState(false)
+const [registerSuccess, setRegisterSuccess] = useState(false)
 
 
 const { authenticated } = useContext(AuthContext)
@@ -287,6 +289,10 @@ useEffect(() => {
             {denied && <DeniedModal 
             setDenied={setDenied} 
             />}
+          </AnimatePresence>
+          <AnimatePresence>
+            {registerSuccess && <RegisterSuccessModal
+            setRegisterSuccess={setRegisterSuccess}/>}
           </AnimatePresence>
       </div>
     </>
