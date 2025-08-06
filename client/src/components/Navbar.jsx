@@ -23,6 +23,7 @@ export function Navbar(props) {
         setNavModalOpen(false)
         setSuggestions([])
         setShoppingListOpen(false)
+        setSavedMealsOpen(false)
     }
 
     const handleLogin = () => {

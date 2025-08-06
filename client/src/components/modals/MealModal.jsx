@@ -24,6 +24,7 @@ export function MealModal(props) {
     const [showDirections, setShowDirections] = useState(true)
 
     useEffect(() => {
+        if(!authenticated) { return }
         console.log('Loading shopping list for modal')
         const loadShoppingList = async () => {
             try {
@@ -66,7 +67,7 @@ export function MealModal(props) {
                 setSelectedMeal(null)
             }
             }}
-            whileDrag={{ scale: 0.98 }}
+            whileDrag={{ scale: 0.88 }}
             >
                 <h3 className="text-xl poppins-extrabold bg-[var(--secondary-color)] rounded-lg p-2 text-white">{selectedMeal.title}</h3>
                     <div className="bg-[var(--mealcard-color-1)] my-2 rounded-lg relative">
@@ -119,6 +120,7 @@ export function MealModal(props) {
                                     <div key={index} className='flex items-center gap-2'>
                                         <li  className="text-lg text-red-700 poppins-medium max-w-[120px] mb-4">
                                             <button onClick={() => {
+                                                if(!authenticated) { return }
                                                 if(isOnList){
                                                     const newLocalShoppingList = localShoppingList.filter(item => item !== ingredient)
                                                     setLocalShoppingList(newLocalShoppingList)

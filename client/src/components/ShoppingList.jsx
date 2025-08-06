@@ -60,7 +60,7 @@ export function ShoppingList(props) {
                                         handleAddToSelectedItems(item)
                                     }}>
                                         {item.item}
-                                        {selectedItems.includes(item) && <motion.i 
+                                        {selectedItems.some(selectedItem => selectedItem.item === item.item) && <motion.i 
                                             className="fa-solid fa-square-check text-base text-green-600 ml-2"
                                             initial = {{ scale: 0.5, opacity: 0 }}
                                             animate = {{ scale: 1, opacity: 1 }}
