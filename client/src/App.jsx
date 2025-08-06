@@ -225,7 +225,7 @@ useEffect(() => {
           /> 
         )}
       </AnimatePresence>
-      <div className='ml-4'>
+      <div className='ml-4 md:ml-0 md:flex md:flex-col md:items-center md:justify-center'>
           <Header selectedMeal={selectedMeal}/>
           <IngredientInput 
             ingredients={ingredients} 
