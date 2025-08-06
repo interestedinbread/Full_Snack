@@ -21,7 +21,7 @@ export function Header(props) {
             {!authenticated && (
                 <>
                     <h3 className="my-3 text-lg md:text-xl text-white md:text-center">Never run out of meal ideas!</h3>
-                    <div className="bg-[var(--secondary-color)] max-w-lg rounded-lg mb-4">
+                    <div className="bg-[var(--secondary-color)] w-9/10 rounded-lg mb-4">
                         <h4 className="text-3xl p-4 poppins-extrabold text-white">Use Full Snack and...</h4>
                         <ul className="pl-4 pb-4 md:px-4">
                             <li className="text-base md:text-lg poppins-regular text-white leading-relaxed">💡 Get inspiration for your next meal!</li>
