@@ -225,85 +225,87 @@ useEffect(() => {
           /> 
         )}
       </AnimatePresence>
-      <div className='ml-4 md:ml-0 md:flex md:flex-col md:items-center md:justify-center'>
-          <Header selectedMeal={selectedMeal}/>
-          <IngredientInput 
-            ingredients={ingredients} 
-            setIngredients={setIngredients} 
-            handleAddIngredient={handleAddIngredient} 
-            handleDeleteIngredient={handleDeleteIngredient}
-            suggestions={suggestions}
-            setSuggestions={setSuggestions}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            savedMealsOpen={savedMealsOpen}
-            shoppingListOpen={shoppingListOpen}
-            />
-          {authenticated && <MultiChoiceInput 
-            suggestions={suggestions}
-            setSuggestions={setSuggestions}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            savedMealsOpen={savedMealsOpen}
-            shoppingListOpen={shoppingListOpen}/>}
-          {authenticated && <PromptInput 
-            suggestions={suggestions}
-            setSuggestions={setSuggestions}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            savedMealsOpen={savedMealsOpen}
-            shoppingListOpen={shoppingListOpen}/>}
-          <AnimatePresence>
-            <MealResults 
+      <div className='flex justify-center'>
+        <div className='ml-4 md:ml-0 md:flex md:flex-col md:items-center md:w-2/3'>
+            <Header selectedMeal={selectedMeal}/>
+            <IngredientInput 
+              ingredients={ingredients} 
+              setIngredients={setIngredients} 
+              handleAddIngredient={handleAddIngredient} 
+              handleDeleteIngredient={handleDeleteIngredient}
               suggestions={suggestions}
               setSuggestions={setSuggestions}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
-              selectedMeal={selectedMeal}
-              setSelectedMeal={setSelectedMeal}
               savedMealsOpen={savedMealsOpen}
-              setSavedMealsOpen={setSavedMealsOpen}
               shoppingListOpen={shoppingListOpen}
               />
+            {authenticated && <MultiChoiceInput 
+              suggestions={suggestions}
+              setSuggestions={setSuggestions}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              savedMealsOpen={savedMealsOpen}
+              shoppingListOpen={shoppingListOpen}/>}
+            {authenticated && <PromptInput 
+              suggestions={suggestions}
+              setSuggestions={setSuggestions}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              savedMealsOpen={savedMealsOpen}
+              shoppingListOpen={shoppingListOpen}/>}
+            <AnimatePresence>
+              <MealResults 
+                suggestions={suggestions}
+                setSuggestions={setSuggestions}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                selectedMeal={selectedMeal}
+                setSelectedMeal={setSelectedMeal}
+                savedMealsOpen={savedMealsOpen}
+                setSavedMealsOpen={setSavedMealsOpen}
+                shoppingListOpen={shoppingListOpen}
+                />
+              </AnimatePresence>
+            {!authenticated && <LoginRegister 
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              loggingIn={loggingIn}
+              setLoggingIn={setLoggingIn}
+              setSuggestions={setSuggestions}
+              setRegistering={setRegistering}
+              />}
+            {isLoading && <Loading />}
+            <AnimatePresence>
+              {shoppingListOpen && <ShoppingList 
+              shoppingListItems={shoppingListItems}
+              handleGetShoppingList={handleGetShoppingList}
+              handleAddToList={handleAddToList}
+              handleMultiDeleteFromList={handleMultiDeleteFromList}
+              handleMultiAddToList={handleMultiAddToList}
+              localShoppingList={localShoppingList}
+              setLocalShoppingList={setLocalShoppingList}
+              refetchTrigger={refetchTrigger}
+              setRefetchTrigger={setRefetchTrigger}
+              />}
             </AnimatePresence>
-          {!authenticated && <LoginRegister 
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            loggingIn={loggingIn}
-            setLoggingIn={setLoggingIn}
-            setSuggestions={setSuggestions}
-            setRegistering={setRegistering}
-            />}
-          {isLoading && <Loading />}
-          <AnimatePresence>
-            {shoppingListOpen && <ShoppingList 
-            shoppingListItems={shoppingListItems}
-            handleGetShoppingList={handleGetShoppingList}
-            handleAddToList={handleAddToList}
-            handleMultiDeleteFromList={handleMultiDeleteFromList}
-            handleMultiAddToList={handleMultiAddToList}
-            localShoppingList={localShoppingList}
-            setLocalShoppingList={setLocalShoppingList}
-            refetchTrigger={refetchTrigger}
-            setRefetchTrigger={setRefetchTrigger}
-            />}
-          </AnimatePresence>
-          <AnimatePresence>
-            {denied && <DeniedModal 
-            setDenied={setDenied} 
-            />}
-          </AnimatePresence>
-          <AnimatePresence>
-            {registerSuccess && <RegisterSuccessModal
-            setRegisterSuccess={setRegisterSuccess}/>}
-          </AnimatePresence>
-          {(loggingIn || registering) && (<LoginRegisterModal 
-            loggingIn={loggingIn}
-            setLoggingIn={setLoggingIn}
-            registering={registering}
-            setRegistering={setRegistering}
-            setRegisterSuccess={setRegisterSuccess}
-        />)}
+            <AnimatePresence>
+              {denied && <DeniedModal 
+              setDenied={setDenied} 
+              />}
+            </AnimatePresence>
+            <AnimatePresence>
+              {registerSuccess && <RegisterSuccessModal
+              setRegisterSuccess={setRegisterSuccess}/>}
+            </AnimatePresence>
+            {(loggingIn || registering) && (<LoginRegisterModal 
+              loggingIn={loggingIn}
+              setLoggingIn={setLoggingIn}
+              registering={registering}
+              setRegistering={setRegistering}
+              setRegisterSuccess={setRegisterSuccess}
+              />)}
+        </div>
       </div>
     </>
   )

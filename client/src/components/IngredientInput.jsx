@@ -39,11 +39,10 @@ export function IngredientInput(props) {
 
     return (
         <>
-        <div >
             <h2 className="text-3xl poppins-extrabold my-3 text-white">
                 { authenticated ? "When you're ready..." : 'Try our meal generator'}
                 </h2>
-            <div className="bg-[var(--secondary-color)] w-9/10 rounded-lg md:p-2">
+            <div className="bg-[var(--secondary-color)] w-9/10 md:w-1/3 rounded-lg md:p-2">
                 <h4 className="p-3 text-white md:text-lg">Enter some ingredients you might want to use! <br />(One at a time)</h4>
                 <input className="ml-3 mb-3 pl-2 bg-black border-2 border-slate-400 text-white rounded-lg md:text-lg"
                 placeholder="eggs, cumin, beef..." 
@@ -97,7 +96,7 @@ export function IngredientInput(props) {
                 </>
                 )}
             </div>
-        </div>
+        
         </>
     )
 }
