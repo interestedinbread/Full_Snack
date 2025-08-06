@@ -166,20 +166,24 @@ export function MealModal(props) {
                             </button>
                             <img src="/img/noun-checklist-445258-E63946.png" className='h-[50px] w-[50px] mt-2 mr-4 mb-2'></img>
                         </div>
-                        {showDirections && <ol className="list-decimal list-outside px-6 mt-2">
+                        {showDirections && <ol className="list-decimal list-outside pl-8 mt-2">
                             {selectedMeal.instructions.map((step, index) => {
                                 return(
-                                    <li key={index} className="text-base text-red-700 poppins-medium px-2 py-2">{step}</li>
+                                    <li key={index} className="text-base text-red-700 poppins-medium px-4 py-2">{step}</li>
                                 )
                             })}
                         </ol>}
                     </div>
-                    {(authenticated && !savedMealsOpen) && <button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" onClick={() => {
-                        if(savedMeals.includes(selectedMeal.title)){
-                            return
-                        }
-                        handleSaveMeal(selectedMeal) 
-                    }}>{savedMeals.includes(selectedMeal.title) ? 'Saved' : 'Save'}</button>}
+                    {(authenticated && !savedMealsOpen) && <motion.button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white border-3 border-green-400" 
+                    whileTap={{ scale: 0.85 }}
+                    onClick={() => {
+                        setTimeout(() => {
+                            if(savedMeals.includes(selectedMeal.title)){
+                                return
+                            }
+                            handleSaveMeal(selectedMeal) 
+                        }, 100)
+                    }}>{savedMeals.includes(selectedMeal.title) ? 'Saved' : 'Save'}</motion.button>}
                     
                     {(authenticated && savedMealsOpen) && <motion.button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" 
                     whileTap={{ scale: 0.85 }}
