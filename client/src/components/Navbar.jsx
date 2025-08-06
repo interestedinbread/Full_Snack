@@ -52,16 +52,16 @@ export function Navbar(props) {
     return(
         <>
             <nav className={`flex justify-end ${scrolled ? 'backdrop-blur-md shadow-md' : ''}`}>
-                <div className="flex justify-end gap-4 p-4 hidden">
+                <div className="flex justify-end hidden md:block md:mr-8">
                     {tabs.map((tab, tabIndex) => {
                         return(
                             <button key={tabIndex} onClick={tab.onclick}>
-                                <h4 className="text-white poppins-regular text-sm">{tab.name}</h4>
+                                <h4 className="text-white poppins-regular text-sm md:text-lg md:m-4">{tab.name}</h4>
                             </button>
                         )
                     })}
                 </div>
-                <button className="mt-4 mr-4 relative z-50" onClick={() => {
+                <button className="mt-4 mr-4 relative z-50 md:hidden" onClick={() => {
                     setNavModalOpen(prev => !prev)
                     setSelectedMeal(null)
                 }}>

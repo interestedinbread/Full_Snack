@@ -118,7 +118,7 @@ export function MultiChoiceModal(props) {
                 <AnimatePresence
                 mode="wait">
                     <motion.div 
-                    className="bg-[var(--secondary-color)] fixed inset-0 w-9/10 h-max mx-auto mt-24 z-50 rounded-md"
+                    className="bg-[var(--secondary-color)] fixed inset-0 w-9/10 md:w-2/5 h-max mx-auto mt-24 z-50 rounded-md"
                     key={step} 
                     initial={{ x: '-100%', opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}

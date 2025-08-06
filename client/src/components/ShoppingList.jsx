@@ -37,7 +37,7 @@ export function ShoppingList(props) {
     }, [refetchTrigger])
 
     return (
-        <div>
+        <div className="md:w-2/5">
             <h3 className="text-2xl text-white poppins-extrabold my-3">Here is your shopping list</h3>
             <motion.div
             key="shopping-list"
@@ -77,7 +77,7 @@ export function ShoppingList(props) {
                 initial = {{ scale: 0.5, opacity: 0 }}
                 animate = {{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}>
-                    <p className="p-3 text-white text-base italic">Remove checked items from shopping list?</p>
+                    <p className="p-3 text-white text-base md:text-lg italic">Remove checked items from shopping list?</p>
                     <motion.button className="ml-4 mb-3 bg-white text-black px-2 rounded-lg border-3 border-green-400"
                     whileTap={{ scale: 0.85 }}
                     onClick={async () => {
@@ -111,8 +111,8 @@ export function ShoppingList(props) {
                     }}>Undo</motion.button>
                 </motion.div>}
                 <div className="bg-[var(--secondary-color)] w-9/10 rounded-lg mt-4">
-                    <p className="p-3 text-white text-base">Enter new ingredients below</p>
-                    <input placeholder="green onion" className="ml-3 mb-3 pl-2 bg-black border-2 border-slate-400 text-white rounded-lg"
+                    <p className="p-3 text-white text-base md:text-lg">Enter new ingredients below</p>
+                    <input placeholder="green onion" className="ml-3 mb-3 pl-2 bg-black border-2 border-slate-400 text-white md:text-lg rounded-lg"
                     value={inputValue}
                     onChange={(e) => {
                         const onlyLetters = e.target.value.replace(/[^a-zA-Z\s]/g, '')
