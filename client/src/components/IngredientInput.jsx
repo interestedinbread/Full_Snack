@@ -80,7 +80,7 @@ export function IngredientInput(props) {
                     <div>
                     <Ingredientlist ingredients={ingredients} isEditing={isEditing} handleDeleteIngredient={handleDeleteIngredient}/>
                     </div>
-                    <motion.button className="ml-4 mt-2 mb-2 bg-white text-black px-2 rounded-lg"
+                    <motion.button className="ml-4 mb-4 bg-white text-black px-2 rounded-lg border-3 border-green-400"
                     whileTap={{ scale: 0.95 }}
                     onClick={async () => {
                         if(isLoading) { return }

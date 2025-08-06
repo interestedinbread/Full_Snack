@@ -20,7 +20,7 @@ export function DeniedModal (props) {
                 <p className="text-white poppins-regular text-lg">
                     Please login to use this feature.
                 </p>
-                <motion.button className="ml-4 mt-4 bg-white text-black px-2 rounded-lg"
+                <motion.button className="ml-4 mt-4 bg-white text-black px-2 rounded-lg border-3 border-green-400"
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
                     setTimeout(() => {

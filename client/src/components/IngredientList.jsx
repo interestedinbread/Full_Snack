@@ -9,7 +9,7 @@ export function Ingredientlist(props) {
             <ul className="px-4 py-2 bg-[var(--secondary-color)] ml-4 w-4/5 rounded-md">
                 {ingredients.map((ingredient, ingredientIndex) => {
                     return (
-                        <li key={ingredientIndex} className="text-white">
+                        <li key={ingredientIndex} className="text-white text-lg mb-2">
                             <motion.button
                             initial = {{ scale: 0.5, opacity: 0 }}
                             animate = {{ scale: 1, opacity: 1 }}
