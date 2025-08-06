@@ -182,7 +182,7 @@ export function MealModal(props) {
                     }}>{savedMeals.includes(selectedMeal.title) ? 'Saved' : 'Save'}</button>}
                     
                     {(authenticated && savedMealsOpen) && <motion.button className="p-2 text-md poppins-extrabold bg-[var(--secondary-color)] rounded-lg m-2 text-white" 
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.85 }}
                     onClick={async() => {
                         setTimeout(async () => {
                             await handleDeleteSavedMeal(selectedMeal.id)

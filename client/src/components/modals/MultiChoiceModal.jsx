@@ -132,7 +132,7 @@ export function MultiChoiceModal(props) {
                                 return(
                                     <motion.button key={index} 
                                     className={`m-2 ${clickedButtons.includes(option)? 'bg-blue-400 text-white' : 'bg-white text-black'} px-2 rounded-lg border-3 border-green-400`}
-                                    whileTap={{ scale: 0.95 }}
+                                    whileTap={{ scale: 0.85 }}
                                     onClick={() => {
                                         setTimeout(() => {
                                             handleOptionClick(option)
@@ -145,7 +145,7 @@ export function MultiChoiceModal(props) {
                         </div>
                         <div className="w-full flex justify-center">
                             {isMulti && <motion.button className="bg-white text-black px-2 rounded-lg mb-4 mx-auto"
-                            whileTap={{ scale: 0.95 }}
+                            whileTap={{ scale: 0.85 }}
                             onClick={() => {
                                 setTimeout(() => {
                                     setAnswers(prev => ({

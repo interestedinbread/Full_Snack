@@ -34,7 +34,7 @@ export function MealResults(props) {
                         })}
                     </div>
                     <motion.button className="ml-4 w-max bg-white text-black px-2 mb-2 rounded-lg border-3 border-green-400"
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.85 }}
                     onClick={() => {
                         setTimeout(() => {
                             setSuggestions([])

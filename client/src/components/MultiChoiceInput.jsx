@@ -22,7 +22,7 @@ export function MultiChoiceInput(props) {
                 <div className="bg-[var(--secondary-color)] w-9/10 rounded-lg mt-2">
                     <h4 className="p-3 text-white">Answer a few questions about what you're looking for!</h4>
                     <motion.button className="ml-4 bg-white text-black px-2 mb-2 rounded-lg border-3 border-green-400"
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.85 }}
                     onClick={() => {
                         setTimeout(() => {
                             setMultiChoiceOpen(true)

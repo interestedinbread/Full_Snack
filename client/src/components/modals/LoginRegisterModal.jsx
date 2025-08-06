@@ -76,8 +76,8 @@ export function LoginRegisterModal(props) {
                     }}></input>
                 </div>)}
                 <div className='ml-4 my-2'>
-                    <motion.button className="bg-white text-black px-2 mr-2 rounded-lg"
-                    whileTap={{ scale: 0.95 }}
+                    <motion.button className="bg-white text-black px-2 mr-2 rounded-lg border-3 border-green-400"
+                    whileTap={{ scale: 0.85 }}
                     onClick={ async () => {
                         setTimeout(async () => {
                             if((registering && usernameValue === '') || 
@@ -111,8 +111,8 @@ export function LoginRegisterModal(props) {
                     <p className='text-white text-base mt-4'>
                         {registering ? "Already have an account?" : "Don't have an account?"}
                     </p>
-                    <motion.button className="bg-white text-black px-2 rounded-lg my-2"
-                    whileTap={{ scale: 0.95 }}
+                    <motion.button className="bg-white text-black px-2 rounded-lg my-2 border-3 border-green-400"
+                    whileTap={{ scale: 0.85 }}
                     onClick={() => {
                         setTimeout(() => {
                             setLoggingIn(prev => !prev)

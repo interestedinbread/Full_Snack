@@ -79,7 +79,7 @@ export function ShoppingList(props) {
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}>
                     <p className="p-3 text-white text-base italic">Remove checked items from shopping list?</p>
                     <motion.button className="ml-4 mb-3 bg-white text-black px-2 rounded-lg border-3 border-green-400"
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.85 }}
                     onClick={async () => {
                         setTimeout(async () => {
                             const backup = [...selectedItems]
@@ -99,7 +99,7 @@ export function ShoppingList(props) {
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}>
                     <p className="p-3 text-white text-base italic">Undo remove items?</p>
                     <motion.button className="ml-4 mb-3 bg-white text-black px-2 rounded-lg border-3 border-green-400"
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.85 }}
                     onClick={async () => {
                         setTimeout(async () => {
                             const items = backedUpItems.map(item => item.item)
@@ -126,7 +126,7 @@ export function ShoppingList(props) {
                         }
                     }}/>
                     <motion.button className="ml-4 bg-white text-black px-2 rounded-lg border-3 border-green-400"
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.85 }}
                     onClick={async() => {
                         setTimeout(async () => {
                             await handleAddToList(inputValue)

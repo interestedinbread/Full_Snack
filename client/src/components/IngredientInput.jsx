@@ -81,7 +81,7 @@ export function IngredientInput(props) {
                     <Ingredientlist ingredients={ingredients} isEditing={isEditing} handleDeleteIngredient={handleDeleteIngredient}/>
                     </div>
                     <motion.button className="ml-4 mb-4 bg-white text-black px-2 rounded-lg border-3 border-green-400"
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.85 }}
                     onClick={async () => {
                         if(isLoading) { return }
                         setIsLoading(true)
