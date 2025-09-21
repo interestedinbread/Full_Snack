@@ -18,7 +18,7 @@ export function Loading() {
 
     return(
         <>
-            <div className="w-max mx-auto mt-8">
+            <div className="w-max mx-auto mt-8 -pl-4">
                 <h3 className="text-3xl poppins-extrabold mt-3 text-white text-center animate-pulse">Loading...</h3>
                 <img src="/img/Carrot_icon.png" 
                     className="h-[200px] w-[200px] animate-spin mt-4 mx-auto"
