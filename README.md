@@ -4,8 +4,6 @@
 
 A full-stack web application that uses AI to help you discover, plan, and manage your meals. Generate personalized meal suggestions, save your favorites, and create organized shopping lists - all in one place.
 
-![Full Snack Logo](./client/public/img/Carrot_icon.png)
-
 ## ✨ Features
 
 ### 🤖 AI-Powered Meal Generation
@@ -176,14 +174,6 @@ Full_Snack/
 - `POST /api/list` - Add item to shopping list
 - `DELETE /api/list/:id` - Remove item from shopping list
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -193,13 +183,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - OpenAI for providing the AI capabilities
 - The React and Node.js communities for excellent documentation
 - All contributors who help improve this project
-
-## 📞 Support
-
-If you encounter any issues or have questions, please:
-- Check the [Issues](https://github.com/interestedinbread/Full_Snack/issues) page
-- Create a new issue with detailed information about your problem
-- Contact the maintainers
 
 ---
 
