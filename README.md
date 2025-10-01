@@ -28,6 +28,14 @@ A full-stack web application that uses AI to help you discover, plan, and manage
 - Responsive design that works on all devices
 - Smooth animations and modern UI with Framer Motion
 
+## Screenshots
+
+![Landing Page](client/public/img/screenshots/full_snack_screenshot_1.jpeg)
+![Meal Suggestions](client/public/img/screenshots/full_snack_screenshot_3.jpeg)
+![Meal Details](client/public/img/screenshots/full_snack_screenshot_4.jpeg)
+![Shopping List](client/public/img/screenshots/full_snack_screenshot_5.jpeg)
+![Meal Generation Options](client/public/img/screenshots/full_snack_screenshot_6.jpeg)
+
 ## 🛠️ Tech Stack
 
 ### Frontend
