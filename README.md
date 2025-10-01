@@ -9,7 +9,7 @@ A full-stack web application that uses AI to help you discover, plan, and manage
 ## ✨ Features
 
 ### 🤖 AI-Powered Meal Generation
-- **Ingredient-Based Suggestions**: Input ingredients you have to get creative meal ideas
+- **Ingredient-Based Suggestions**: Input ingredients you want to use to get creative meal ideas
 - **Multi-Choice Questionnaire**: Answer questions about preferences, dietary restrictions, and cuisine types
 - **Free-Form Prompts**: Describe your meal ideas in natural language (e.g., "something spicy and Asian-inspired")
 
@@ -116,9 +116,9 @@ A full-stack web application that uses AI to help you discover, plan, and manage
 ## 📱 How to Use
 
 ### For New Users
-1. **Register** for a new account or **login** if you already have one
+1. **Register** for a new account or **login** if you already have one. You can register with a fake email.
 2. **Choose your input method**:
-   - Add ingredients you have on hand
+   - Add ingredients you have on hand or would like to use.
    - Answer the multi-choice questionnaire about your preferences
    - Write a free-form description of what you're craving
 3. **Browse AI-generated meal suggestions**
@@ -127,7 +127,7 @@ A full-stack web application that uses AI to help you discover, plan, and manage
 
 ### For Returning Users
 - Access your **saved meals** from the navigation menu
-- View and manage your **shopping lists**
+- View and manage your **shopping list**
 - Generate new meal ideas anytime
 
 ## 🏗️ Project Structure
