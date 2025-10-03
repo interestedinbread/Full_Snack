@@ -148,7 +148,7 @@ export function MealModal(props) {
                                 authenticated &&
                                 showIngredients) && 
                                 <motion.p 
-                                className='text-[var(--secondary-color)] text-sm md:text-base italic absolute bottom-6 right-2 w-[150px]'
+                                className='text-[var(--secondary-color)] text-sm italic absolute bottom-6 right-2 w-[150px]'
                                 initial={{ x: 50, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
                                 transition={{ type: "tween", duration: 0.2 }}

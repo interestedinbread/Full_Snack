@@ -13,7 +13,7 @@ export function NavModal(props) {
             }}/>
             <div className="fixed inset-0 w-4/5 mx-auto mt-60 z-50 max-h-[60vh] flex flex-col gap-4 h-max
                            md:w-96 md:h-[800px] md:left-1/2 md:transform md:-translate-x-1/2 md:top-20 md:rounded-[2.5rem] md:inset-auto md:w-4/5 md:mx-auto md:mt-60
-                           lg:w-4/5 lg:h-max lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-32 lg:rounded-lg lg:inset-auto lg:mx-auto">
+                           lg:w-4/5 lg:h-max lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-10 lg:rounded-lg lg:inset-auto lg:mx-auto">
                 {tabs.map((tab, index) => {
                     return(
                         <button key={index} className='my-2' onClick={async() => {

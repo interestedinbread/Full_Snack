@@ -33,7 +33,7 @@ export function Header(props) {
             )}
             {authenticated && (
                 <>
-                    <h3 className="my-3 text-lg text-white md:-ml-12 md:text-center">Welcome back {username}!</h3>
+                    <h3 className="my-3 text-lg text-white w-9/10 mx-auto">Welcome back {username}!</h3>
                 </>
             )}
         </header>

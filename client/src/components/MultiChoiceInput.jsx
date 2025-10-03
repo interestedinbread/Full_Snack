@@ -17,11 +17,11 @@ export function MultiChoiceInput(props) {
         savedMealsOpen) return null
     
     return (
-            <>
+            <div className="w-9/10 mx-auto">
             
                 <h3 className="text-3xl poppins-extrabold mt-3 text-white">or...</h3>
-                <div className="bg-[var(--secondary-color)] w-9/10 md:w-1/3 rounded-lg mt-2">
-                    <h4 className="p-3 text-white md:text-lg">Answer a few questions about what you're looking for!</h4>
+                <div className="bg-[var(--secondary-color)] rounded-lg mt-2">
+                    <h4 className="p-3 text-white">Answer a few questions about what you're looking for!</h4>
                     <motion.button className="ml-4 bg-white text-black px-2 mb-2 rounded-lg border-3 border-green-400"
                     whileTap={{ scale: 0.85 }}
                     onClick={() => {
@@ -36,6 +36,6 @@ export function MultiChoiceInput(props) {
                 setSuggestions={setSuggestions}
                 setIsLoading={setIsLoading}/>
             
-            </>
+            </div>
     )
 }
