@@ -41,11 +41,17 @@ export function LoginRegisterModal(props) {
 
     return ReactDom.createPortal(
         <div className='fixed inset-0 z-10'>
-            <button className='fixed inset-0 z-20 bg-black bg-opacity-50' onClick={() => {
+            <button className='fixed z-20 bg-black bg-opacity-50
+                              lg:w-96 lg:h-[800px] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-20 lg:rounded-[2.5rem] lg:border-4 lg:border-gray-300
+                              md:w-96 md:left-1/2 md:transform md:-translate-x-1/2 md:top-20 md:rounded-[2.5rem]
+                              w-80 left-1/2 transform -translate-x-1/2 top-16' onClick={() => {
                 setLoggingIn(false)
                 setRegistering(false)
             }}/>
-            <div className='bg-[var(--secondary-color)] fixed inset-0 w-max h-max mx-auto mt-24 z-50 rounded-md'>
+            <div className='bg-[var(--secondary-color)] fixed w-max h-max z-50 rounded-md
+                           lg:w-60 lg:h-[300px] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-50 lg:rounded-lg
+                           md:w-96 md:left-1/2 md:transform md:-translate-x-1/2 md:top-20 md:rounded-[2.5rem]
+                           w-80 left-1/2 transform -translate-x-1/2 top-16'>
                 {registering && (<div className="flex flex-col gap-4">
                     <input className="mx-4 mt-4 pl-2 bg-black border-2 border-slate-400 text-white rounded-lg"
                     placeholder='create a username'
