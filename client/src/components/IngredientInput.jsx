@@ -39,12 +39,12 @@ export function IngredientInput(props) {
 
     return (
         <>
-            <h2 className="text-3xl poppins-extrabold my-3 text-white">
-                { authenticated ? "When you're ready..." : 'Try our meal generator'}
+            <h2 className="text-2xl poppins-extrabold my-3 text-white w-9/10 mx-auto">
+                { authenticated ? "When you're ready..." : 'Try our meal generator!'}
                 </h2>
-            <div className="bg-[var(--secondary-color)] w-9/10 md:w-1/3 rounded-lg md:p-2">
-                <h4 className="p-3 text-white md:text-lg">Enter some ingredients you might want to use! <br />(One at a time)</h4>
-                <input className="ml-3 mb-3 pl-2 bg-black border-2 border-slate-400 text-white rounded-lg md:text-lg"
+            <div className="bg-[var(--secondary-color)] w-9/10 mx-auto rounded-lg">
+                <h4 className="p-3 text-white">Enter some ingredients you might want to use! <br />(One at a time)</h4>
+                <input className="ml-3 mb-3 pl-2 bg-black border-2 border-slate-400 text-white rounded-lg"
                 placeholder="eggs, cumin, beef..." 
                 value={inputValue}
                 onChange={(e) => {
@@ -57,7 +57,7 @@ export function IngredientInput(props) {
                         setIsEditing(false)
                     }
                 }}></input>
-                <motion.button className="ml-4 md:ml-2 bg-white text-black px-2 rounded-lg border-3 border-green-500"
+                <motion.button className="ml-4 bg-white text-black px-2 rounded-lg border-3 border-green-500"
                 whileTap={{ scale: 0.85 }}
                 onClick={() => {
                     
@@ -68,7 +68,7 @@ export function IngredientInput(props) {
                     
                 }}
                 >Add</motion.button>
-                <motion.button className="ml-4 md:ml-2 bg-white text-black px-2 rounded-lg border-3 border-green-400"
+                <motion.button className="ml-4 bg-white text-black px-2 rounded-lg border-3 border-green-400"
                 whileTap={{ scale: 0.85 }}
                 onClick={() => {
                     setIsEditing(prev => !prev)
