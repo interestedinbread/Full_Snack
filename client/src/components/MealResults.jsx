@@ -16,7 +16,7 @@ export function MealResults(props) {
     }
 
     return(
-        <div>
+        <div className='w-9/10 mx-auto'>
             <h3 className="text-2xl text-white poppins-extrabold my-3">{savedMealsOpen ? "Here are your saved meals!" : "How about making..."}</h3>
             <motion.div
             key="meal-results"
