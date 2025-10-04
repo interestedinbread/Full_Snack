@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 
 export function LoginRegisterModal(props) {
 
-    const { loggingIn, setLoggingIn, registering, setRegistering, setRegisterSuccess } = props
+    const { loggingIn, setLoggingIn, registering, setRegistering, setModalMessage, setMessageModalOpen } = props
     const [usernameValue, setUsernameValue] = useState('')
     const [emailValue, setEmailValue] = useState('')
     const [passwordValue, setPasswordValue] = useState('')
@@ -25,6 +25,8 @@ export function LoginRegisterModal(props) {
             
         } catch (err) {
             console.error('Could not log in:', err.message)
+            setModalMessage('Error logging in. Please check your input.')
+            setMessageModalOpen(true)
         }
     }
 
@@ -33,9 +35,12 @@ export function LoginRegisterModal(props) {
             const data = await registerUser(userInfo)
             console.log('User registered:', data)
             setRegistering(false)
-            setRegisterSuccess(true)
+            setModalMessage(`${userInfo.username} has been registered! You may now login to use the app :)`)
+            setMessageModalOpen(true)
         } catch (err) {
             console.error('Error registering user:', err)
+            setModalMessage('Error registering user. Please check your input.')
+            setMessageModalOpen(true)
         }
     }
 
@@ -87,7 +92,8 @@ export function LoginRegisterModal(props) {
                             if((registering && usernameValue === '') || 
                             emailValue === '' || 
                             passwordValue === ''){
-                                alert('Please fill out all input fields')
+                                setModalMessage('Please fill out all fields')
+                                setMessageModalOpen(true)
                                 return
                             }
                             if(loggingIn){

@@ -18,9 +18,8 @@ import { multiAddToShoppingList } from './api/multiAddToShoppingList'
 import { multiDeleteFromShoppingList } from './api/multiDeleteFromShoppingList'
 import { deleteSavedMeal } from './api/deleteSavedMeal'
 import { getSavedMeals } from './api/getSavedMeals'
-import { DeniedModal } from './components/modals/DeniedModal'
+import { MessageModal } from './components/modals/MessageModal'
 import { LoginRegisterModal } from "./components/modals/LoginRegisterModal"
-import { RegisterSuccessModal } from './components/modals/RegisterSuccessModal'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function App() {
@@ -37,9 +36,9 @@ const [shoppingListItems, setShoppingListItems] = useState([])
 const [navModalOpen, setNavModalOpen] = useState(false)
 const [localShoppingList, setLocalShoppingList] = useState([])
 const [refetchTrigger, setRefetchTrigger] = useState(0)
-const [denied, setDenied] = useState(false)
-const [registerSuccess, setRegisterSuccess] = useState(false)
 const [registering, setRegistering] = useState(false)
+const [modalMessage, setModalMessage] = useState('')
+const [messageModalOpen, setMessageModalOpen] = useState(false)
 
 
 const { authenticated } = useContext(AuthContext)
@@ -121,7 +120,8 @@ async function handleSaveMeal(meal) {
 async function handleGetShoppingList() {
   if(!authenticated){
     setNavModalOpen(false)
-    setDenied(true)
+    setMessageModalOpen(true)
+    setModalMessage('Please login to use this feature')
     return
   }
   setSuggestions([])
@@ -143,7 +143,8 @@ async function handleGetShoppingList() {
 async function handleGetMeals() {
   if(!authenticated){
     setNavModalOpen(false)
-    setDenied(true)
+    setMessageModalOpen(true)
+    setModalMessage('Please login to use this feature')
     return
   }
   setSuggestions([])
@@ -290,20 +291,18 @@ useEffect(() => {
               />}
             </AnimatePresence>
             <AnimatePresence>
-              {denied && <DeniedModal 
-              setDenied={setDenied} 
+              {messageModalOpen && <MessageModal
+              modalMessage={modalMessage}
+              setMessageModalOpen={setMessageModalOpen}
               />}
-            </AnimatePresence>
-            <AnimatePresence>
-              {registerSuccess && <RegisterSuccessModal
-              setRegisterSuccess={setRegisterSuccess}/>}
             </AnimatePresence>
             {(loggingIn || registering) && (<LoginRegisterModal 
               loggingIn={loggingIn}
               setLoggingIn={setLoggingIn}
               registering={registering}
               setRegistering={setRegistering}
-              setRegisterSuccess={setRegisterSuccess}
+              setModalMessage={setModalMessage}
+              setMessageModalOpen={setMessageModalOpen}
               />)}
         </div>
       </div>
