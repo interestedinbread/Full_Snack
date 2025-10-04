@@ -11,7 +11,7 @@ export function RegisterSuccessModal (props) {
             onClick={() => {
                 setRegisterSuccess(false)
             }}/>
-            <motion.div className="w-2/3 bg-[var(--secondary-color)] rounded-md p-4 h-max z-50 md:w-max"
+            <motion.div className="w-2/3 bg-[var(--secondary-color)] rounded-md p-4 h-max z-50"
             key="denied-portal"
             initial={{ x: '-100%', opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
