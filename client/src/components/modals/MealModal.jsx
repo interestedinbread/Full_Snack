@@ -48,12 +48,18 @@ export function MealModal(props) {
     const controls = useAnimation()
 
     return ReactDom.createPortal(
-        <div className='fixed inset-0 bg-black bg-opacity-50 z-40 top-10 flex justify-center p-4 h-fit'>
-            <button className="fixed inset-0 z-20" onClick={() => {
+        <div className='fixed inset-0 bg-black bg-opacity-50 z-40 top-10 flex justify-center p-4 h-fit
+                      md:left-1/2 md:transform md:-translate-x-1/2 md:w-96 md:h-[800px] md:top-20 md:rounded-[2.5rem] md:overflow-hidden
+                      lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:w-96 lg:h-[800px] lg:top-20 lg:rounded-[2.5rem] lg:overflow-hidden lg:border-4 lg:border-gray-300'>
+            <button className="fixed inset-0 z-20
+                              md:w-96 md:h-[800px] md:left-1/2 md:transform md:-translate-x-1/2 md:top-20 md:rounded-[2.5rem] md:inset-auto
+                              lg:w-96 lg:h-[800px] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-0 lg:rounded-[2.5rem]" onClick={() => {
                 setSelectedMeal(null)
             }}/>
             <motion.div
-            className='relative w-7/8 max-w-md max-h-[90vh] overflow-y-auto rounded-lg shadow-xl z-50 pb-12'
+            className='relative w-7/8 max-w-md max-h-[90vh] overflow-y-auto rounded-lg shadow-xl z-50 pb-12 lg:overflow-x-hidden
+                      md:fixed md:w-96 md:h-[800px] md:left-1/2 md:transform md:-translate-x-1/2 md:top-20 md:rounded-[2.5rem] md:inset-auto md:w-7/8 md:max-w-none md:max-h-[90vh]
+                      lg:fixed lg:w-80 lg:h-[800px] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-20 lg:rounded-lg lg:inset-auto lg:max-w-none'
             key="meal-modal"
             initial={{ x: '-100%', y: 0, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}

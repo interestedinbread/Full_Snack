@@ -193,7 +193,7 @@ useEffect(() => {
 
 
   return (
-    <div className='mt-10 lg:w-96 lg:h-[800px] lg:bg-black lg:rounded-[2.5rem] lg:overflow-y-auto lg:border-4 border-gray-300 lg:py-8 lg:mx-auto lg:mt-20 lg:relative'>
+    <div className='mt-10 lg:w-96 lg:h-[800px] lg:bg-black lg:rounded-[2.5rem] lg:overflow-y-auto lg:border-4 border-gray-300 lg:py-8 lg:mx-auto lg:mt-20 lg:relative lg:overscroll-none'>
       <Navbar setSuggestions={setSuggestions} 
       setSavedMealsOpen={setSavedMealsOpen}
       setSelectedMeal={setSelectedMeal}
