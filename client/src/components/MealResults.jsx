@@ -27,7 +27,7 @@ export function MealResults(props) {
                     <div className="flex flex-col">
                         {suggestions.map((meal, index) => {
                             return(
-                                <button className="p-2 text-md poppins-extrabold bg-green-600 rounded-lg m-2 text-white w-max max-w-[350px] truncate overflow-hidden whitespace-nowrap" 
+                                <button className="p-2 text-md poppins-extrabold bg-green-600 rounded-lg m-2 text-white w-max max-w-[325px] truncate overflow-hidden whitespace-nowrap" 
                                 key={index} 
                                 onClick={() => {
                                     setSelectedMeal(suggestions[index])

@@ -24,7 +24,7 @@ export function Loading() {
                     className="h-[200px] w-[200px] animate-spin mt-4 mx-auto"
                     style={{ animationDuration: '6s' }}
                     />
-                <p className="text-white text-center md:text-lg italic mt-4 max-w-[250px] md:max-w-[350px]">
+                <p className="text-white text-center italic mt-4 max-w-[250px]">
                     {`Did you know that ${funFacts[random]}?`}
                     </p>
             </div>

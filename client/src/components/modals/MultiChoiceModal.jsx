@@ -107,8 +107,12 @@ export function MultiChoiceModal(props) {
     if(!multiChoiceOpen) return null
 
     return ReactDom.createPortal(
-            <div className="fixed inset-0 z-10">
-                <button className='fixed inset-0 z-20 bg-black bg-opacity-50' onClick={() => {
+            <div className="fixed inset-0 z-10
+                          md:left-1/2 md:transform md:-translate-x-1/2 md:w-96 md:h-[800px] md:top-20 md:rounded-[2.5rem] md:overflow-hidden
+                          lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:w-96 lg:h-[800px] lg:top-20 lg:rounded-[2.5rem] lg:overflow-hidden lg:border-4 lg:border-gray-300">
+                <button className='fixed inset-0 z-20 bg-black bg-opacity-50
+                                  md:w-96 md:h-[800px] md:left-1/2 md:transform md:-translate-x-1/2 md:top-20 md:rounded-[2.5rem] md:inset-auto
+                                  lg:w-96 lg:h-[800px] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-20 lg:rounded-[2.5rem]' onClick={() => {
                 setMultiChoiceOpen(false)
                 setAnswers({})
                 setClickedButtons([])
@@ -118,7 +122,9 @@ export function MultiChoiceModal(props) {
                 <AnimatePresence
                 mode="wait">
                     <motion.div 
-                    className="bg-[var(--secondary-color)] fixed inset-0 w-9/10 md:w-2/5 h-max mx-auto mt-24 z-50 rounded-md"
+                    className="bg-[var(--secondary-color)] fixed inset-0 w-9/10 h-max mx-auto mt-24 z-50 rounded-md
+                               md:w-96 md:h-[800px] md:left-1/2 md:transform md:-translate-x-1/2 md:rounded-[2.5rem] md:inset-auto md:w-9/10 md:max-w-none md:overflow-y-auto
+                               lg:w-9/10 lg:h-max lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:rounded-lg lg:inset-auto lg:max-w-none lg:overflow-y-auto"
                     key={step} 
                     initial={{ x: '-100%', opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -127,11 +133,11 @@ export function MultiChoiceModal(props) {
                     >
                         <h3 className="text-xl poppins-extrabold m-4 text-white">{currentGroup.question}</h3>
                         {isMulti && (<p className="text-base poppins-regular m-4 text-white">You can choose more than one</p>)}
-                        <div className="grid grid-cols-3 mx-4 mb-2">
+                        <div className="grid grid-cols-3 mx-2 mb-2">
                             {currentGroup.options.map((option, index) => {
                                 return(
                                     <motion.button key={index} 
-                                    className={`m-2 ${clickedButtons.includes(option)? 'bg-blue-400 text-white' : 'bg-white text-black'} px-2 rounded-lg border-3 border-green-400`}
+                                    className={`m-2 ${clickedButtons.includes(option)? 'bg-blue-400 text-white' : 'bg-white text-black'} px-2 rounded-lg border-3 border-green-400 text-sm`}
                                     whileTap={{ scale: 0.85 }}
                                     onClick={() => {
                                         setTimeout(() => {
