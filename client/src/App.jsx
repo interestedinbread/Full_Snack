@@ -194,7 +194,7 @@ useEffect(() => {
 
 
   return (
-    <div className='lg:w-96 lg:h-[800px] lg:bg-black lg:rounded-[2.5rem] lg:overflow-y-auto lg:border-4 border-gray-300 lg:pb-8 lg:pt-20 lg:mx-auto lg:mt-20 lg:relative lg:overscroll-none lg:pt-20'>
+      <div className='lg:w-96 lg:h-[800px] lg:bg-black lg:rounded-[2.5rem] lg:overflow-y-auto lg:border-4 border-gray-300 lg:pb-8 lg:pt-20 lg:mx-auto lg:mt-20 lg:relative lg:overscroll-none lg:pt-20'>
       <Navbar setSuggestions={setSuggestions} 
       setSavedMealsOpen={setSavedMealsOpen}
       setSelectedMeal={setSelectedMeal}
@@ -206,7 +206,7 @@ useEffect(() => {
       setNavModalOpen={setNavModalOpen}
       setShoppingListOpen={setShoppingListOpen}
       />
-      <div className="pt-20 lg:pt-0">
+      <div className="pt-21 lg:pt-0">
         <AnimatePresence>
           {selectedMeal && (
             <MealModal selectedMeal={selectedMeal} 

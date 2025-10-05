@@ -57,7 +57,7 @@ export function MealModal(props) {
                 setSelectedMeal(null)
             }}/>
             <motion.div
-            className='relative w-7/8 max-w-md max-h-[90vh] overflow-y-auto rounded-lg shadow-xl z-50 pb-12 lg:overflow-x-hidden
+            className='relative w-7/8 max-w-md max-h-[90vh] overflow-y-auto rounded-lg shadow-xl z-50 pb-12 mt-10 lg:overflow-x-hidden
                       md:fixed md:w-96 md:h-[750px] md:left-1/2 md:transform md:-translate-x-1/2 md:top-20 md:rounded-[2.5rem] md:inset-auto md:w-7/8 md:max-w-none md:overflow-y-auto
                       lg:fixed lg:w-80 lg:h-[750px] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-20 lg:rounded-lg lg:inset-auto lg:max-w-none lg:overflow-y-auto'
             key="meal-modal"
