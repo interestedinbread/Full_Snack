@@ -52,7 +52,7 @@ export function Navbar(props) {
 
     return(
         <>
-            <nav className="flex justify-between px-4 fixed left-0 right-0 z-50 bg-black lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:w-96 lg:top-20 lg:rounded-t-[2.5rem] lg:pt-6 lg:border-t-4 lg:border-l-4 lg:border-r-4 lg:border-t-gray-300 lg:border-l-gray-300 lg:border-r-gray-300">
+            <nav className="flex justify-between px-4 pt-8 fixed left-0 right-0 z-50 bg-black lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:w-96 lg:top-20 lg:rounded-t-[2.5rem] lg:pt-6 lg:border-t-4 lg:border-l-4 lg:border-r-4 lg:border-t-gray-300 lg:border-l-gray-300 lg:border-r-gray-300">
                 <div className="flex">
                     <h1 className="text-4xl poppins-extrabold text-white mb-4">Full Snack</h1>
                     <img src="/img/Carrot_icon.png" className="ml-2 -mt-2 h-[60px] w-[60px]"/>
