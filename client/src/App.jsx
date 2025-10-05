@@ -206,104 +206,106 @@ useEffect(() => {
       setNavModalOpen={setNavModalOpen}
       setShoppingListOpen={setShoppingListOpen}
       />
-      <AnimatePresence>
-        {selectedMeal && (
-          <MealModal selectedMeal={selectedMeal} 
-          setSelectedMeal={setSelectedMeal}
-          savedMeals={savedMeals}
-          handleSaveMeal={handleSaveMeal}
-          savedMealsOpen={savedMealsOpen}
-          handleAddToList={handleAddToList}
-          handleDeleteFromList={handleDeleteFromList}
-          handleMultiAddToList={handleMultiAddToList}
-          handleMultiDeleteFromList={handleMultiDeleteFromList}
-          handleDeleteSavedMeal={handleDeleteSavedMeal}
-          handleGetMeals={handleGetMeals}
-          localShoppingList={localShoppingList}
-          setLocalShoppingList={setLocalShoppingList}
-          shoppingListItems={shoppingListItems}
-          setShoppingListItems={setShoppingListItems}
-          /> 
-        )}
-      </AnimatePresence>
-      <div>
-        <div className='mx-auto'>
-            <Header selectedMeal={selectedMeal}/>
-            <IngredientInput 
-              ingredients={ingredients} 
-              setIngredients={setIngredients} 
-              handleAddIngredient={handleAddIngredient} 
-              handleDeleteIngredient={handleDeleteIngredient}
-              suggestions={suggestions}
-              setSuggestions={setSuggestions}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              savedMealsOpen={savedMealsOpen}
-              shoppingListOpen={shoppingListOpen}
-              />
-            {authenticated && <MultiChoiceInput 
-              suggestions={suggestions}
-              setSuggestions={setSuggestions}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              savedMealsOpen={savedMealsOpen}
-              shoppingListOpen={shoppingListOpen}/>}
-            {authenticated && <PromptInput 
-              suggestions={suggestions}
-              setSuggestions={setSuggestions}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              savedMealsOpen={savedMealsOpen}
-              shoppingListOpen={shoppingListOpen}/>}
-            <AnimatePresence>
-              <MealResults 
+      <div className="pt-20 lg:pt-0">
+        <AnimatePresence>
+          {selectedMeal && (
+            <MealModal selectedMeal={selectedMeal} 
+            setSelectedMeal={setSelectedMeal}
+            savedMeals={savedMeals}
+            handleSaveMeal={handleSaveMeal}
+            savedMealsOpen={savedMealsOpen}
+            handleAddToList={handleAddToList}
+            handleDeleteFromList={handleDeleteFromList}
+            handleMultiAddToList={handleMultiAddToList}
+            handleMultiDeleteFromList={handleMultiDeleteFromList}
+            handleDeleteSavedMeal={handleDeleteSavedMeal}
+            handleGetMeals={handleGetMeals}
+            localShoppingList={localShoppingList}
+            setLocalShoppingList={setLocalShoppingList}
+            shoppingListItems={shoppingListItems}
+            setShoppingListItems={setShoppingListItems}
+            /> 
+          )}
+        </AnimatePresence>
+        <div>
+          <div className='mx-auto'>
+              <Header selectedMeal={selectedMeal}/>
+              <IngredientInput 
+                ingredients={ingredients} 
+                setIngredients={setIngredients} 
+                handleAddIngredient={handleAddIngredient} 
+                handleDeleteIngredient={handleDeleteIngredient}
                 suggestions={suggestions}
                 setSuggestions={setSuggestions}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
-                selectedMeal={selectedMeal}
-                setSelectedMeal={setSelectedMeal}
                 savedMealsOpen={savedMealsOpen}
-                setSavedMealsOpen={setSavedMealsOpen}
                 shoppingListOpen={shoppingListOpen}
                 />
+              {authenticated && <MultiChoiceInput 
+                suggestions={suggestions}
+                setSuggestions={setSuggestions}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                savedMealsOpen={savedMealsOpen}
+                shoppingListOpen={shoppingListOpen}/>}
+              {authenticated && <PromptInput 
+                suggestions={suggestions}
+                setSuggestions={setSuggestions}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                savedMealsOpen={savedMealsOpen}
+                shoppingListOpen={shoppingListOpen}/>}
+              <AnimatePresence>
+                <MealResults 
+                  suggestions={suggestions}
+                  setSuggestions={setSuggestions}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                  selectedMeal={selectedMeal}
+                  setSelectedMeal={setSelectedMeal}
+                  savedMealsOpen={savedMealsOpen}
+                  setSavedMealsOpen={setSavedMealsOpen}
+                  shoppingListOpen={shoppingListOpen}
+                  />
+                </AnimatePresence>
+              {!authenticated && <LoginRegister 
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                loggingIn={loggingIn}
+                setLoggingIn={setLoggingIn}
+                setSuggestions={setSuggestions}
+                setRegistering={setRegistering}
+                />}
+              {isLoading && <Loading />}
+              <AnimatePresence>
+                {shoppingListOpen && <ShoppingList 
+                shoppingListItems={shoppingListItems}
+                handleGetShoppingList={handleGetShoppingList}
+                handleAddToList={handleAddToList}
+                handleMultiDeleteFromList={handleMultiDeleteFromList}
+                handleMultiAddToList={handleMultiAddToList}
+                localShoppingList={localShoppingList}
+                setLocalShoppingList={setLocalShoppingList}
+                refetchTrigger={refetchTrigger}
+                setRefetchTrigger={setRefetchTrigger}
+                />}
               </AnimatePresence>
-            {!authenticated && <LoginRegister 
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              loggingIn={loggingIn}
-              setLoggingIn={setLoggingIn}
-              setSuggestions={setSuggestions}
-              setRegistering={setRegistering}
-              />}
-            {isLoading && <Loading />}
-            <AnimatePresence>
-              {shoppingListOpen && <ShoppingList 
-              shoppingListItems={shoppingListItems}
-              handleGetShoppingList={handleGetShoppingList}
-              handleAddToList={handleAddToList}
-              handleMultiDeleteFromList={handleMultiDeleteFromList}
-              handleMultiAddToList={handleMultiAddToList}
-              localShoppingList={localShoppingList}
-              setLocalShoppingList={setLocalShoppingList}
-              refetchTrigger={refetchTrigger}
-              setRefetchTrigger={setRefetchTrigger}
-              />}
-            </AnimatePresence>
-            <AnimatePresence>
-              {messageModalOpen && <MessageModal
-              modalMessage={modalMessage}
-              setMessageModalOpen={setMessageModalOpen}
-              />}
-            </AnimatePresence>
-            {(loggingIn || registering) && (<LoginRegisterModal 
-              loggingIn={loggingIn}
-              setLoggingIn={setLoggingIn}
-              registering={registering}
-              setRegistering={setRegistering}
-              setModalMessage={setModalMessage}
-              setMessageModalOpen={setMessageModalOpen}
-              />)}
+              <AnimatePresence>
+                {messageModalOpen && <MessageModal
+                modalMessage={modalMessage}
+                setMessageModalOpen={setMessageModalOpen}
+                />}
+              </AnimatePresence>
+              {(loggingIn || registering) && (<LoginRegisterModal 
+                loggingIn={loggingIn}
+                setLoggingIn={setLoggingIn}
+                registering={registering}
+                setRegistering={setRegistering}
+                setModalMessage={setModalMessage}
+                setMessageModalOpen={setMessageModalOpen}
+                />)}
+          </div>
         </div>
       </div>
     </div>
