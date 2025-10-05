@@ -12,12 +12,7 @@ export function Header(props) {
     return(
         <>
         <header className="w-full">
-            <div className="w-9/10 mx-auto">
-                <div className="flex">
-                    <h1 className="text-4xl poppins-extrabold text-white">Full Snack</h1>
-                    <img src="/img/Carrot_icon.png" className="ml-2 -mt-2 h-[60px] w-[60px]"/>
-                </div>
-            </div>
+            
             {!authenticated && (
                 <>
                     <h3 className="mb-3 text-lg text-white w-9/10 mx-auto italic">Never run out of meal ideas!</h3>
