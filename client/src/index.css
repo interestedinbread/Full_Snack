@@ -4,14 +4,14 @@ html, body {
   overscroll-behavior: none;
 }
 
-/* Hide scrollbars */
+
 * {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 
 *::-webkit-scrollbar {
-  display: none; /* WebKit browsers (Chrome, Safari, Edge) */
+  display: none; 
 }
 
 @media (min-width: 1024px) {
