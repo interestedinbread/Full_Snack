@@ -52,9 +52,9 @@ export function LoginRegisterModal(props) {
                 setLoggingIn(false)
                 setRegistering(false)
             }}/>
-            <div className='bg-[var(--secondary-color)] fixed inset-0 w-max h-max mx-auto mt-24 z-50 rounded-md
+            <div className='bg-[var(--secondary-color)] fixed inset-0 w-max h-max mx-auto mt-55 z-50 rounded-md
                            md:w-96 md:h-[800px] md:left-1/2 md:transform md:-translate-x-1/2 md:top-20 md:rounded-[2.5rem] md:inset-auto
-                           lg:w-60 lg:h-max lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-50 lg:rounded-lg'>
+                           lg:w-60 lg:h-max lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:top-70 lg:mt-0 lg:rounded-lg'>
                 {registering && (<div className="flex flex-col gap-4">
                     <input className="mx-4 mt-4 pl-2 bg-black border-2 border-slate-400 text-white rounded-lg"
                     placeholder='create a username'
