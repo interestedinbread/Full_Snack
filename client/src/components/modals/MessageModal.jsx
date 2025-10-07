@@ -7,7 +7,7 @@ export function MessageModal (props) {
     const { modalMessage, setMessageModalOpen } = props
 
     return ReactDom.createPortal(
-        <div className="fixed inset-0 flex mt-20 justify-center z-30 p-4
+        <div className="fixed inset-0 flex mt-55 justify-center z-30 p-4
                       md:left-1/2 md:transform md:-translate-x-1/2 md:w-96 md:h-[800px] md:rounded-[2.5rem] md:overflow-hidden
                       lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:w-96 lg:h-[800px] lg:rounded-[2.5rem] lg:overflow-hidden lg:border-4 lg:border-gray-300">
             <button className="fixed inset-0 bg-black bg-opacity-50 z-40
